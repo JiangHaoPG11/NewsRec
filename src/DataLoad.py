@@ -62,20 +62,20 @@ def parse_args():
 # # 生成候选新闻和点击新闻相关元信息
 # def metadata_generator(path):
 #     # news_title_embedding
-#     news_title_embedding = np.load(path + '/NewsRec/data/metadata/news_title_embedding.npy')
+#     news_title_embedding = np.load(path + '/data/metadata/news_title_embedding.npy')
 #     # news entity dict
-#     news_entity_index = np.load(path + '/NewsRec/data/metadata/news_entity_index.npy')
+#     news_entity_index = np.load(path + '/data/metadata/news_entity_index.npy')
 #     # 用户点击新闻
-#     user_clicked_newsindex = np.load(path + '/NewsRec/data/metadata/user_clicked_newsindex.npy')
+#     user_clicked_newsindex = np.load(path + '/data/metadata/user_clicked_newsindex.npy')
 #     # 训练集
-#     candidate_newsindex_train = np.load(path + '/NewsRec/data/metadata/candidate_newsindex.npy')
-#     user_index_train = np.load(path + '/NewsRec/data/metadata/user_index.npy')
-#     label_train = np.load(path + '/NewsRec/data/metadata/label.npy')
+#     candidate_newsindex_train = np.load(path + '/data/metadata/candidate_newsindex.npy')
+#     user_index_train = np.load(path + '/data/metadata/user_index.npy')
+#     label_train = np.load(path + '/data/metadata/label.npy')
 #     # 测试集
-#     candidate_newsindex_test = np.load(path + '/NewsRec/data/test/test_candidate_newsindex.npy')
-#     user_index_test = np.load(path + '/NewsRec/data/test/test_user_index.npy')
-#     label_test = np.load(path + '/NewsRec/data/test/test_label.npy')
-#     Bound_test = np.load(path + '/NewsRec/data/test/test_bound.npy')
+#     candidate_newsindex_test = np.load(path + '/data/test/test_candidate_newsindex.npy')
+#     user_index_test = np.load(path + '/data/test/test_user_index.npy')
+#     label_test = np.load(path + '/data/test/test_label.npy')
+#     Bound_test = np.load(path + '/data/test/test_bound.npy')
 #     # 选择bound
 #     candidate_newsindex_select = []
 #     user_index_select = []
@@ -138,25 +138,25 @@ def metadata_generator(args, path):
             return candidate_newsindex[index], user_index[index], label[index]
 
     # 嵌入数据
-    news_title_embedding = np.load(path + '/NewsRec/data/metadata/news_title_embedding.npy')
+    news_title_embedding = np.load(path + '/data/metadata/news_title_embedding.npy')
     # 新闻类型
-    news_type = np.load(path + '/NewsRec/data/metadata/news_type.npy')
+    news_type = np.load(path + '/data/metadata/news_type.npy')
     # 新闻实体index
-    news_entity_index = np.load(path + '/NewsRec/data/metadata/news_entity_index.npy')
+    news_entity_index = np.load(path + '/data/metadata/news_entity_index.npy')
     # 用户点击新闻
-    user_clicked_newsindex = np.load(path + '/NewsRec/data/metadata/user_clicked_newsindex.npy')
+    user_clicked_newsindex = np.load(path + '/data/metadata/user_clicked_newsindex.npy')
     # 用户类型类型
-    user_type = np.load(path + '/NewsRec/data/metadata/user_type.npy')
+    user_type = np.load(path + '/data/metadata/user_type.npy')
     # 训练集
-    candidate_newsindex = np.load(path + '/NewsRec/data/metadata/candidate_newsindex.npy')
-    user_index= np.load(path + '/NewsRec/data/metadata/user_index.npy')
-    label = np.load(path + '/NewsRec/data/metadata/label.npy')
+    candidate_newsindex = np.load(path + '/data/metadata/candidate_newsindex.npy')
+    user_index= np.load(path + '/data/metadata/user_index.npy')
+    label = np.load(path + '/data/metadata/label.npy')
 
     # 测试集
-    candidate_newsindex_test = np.load(path + '/NewsRec/data/test/test_candidate_newsindex.npy')
-    user_index_test = np.load(path + '/NewsRec/data/test/test_user_index.npy')
-    label_test = np.load(path + '/NewsRec/data/test/test_label.npy')
-    Bound_test = np.load(path + '/NewsRec/data/test/test_bound.npy')
+    candidate_newsindex_test = np.load(path + '/data/test/test_candidate_newsindex.npy')
+    user_index_test = np.load(path + '/data/test/test_user_index.npy')
+    label_test = np.load(path + '/data/test/test_label.npy')
+    Bound_test = np.load(path + '/data/test/test_bound.npy')
 
     # 选择bound
     candidate_newsindex_select = []
@@ -229,8 +229,8 @@ def metadata_generator(args, path):
 # 生成实体字典和关系字典
 def load_entity_relation_dict(path):
     print('constructing entity_dict relation_dict ...')
-    entityid2index = pd.read_csv( path + '/NewsRec/data/KG/entityid2index.csv')
-    relationid2index = pd.read_csv(path + '/NewsRec/data/KG/relationid2index.csv')
+    entityid2index = pd.read_csv( path + '/data/KG/entityid2index.csv')
+    relationid2index = pd.read_csv(path + '/data/KG/relationid2index.csv')
     entity_dict = {}
     relation_dict = {}
     entity_id_list = entityid2index['entity_id'].tolist()
@@ -326,7 +326,7 @@ def build_KG_network(path, news_entity_dict):
     # plt.show()
     # network.add_edge(newsid, 0, label="innews", weight=0)
 
-    graph = pd.read_csv(path + '/NewsRec/data/KG/graph_index.csv')
+    graph = pd.read_csv(path + '/data/KG/graph_index.csv')
     head_entity_list = graph['h_index'].tolist()
     relation_list = graph['r_index'].tolist()
     tail_entity_list = graph['t_idnex'].tolist()
@@ -379,15 +379,15 @@ def build_neighbor_word_index(entity_news_dict, news_title_embedding):
 
 def build_entity_relation_embedding(path):
     print('constructing entity and relation embedding ...')
-    TransE_entity_embedding = np.load(path+'/NewsRec/data/KG/TransE_entity_embedding.npy')
-    TransE_relation_embedding = np.load(path + '/NewsRec/data/KG/TransE_relation_embedding.npy')
+    TransE_entity_embedding = np.load(path+'/data/KG/TransE_entity_embedding.npy')
+    TransE_relation_embedding = np.load(path + '/data/KG/TransE_relation_embedding.npy')
     TransE_relation_embedding = np.delete(TransE_relation_embedding, 0, axis = 0)
     TransE_relation_embedding = np.concatenate(([np.random.normal(-0.1, 0.1, 100)], TransE_relation_embedding), axis=0)
     return torch.FloatTensor(TransE_entity_embedding), torch.FloatTensor(TransE_relation_embedding)
 
 def build_word_embedding(path):
     print('constructing word embedding ...')
-    word_embedding = np.load(path+'/NewsRec/data/metadata/news_title_word_embedding.npy')
+    word_embedding = np.load(path+'/data/metadata/news_title_word_embedding.npy')
     return torch.FloatTensor(word_embedding)
 
 

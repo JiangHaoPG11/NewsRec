@@ -33,7 +33,7 @@ def parse_args_2w():
     parser = argparse.ArgumentParser()
     parser.add_argument('--user_data_mode', type=int, default=3)
     parser.add_argument('--news_data_mode', type=int, default=3)
-    parser.add_argument('--mode', type=str, default='RCENR')
+    parser.add_argument('--mode', type=str, default='NAML')
     parser.add_argument('--epoch', type=int, default= 60)
     parser.add_argument('--batch_size', type=int, default=50)
     parser.add_argument('--sample_size', type=int, default=5)

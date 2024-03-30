@@ -1,30 +1,30 @@
-from AnchorKG_model.AnchorKG_Train_Test import *
-from PGPR_model.PGPR_Train_Test import *
-from RippleNet_model.RippleNet_Train_Test import *
-from ADAC_model.ADAC_Train_Test import *
-from KPRN_model.KPRN_Train_Test import *
-from MRNN_model.MRNN_Train_Test import *
-from Baseline_model.Baseline_Train_Test import *
-from KGIN_model.KGIN_Train_Test import *
-from KGCN_model.KGCN_Train_Test import *
-from KGAT_model.KGAT_Train_Test import *
-from LightGCN_model.LightGCN_Train_Test import *
-from RCENR_model.RCENR_Train_Test import *
-from MRNN_model.MRNN_Train_Test import *
-from NRMS_model.NRMS_Train_Test import *
-from NAML_model.NAML_Train_Test import *
-from MNN4Rec_model.MNN4Rec_Train_Test import *
-from LSTUR_model.LSTUR_Train_Test import *
-from DKN_model.DKN_Train_Test import *
-from FM_model.FM_Train_Test import *
-from MNN4Rec_update_model.MNN4Rec_update_Train_Test import *
-from NPA_model.NPA_Train_Test import *
-from KIM_model.KIM_Train_Test import *
-from FIM_model.FIM_Train_Test import *
-from SFT_NPA_model.SFT_NPA_Train_Test import *
-from SFT_NRMS_model.SFT_NRMS_Train_Test import *
-from SFT_NAML_model.SFT_NAML_Train_Test import *
-from SFT_MRNN_model.SFT_MRNN_Train_Test import *
+from model.AnchorKG_model.AnchorKG_Train_Test import *
+from model.PGPR_model.PGPR_Train_Test import *
+from model.RippleNet_model.RippleNet_Train_Test import *
+from model.ADAC_model.ADAC_Train_Test import *
+from model.KPRN_model.KPRN_Train_Test import *
+from model.MRNN_model.MRNN_Train_Test import *
+from model.Baseline_model.Baseline_Train_Test import *
+from model.KGIN_model.KGIN_Train_Test import *
+from model.KGCN_model.KGCN_Train_Test import *
+from model.KGAT_model.KGAT_Train_Test import *
+from model.LightGCN_model.LightGCN_Train_Test import *
+from model.RCENR_model.RCENR_Train_Test import *
+from model.MRNN_model.MRNN_Train_Test import *
+from model.NRMS_model.NRMS_Train_Test import *
+from model.NAML_model.NAML_Train_Test import *
+from model.MNN4Rec_model.MNN4Rec_Train_Test import *
+from model.LSTUR_model.LSTUR_Train_Test import *
+from model.DKN_model.DKN_Train_Test import *
+from model.FM_model.FM_Train_Test import *
+from model.MNN4Rec_update_model.MNN4Rec_update_Train_Test import *
+from model.NPA_model.NPA_Train_Test import *
+from model.KIM_model.KIM_Train_Test import *
+from model.FIM_model.FIM_Train_Test import *
+from model.SFT_NPA_model.SFT_NPA_Train_Test import *
+from model.SFT_NRMS_model.SFT_NRMS_Train_Test import *
+from model.SFT_NAML_model.SFT_NAML_Train_Test import *
+from model.SFT_MRNN_model.SFT_MRNN_Train_Test import *
 from DataLoad import load_data
 import argparse
 import os
@@ -33,7 +33,7 @@ def parse_args_2w():
     parser = argparse.ArgumentParser()
     parser.add_argument('--user_data_mode', type=int, default=3)
     parser.add_argument('--news_data_mode', type=int, default=3)
-    parser.add_argument('--mode', type=str, default='NAML')
+    parser.add_argument('--mode', type=str, default='RCENR')
     parser.add_argument('--epoch', type=int, default= 60)
     parser.add_argument('--batch_size', type=int, default=50)
     parser.add_argument('--sample_size', type=int, default=5)
@@ -309,6 +309,7 @@ def parse_args_full():
 
 def main(path, device):
     data_scale = "2wu"
+    
     if data_scale == '2wu':
         args = parse_args_2w()
     elif data_scale == '5wu':

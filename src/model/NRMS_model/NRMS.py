@@ -7,7 +7,11 @@ from utils.utils import *
 class news_encoder(torch.nn.Module):
     def __init__(self, word_dim, attention_dim, attention_heads, query_vector_dim):
         super(news_encoder, self).__init__()
-        self.multiheadatt = MultiHeadSelfAttention_2(word_dim, attention_dim * attention_heads, attention_heads)
+        self.multiheadatt = MultiHeadSelfAttention_2(
+            word_dim, 
+            attention_dim * attention_heads, 
+            attention_heads
+        )
         self.multi_dim = attention_dim * attention_heads
         self.norm = nn.LayerNorm(self.multi_dim)
         self.word_attention = Additive_Attention(query_vector_dim, self.multi_dim)
@@ -17,20 +21,29 @@ class news_encoder(torch.nn.Module):
         word_embedding = self.multiheadatt(word_embedding)
         word_embedding = F.dropout(word_embedding, p=self.dropout_prob, training=self.training)
         news_rep = self.word_attention(word_embedding)
+        news_rep = F.dropout(news_rep, p=self.dropout_prob, training=self.training)
+
         return news_rep
 
 class user_encoder(torch.nn.Module):
-    def __init__(self,  word_dim, attention_dim, attention_heads, query_vector_dim):
+    def __init__(self, word_dim, attention_dim, attention_heads, query_vector_dim):
         super(user_encoder, self).__init__()
-        self.multiheadatt = MultiHeadSelfAttention_2(attention_dim * attention_heads, attention_dim * attention_heads, attention_heads)
-        self.multi_dim = attention_dim * attention_heads
-        self.user_attention = Additive_Attention(query_vector_dim, self.multi_dim)
+        self.multiheadatt = MultiHeadSelfAttention_2(
+            attention_dim * attention_heads, 
+            attention_dim * attention_heads, 
+            attention_heads
+        )
+        self.user_attention = Additive_Attention(
+            query_vector_dim, 
+            attention_dim * attention_heads
+        )
         self.dropout_prob = 0.2
 
     def forward(self, clicked_news_rep):
         user_seq_rep = self.multiheadatt(clicked_news_rep)
         user_seq_rep = F.dropout(user_seq_rep, p=self.dropout_prob, training=self.training)
         user_rep = self.user_attention(user_seq_rep)
+        user_rep = F.dropout(user_rep, p=self.dropout_prob, training=self.training)
         return user_rep
 
 class NRMS(torch.nn.Module):
@@ -71,6 +84,7 @@ class NRMS(torch.nn.Module):
                 news_rep = news_rep_one
             else:
                 news_rep = torch.cat([news_rep, news_rep_one], dim=1)
+        
         # 用户编码器
         user_rep = None
         for i in range(self.args.batch_size):
@@ -94,6 +108,7 @@ class NRMS(torch.nn.Module):
     def test(self, candidate_news, user_clicked_news_index):
         # 新闻用户表征
         user_rep, news_rep = self.get_user_news_rep(candidate_news, user_clicked_news_index)
+        news_rep = news_rep[:, :1,:]
         # 预测得分
         score = torch.sum(news_rep * user_rep, dim=-1).view(self.args.batch_size, -1)
         # score = torch.sigmoid(score)

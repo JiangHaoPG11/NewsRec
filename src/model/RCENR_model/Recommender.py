@@ -18,9 +18,7 @@ class news_encoder(torch.nn.Module):
         word_embedding = F.dropout(word_embedding, p=self.dropout_prob, training=self.training)
         word_embedding = self.multiheadatt(word_embedding)
         word_embedding = F.dropout(word_embedding, p=self.dropout_prob, training=self.training)
-        word_rep = self.tanh(self.word_attention(word_embedding))
-        # word_rep = self.word_attention(word_embedding)
-
+        word_rep = self.word_attention(word_embedding)
         news_rep = F.dropout(word_rep, p=self.dropout_prob, training=self.training)
         return news_rep
 
@@ -376,8 +374,7 @@ class Recommender(torch.nn.Module):
                 user_rep = user_rep_one
             else:
                 user_rep = torch.cat([user_rep, user_rep_one], dim=0)
-        score = torch.sum(news_rep * user_rep, dim = -1)
-        return user_rep, news_rep, score
+        return user_rep, news_rep
 
     def forward(self, candidate_news, user_clicked_news_index, news_graph, user_graph):
         weight = 1
@@ -385,16 +382,17 @@ class Recommender(torch.nn.Module):
         candidate_news = candidate_news.to(self.device)
         user_clicked_news_index = user_clicked_news_index.to(self.device)
 
-        user_clicked_news_index = user_clicked_news_index[..., :10]
+        # user_clicked_news_index = user_clicked_news_index[..., :10]
     
-        # 新闻用户表征
-        user_rep, news_rep, score = self.get_user_news_rep(candidate_news, user_clicked_news_index)
-        
-        # 子图嵌入
+        user_rep, news_rep = self.get_user_news_rep(candidate_news, user_clicked_news_index)
+        score = torch.sum(news_rep * user_rep, dim = -1)
+
         news_graph_embedding = self.get_graph_embedding(news_graph, mode="news") # bz, news_dim
         user_graph_embedding = self.get_graph_embedding(user_graph, mode="user") # bz, news_dim
-        graph_score = torch.sum(news_graph_embedding * user_graph_embedding, dim=-1).view(self.args.batch_size, -1) 
         
-        # 得分
+        graph_score = torch.sum(
+            news_graph_embedding * user_graph_embedding, dim=-1
+        ).view(self.args.batch_size, -1) 
+        
         score = weight * score + (1 - weight) * graph_score
         return score

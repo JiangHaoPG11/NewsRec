@@ -29,8 +29,22 @@ from DataLoad import load_data
 import argparse
 import os
 
+def str2bool(v):
+    if isinstance(v, bool):
+        return v
+    if v.lower() in ("yes", "true", "t", "y", "1"):
+        return True
+    elif v.lower() in ("no", "false", "f", "n", "0"):
+        return False
+    else:
+        raise argparse.ArgumentTypeError("Boolean value expected.")
+
 def parse_args_2w():
     parser = argparse.ArgumentParser()
+
+    parser.add_argument('--train_flag', type=str2bool, default=True)
+    parser.add_argument('--test_flag', type=str2bool, default=True)
+
     parser.add_argument('--user_data_mode', type=int, default=3)
     parser.add_argument('--news_data_mode', type=int, default=3)
     parser.add_argument('--mode', type=str, default='RCENR')
@@ -39,7 +53,7 @@ def parse_args_2w():
     parser.add_argument('--sample_size', type=int, default=5)
     parser.add_argument('--optimizer_type', type=str, default='adam')
     parser.add_argument('--loss_type', type=str, default='cross_entropy')
-    parser.add_argument('--checkpoint_dir', type=str, default='./save_model/', help='模型保留位置')
+    parser.add_argument('--checkpoint_dir', type=str, default='../save_model/', help='模型保留位置')
     parser.add_argument('--train_ratio', type=float, default= 1)
 
     parser.add_argument('--user_num', type = int, default=15427)
@@ -200,7 +214,7 @@ def parse_args_5w():
 
     # RCENR
     parser.add_argument('--depth', type=list, default=[5, 3, 2], help='K-跳深度')
-    parser.add_argument('--checkpoint_dir', type=str, default='./save_model/', help='模型保留位置')
+    parser.add_argument('--checkpoint_dir', type=str, default='../save_model/', help='模型保留位置')
     # RippleNet
     parser.add_argument('--ripplenet_n_hop', type=int, default=2, help='maximum hops')
     parser.add_argument('--ripplenet_n_memory', type=int, default=5, help='size of ripple set for each hop')
@@ -227,7 +241,7 @@ def parse_args_full():
     parser.add_argument('--sample_size', type=int, default=5)
     parser.add_argument('--optimizer_type', type=str, default='adam')
     parser.add_argument('--loss_type', type=str, default='cross_entropy')
-    parser.add_argument('--checkpoint_dir', type=str, default='./save_model/', help='模型保留位置')
+    parser.add_argument('--checkpoint_dir', type=str, default='../save_model/', help='模型保留位置')
 
     parser.add_argument('--user_num', type = int, default=711222)
     parser.add_argument('--user_clicked_num', type=int, default=50)
@@ -320,112 +334,166 @@ def main(path, device):
     data = load_data( args, path )
     if args.mode == "AnchorKG":
         model = AnchorKG_Train_Test(args, data, device)
-        model.Train()
-        model.Test()
+        if args.train_flag:
+            model.Train()
+        if args.test_flag:
+            model.Test()
     if args.mode == "PGPR":
         model = PGPR_Train_Test(args, data, device)
-        model.Train()
-        model.Test()
+        if args.train_flag:
+            model.Train()
+        if args.test_flag:
+            model.Test()
     if args.mode == "RippleNet":
         model = RippleNet_Train_Test(args, data, device)
-        model.Train()
-        model.Test()
+        if args.train_flag:
+            model.Train()
+        if args.test_flag:
+            model.Test()
     if args.mode == "ADAC":
         model = ADAC_Train_Test(args, data, device)
-        model.Train()
-        model.Test()
+        if args.train_flag:
+            model.Train()
+        if args.test_flag:
+            model.Test()
     if args.mode == "KPRN":
         model = KPRN_Train_Test(args, data, device)
-        model.Train()
-        model.Test()
+        if args.train_flag:
+            model.Train()
+        if args.test_flag:
+            model.Test()
     if args.mode == "MRNN":
         model = MRNN_Train_Test(args, data, device)
-        model.Train()
-        model.Test()
+        if args.train_flag:
+            model.Train()
+        if args.test_flag:
+            model.Test()
     if args.mode == "Baseline":
         model = Baseline_Train_Test(args, data, device)
-        model.Train()
-        model.Test()
+        if args.train_flag:
+            model.Train()
+        if args.test_flag:
+            model.Test()
     if args.mode == "KGIN":
         model = KGIN_Train_Test(args, data, device)
-        model.Train()
-        model.Test()
+        if args.train_flag:
+            model.Train()
+        if args.test_flag:
+            model.Test()
     if args.mode == "KGCN":
         model = KGCN_Train_Test(args, data, device)
-        model.Train()
-        model.Test()
+        if args.train_flag:
+            model.Train()
+        if args.test_flag:
+            model.Test()
     if args.mode == "KGAT":
         model = KGAT_Train_Test(args, data, device)
-        model.Train()
-        model.Test()
+        if args.train_flag:
+            model.Train()
+        if args.test_flag:
+            model.Test()
     if args.mode == "LightGCN":
         model = LightGCN_Train_Test(args, data, device)
-        model.Train()
-        model.Test()
+        if args.train_flag:
+            model.Train()
+        if args.test_flag:
+            model.Test()
     if args.mode == "RCENR":
         model = RCENR_Train_Test(args, data, device)
-        model.Train()
-        model.Test()
+        if args.train_flag:
+            model.Train()
+        if args.test_flag:
+            model.Test()
     if args.mode == "NRMS":
         model = NRMS_Train_Test(args, data, device)
-        model.Train()
-        model.Test()
+        if args.train_flag:
+            model.Train()
+        if args.test_flag:
+            model.Test()
     if args.mode == "NAML":
         model = NAML_Train_Test(args, data, device)
-        model.Train()
-        model.Test()
+        if args.train_flag:
+            model.Train()
+        if args.test_flag:
+            model.Test()
     if args.mode == "MNN4Rec":
         model = MNN4Rec_Train_Test(args, data, device)
-        model.Train()
-        model.Test()
+        if args.train_flag:
+            model.Train()
+        if args.test_flag:
+            model.Test()
     if args.mode == "LSTUR":
         model = LSTUR_Train_Test(args, data, device)
-        model.Train()
-        model.Test()
+        if args.train_flag:
+            model.Train()
+        if args.test_flag:
+            model.Test()
     if args.mode == "DKN":
         model = DKN_Train_Test(args, data, device)
-        model.Train()
-        model.Test()
+        if args.train_flag:
+            model.Train()
+        if args.test_flag:
+            model.Test()
     if args.mode == "LightGCN":
         model = LightGCN_Train_Test(args, data, device)
-        model.Train()
-        model.Test()
+        if args.train_flag:
+            model.Train()
+        if args.test_flag:
+            model.Test()
     if args.mode == "FM":
         model = FM_Train_Test(args, data, device)
-        model.Train()
-        model.Test()
+        if args.train_flag:
+            model.Train()
+        if args.test_flag:
+            model.Test()
     if args.mode == "MNN4Rec_update":
         model = MNN4Rec_update_Train_Test(args, data, device)
-        model.Train()
-        model.Test()
+        if args.train_flag:
+            model.Train()
+        if args.test_flag:
+            model.Test()
     if args.mode == "NPA":
         model = NPA_Train_Test(args, data, device)
-        model.Train()
-        model.Test()
+        if args.train_flag:
+            model.Train()
+        if args.test_flag:
+            model.Test()
     if args.mode == "KIM":
         model = KIM_Train_Test(args, data, device)
-        model.Train()
-        model.Test()
+        if args.train_flag:
+            model.Train()
+        if args.test_flag:
+            model.Test()
     if args.mode == "FIM":
         model = FIM_Train_Test(args, data, device)
-        model.Train()
-        model.Test()
+        if args.train_flag:
+            model.Train()
+        if args.test_flag:
+            model.Test()
     if args.mode == "SFT_NPA_ATT":
         model = SFT_NPA_Train_Test(args, data, device)
-        model.Train()
-        model.Test()
+        if args.train_flag:
+            model.Train()
+        if args.test_flag:
+            model.Test()
     if args.mode == "SFT_NRMS_ATT":
         model = SFT_NRMS_Train_Test(args, data, device)
-        model.Train()
-        model.Test()
+        if args.train_flag:
+            model.Train()
+        if args.test_flag:
+            model.Test()
     if args.mode == "SFT_NAML_ATT":
         model = SFT_NAML_Train_Test(args, data, device)
-        model.Train()
-        model.Test()
+        if args.train_flag:
+            model.Train()
+        if args.test_flag:
+            model.Test()
     if args.mode == "SFT_MRNN_ATT":
         model = SFT_MRNN_Train_Test(args, data, device)
-        model.Train()
-        model.Test()
+        if args.train_flag:
+            model.Train()
+        if args.test_flag:
+            model.Test()
 
 if __name__ == '__main__':
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")

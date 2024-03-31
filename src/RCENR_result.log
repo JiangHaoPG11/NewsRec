@@ -1,8 +1,0 @@
-Traceback (most recent call last):
-  File "/home/v-jiangha/workspace/NewsRec/src/main.py", line 2, in <module>
-    from model.PGPR_model.PGPR_Train_Test import *
-  File "/home/v-jiangha/workspace/NewsRec/src/model/PGPR_model/PGPR_Train_Test.py", line 1, in <module>
-    from model.PGPR_model.PGPR_Trainer import Trainer
-  File "/home/v-jiangha/workspace/NewsRec/src/model/PGPR_model/PGPR_Trainer.py", line 3, in <module>
-    from AnchorKG_model.AnchorKG import *
-ModuleNotFoundError: No module named 'AnchorKG_model'

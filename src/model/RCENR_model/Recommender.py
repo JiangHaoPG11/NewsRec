@@ -11,11 +11,11 @@ class news_encoder(torch.nn.Module):
         self.multi_dim = attention_dim * attention_heads
         self.tanh = nn.Tanh()
         self.dropout_prob = 0.2
-        self.multiheadatt = MultiHeadSelfAttention_2(word_dim, self.multi_dim, attention_heads)
+        self.multiheadatt = MultiHeadSelfAttention(word_dim, self.multi_dim, attention_heads)
         self.word_attention = Additive_Attention(query_vector_dim, self.multi_dim)
 
     def forward(self, word_embedding, entity_embedding, category_index, subcategory_index):
-        word_embedding = F.dropout(word_embedding, p=self.dropout_prob, training=self.training)
+        # word_embedding = F.dropout(word_embedding, p=self.dropout_prob, training=self.training)
         word_embedding = self.multiheadatt(word_embedding)
         word_embedding = F.dropout(word_embedding, p=self.dropout_prob, training=self.training)
         word_rep = self.word_attention(word_embedding)
@@ -34,12 +34,11 @@ class user_encoder(torch.nn.Module):
             category_embedding_dim, subcategory_embedding_dim, 
             category_size, subcategory_size
         )
-        self.multiheadatt = MultiHeadSelfAttention_2(self.multi_dim,
-                                                     self.multi_dim,
-                                                     attention_heads)
-        self.multiheadatt2 = MultiHeadSelfAttention_2(self.multi_dim,
-                                                      self.multi_dim,
-                                                      attention_heads)
+        self.multiheadatt = MultiHeadSelfAttention(
+            self.multi_dim,
+            self.multi_dim,
+            attention_heads
+        )
         self.user_attention = Additive_Attention(query_vector_dim, self.multi_dim)
         self.layernorm1 = nn.LayerNorm(self.multi_dim)
         self.layernorm2 = nn.LayerNorm(self.multi_dim)
@@ -76,7 +75,7 @@ class user_encoder(torch.nn.Module):
 
 #         # 标题节点学习网络
 #         self.layernorm_word = nn.LayerNorm(word_dim)
-#         self.multiheadatt = MultiHeadSelfAttention_2(word_dim, attention_dim * attention_heads, attention_heads)
+#         self.multiheadatt = MultiHeadSelfAttention(word_dim, attention_dim * attention_heads, attention_heads)
 #         self.word_attention = Additive_Attention(query_vector_dim, self.multi_dim)
 #         self.layernorm1 = nn.LayerNorm(self.multi_dim)
 
@@ -160,9 +159,9 @@ class user_encoder(torch.nn.Module):
 #         self.multi_dim = attention_dim * attention_heads
 #         self.news_encoder = news_encoder(word_dim, attention_dim, attention_heads, query_vector_dim, entity_size,
 #                                        entity_embedding_dim, category_embedding_dim, subcategory_embedding_dim, category_size, subcategory_size)
-#         self.multiheadatt = MultiHeadSelfAttention_2(attention_dim * attention_heads, attention_dim * attention_heads,
+#         self.multiheadatt = MultiHeadSelfAttention(attention_dim * attention_heads, attention_dim * attention_heads,
 #                                                      attention_heads)
-#         self.multiheadatt2 = MultiHeadSelfAttention_2(attention_dim * attention_heads, attention_dim * attention_heads,
+#         self.multiheadatt2 = MultiHeadSelfAttention(attention_dim * attention_heads, attention_dim * attention_heads,
 #                                                      attention_heads)
 #         self.user_attention = Additive_Attention(query_vector_dim, self.multi_dim)
 #         self.layernorm1 = nn.LayerNorm(self.multi_dim)
@@ -212,7 +211,7 @@ class Recommender(torch.nn.Module):
         self.device = device
 
         # no_embedding
-        self.word_embedding = word_embedding
+        # self.word_embedding = word_embedding
         # self.entity_embedding = entity_embedding.to(device)
         # self.relation_embedding = relation_embedding.to(device)
 
@@ -221,6 +220,7 @@ class Recommender(torch.nn.Module):
         self.category_embedding = nn.Embedding(self.args.category_num, self.args.embedding_dim).to(self.device)
         self.subcategory_embedding = nn.Embedding(self.args.subcategory_num, self.args.embedding_dim).to(self.device)
         self.news_embedding = nn.Embedding.from_pretrained(torch.FloatTensor(np.array(news_title_embedding))).to(self.device)
+        self.word_embedding = nn.Embedding.from_pretrained(word_embedding)
         self.entity_embedding = nn.Embedding.from_pretrained(entity_embedding)
         self.relation_embedding = nn.Embedding.from_pretrained(relation_embedding)
 
@@ -315,10 +315,16 @@ class Recommender(torch.nn.Module):
         return np.array(news_entities)
 
     def get_user_news_rep(self, candidate_news_index, user_clicked_news_index):
-        candidate_news_word_embedding = self.word_embedding[self.news_title_word_dict[candidate_news_index.cpu()]].to(self.device)
-        user_clicked_news_word_embedding = self.word_embedding[self.news_title_word_dict[user_clicked_news_index.cpu()]].to(self.device)
+
+        # get news words emb
+        candidate_news_word_embedding = self.word_embedding(
+            torch.LongTensor(self.news_title_word_dict[candidate_news_index.cpu().detach()]).to(self.device)
+        )
+        user_clicked_news_word_embedding = self.word_embedding(
+            torch.LongTensor(self.news_title_word_dict[user_clicked_news_index.cpu().detach()]).to(self.device)
+        )
         
-        # get news entity 
+        # get news entity emb
         candidate_news_entity = torch.IntTensor(
             self.get_news_entities_batch(
                 candidate_news_index.cpu()
@@ -345,9 +351,12 @@ class Recommender(torch.nn.Module):
             news_entity_embedding_one = candidate_news_entity_embedding[:, i, :]
             news_category_index = candidate_news_category_index[:, i]
             news_subcategory_index = candidate_news_subcategory_index[:, i]
-            news_rep_one = self.news_encoder(news_word_embedding_one, news_entity_embedding_one,
-                                           news_category_index, news_subcategory_index
-                                           ).unsqueeze(1)
+            news_rep_one = self.news_encoder(
+                news_word_embedding_one, 
+                news_entity_embedding_one,                       
+                news_category_index, 
+                news_subcategory_index
+            ).unsqueeze(1)
             if i == 0:
                 news_rep = news_rep_one
             else:
@@ -377,7 +386,7 @@ class Recommender(torch.nn.Module):
         return user_rep, news_rep
 
     def forward(self, candidate_news, user_clicked_news_index, news_graph, user_graph):
-        weight = 1
+        weight = 0.8
         self.node_embedding = self._reconstruct_node_embedding()
         candidate_news = candidate_news.to(self.device)
         user_clicked_news_index = user_clicked_news_index.to(self.device)

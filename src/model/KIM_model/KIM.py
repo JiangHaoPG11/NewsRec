@@ -41,7 +41,7 @@ class Semantic_co_Encoder(torch.nn.Module):
         super(Semantic_co_Encoder, self).__init__()
         self.word_num = word_num
         self.attention_dim = attention_dim * attention_heads
-        self.multiheadatt_news = MultiHeadSelfAttention_2(word_dim, self.attention_dim, attention_heads)
+        self.multiheadatt_news = MultiHeadSelfAttention(word_dim, self.attention_dim, attention_heads)
         self.multiheadatt_clicked = MultiHeadSelfAttention_3(word_dim, self.attention_dim, attention_heads)
         # self.news_att = Additive_Attention(query_vector_dim, self.attention_dim)
         # self.clicked_att = Additive_Attention(query_vector_dim, self.attention_dim)

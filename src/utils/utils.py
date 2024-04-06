@@ -4,8 +4,10 @@ import math
 import torch.nn.functional as F
 import numpy as np
 import csv
+
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-udevice = torch.device('cpu')
+# device = torch.device('cpu')
+
 #################################   Attentnion  ###############################
 def a_norm(Q, K):
     m = torch.matmul(Q, K.transpose(2,1).float())
@@ -16,67 +18,6 @@ def attention(Q, K, V, dim_attn):
     #Attention(Q, K, V) = norm(QK)V
     a = a_norm(Q, K)/ dim_attn**0.5 #(batch_size, dim_attn, seq_length)
     return  torch.matmul(a,  V) #(batch_size, seq_length, seq_length)
-
-class AttentionBlock(torch.nn.Module):
-    def __init__(self, dim_val, dim_attn):
-        super(AttentionBlock, self).__init__()
-        self.value = Value(dim_val, dim_attn)
-        self.key = Key(dim_val, dim_attn)
-        self.query = Query(dim_val, dim_attn)
-    def forward(self, x, dim_attn, kv = None):
-        if(kv is None):
-            #Attention with x connected to Q,K and V (For encoder)
-            return attention(self.query(x), self.key(x), self.value(x), dim_attn)
-        #Attention with x as Q, external vector kv as K an V (For decoder)
-        return attention(self.query(x), self.key(kv), self.value(kv), dim_attn)
-
-class MultiHeadSelfAttention(torch.nn.Module):
-    def __init__(self, dim_val, dim_attn, n_heads):
-        super(MultiHeadSelfAttention, self).__init__()
-        self.heads = []
-        for i in range(n_heads):
-            self.heads.append(AttentionBlock(dim_val, dim_attn))
-        self.heads = nn.ModuleList(self.heads)
-        self.fc = nn.Linear(n_heads * dim_attn, dim_attn, bias = False)
-    def forward(self, x, dim_attn,  kv = None):
-        a = []
-        for h in self.heads:
-            a.append(h(x, dim_attn, kv = kv))
-        a = torch.stack(a, dim = -1) #combine heads
-        a = torch.flatten(a, start_dim = 2)  #flatten all head outputs
-        x = self.fc(a)
-        x = torch.tanh(x)
-        return x
-
-class Value(torch.nn.Module):
-    def __init__(self, dim_input, dim_val):
-        super(Value, self).__init__()
-        self.dim_val = dim_val
-        self.fc1 = nn.Linear(dim_input, dim_val, bias = False)
-        #self.fc2 = nn.Linear(5, dim_val)
-    def forward(self, x):
-        x = self.fc1(x)
-        return x
-
-class Key(torch.nn.Module):
-    def __init__(self, dim_input, dim_attn):
-        super(Key, self).__init__()
-        self.dim_attn = dim_attn
-        self.fc1 = nn.Linear(dim_input, dim_attn, bias = False)
-        #self.fc2 = nn.Linear(5, dim_attn)
-    def forward(self, x):
-        x = self.fc1(x)
-        return x
-
-class Query(torch.nn.Module):
-    def __init__(self, dim_input, dim_attn):
-        super(Query, self).__init__()
-        self.dim_attn = dim_attn
-        self.fc1 = nn.Linear(dim_input, dim_attn, bias = False)
-        #self.fc2 = nn.Linear(5, dim_attn)
-    def forward(self, x):
-        x = self.fc1(x)
-        return x
 
 class ScaledDotProductAttention(nn.Module):
     def __init__(self, d_k):
@@ -92,18 +33,18 @@ class ScaledDotProductAttention(nn.Module):
         context = torch.matmul(attn, V)
         return context, attn
 
-class MultiHeadSelfAttention_2(nn.Module):
+class MultiHeadSelfAttention(nn.Module):
     def __init__(self, input_dim, d_model, num_attention_heads):
-        super(MultiHeadSelfAttention_2, self).__init__()
+        super(MultiHeadSelfAttention, self).__init__()
         self.d_model = d_model
         self.num_attention_heads = num_attention_heads
-        assert d_model % num_attention_heads == 0
         self.d_k = d_model // num_attention_heads
         self.d_v = d_model // num_attention_heads
         self.W_Q = nn.Linear(input_dim, d_model)
         self.W_K = nn.Linear(input_dim, d_model)
         self.W_V = nn.Linear(input_dim, d_model)
         self._initialize_weights()
+        assert d_model % num_attention_heads == 0
 
     def _initialize_weights(self):
         for m in self.modules():
@@ -149,38 +90,22 @@ class Additive_Attention(torch.nn.Module):
     def __init__(self, query_vector_dim, candidate_vector_dim):
         super(Additive_Attention, self).__init__()
         self.linear = nn.Linear(candidate_vector_dim, query_vector_dim, bias=True)
-        self.attention_query_vector = nn.Parameter(torch.empty(query_vector_dim).uniform_(-0.1, 0.1))
+        self.attention_query_vector = nn.Parameter(
+            torch.empty(query_vector_dim).uniform_(-0.1, 0.1)
+        )
+        self._initialize_weights()
+    
+    def _initialize_weights(self):
+        for m in self.modules():
+            if isinstance(m, nn.Linear):
+                nn.init.xavier_uniform_(m.weight, gain=1)
+
     def forward(self, candidate_vector):
         # bz, title_word_size, title_word_dim
         temp = torch.tanh(self.linear(candidate_vector))
         # bz, title_word_size, 1
         candidate_weights = F.softmax(torch.matmul(temp, self.attention_query_vector), dim=-2)
         target = torch.matmul(candidate_weights.unsqueeze(dim=-2), candidate_vector).squeeze(dim=-2)
-        # bz, title_word_dim
-        return target
-
-class Additive_Attention_printweight(torch.nn.Module):
-    def __init__(self, query_vector_dim, candidate_vector_dim):
-        super(Additive_Attention_printweight, self).__init__()
-        self.linear = nn.Linear(candidate_vector_dim, query_vector_dim, bias=True)
-        self.attention_query_vector = nn.Parameter(torch.empty(query_vector_dim).uniform_(-0.1, 0.1))
-
-    def forward(self, candidate_vector, type_encoder, write = None):
-
-        # bz, title_word_size, title_word_dim
-        temp = torch.tanh(self.linear(candidate_vector))
-        # bz, title_word_size, 1
-        candidate_weights = F.softmax(torch.matmul(temp, self.attention_query_vector), dim=1)
-        if type_encoder == 'newencoder' and write == 'yes':
-            print(candidate_weights.shape)
-            with open("weight.csv", "a") as csvfile:
-                writer = csv.writer(csvfile)
-                # 写入多行用writerows
-                writer.writerows(candidate_weights.detach().numpy())
-            print(candidate_weights)
-        else:
-            print('no')
-        target = torch.bmm(candidate_weights.unsqueeze(dim=1), candidate_vector).squeeze(dim=1)
         # bz, title_word_dim
         return target
 
@@ -418,6 +343,7 @@ class PCNN(torch.nn.Module):
         self.norm = nn.LayerNorm(word_embedding_dim)
         self.cate_embedding = nn.Embedding(entity_cate_size, embedding_dim = 100)
         self.cate_transfor = nn.Linear(100, self.entity_embedding_dim, bias=True)
+    
     def forward(self, word_embedding, entity_embedding, entity_cate):
         bz = word_embedding.shape[0]
         word_embedding = word_embedding.unsqueeze(1)
@@ -589,7 +515,7 @@ class GraphCoAttNet(torch.nn.Module):
 class GAT(torch.nn.Module):
     def __init__(self, entity_dim, output_dim):
         super(GAT, self).__init__()
-        self.multiheadatt = MultiHeadSelfAttention_2(entity_dim, output_dim, 20)
+        self.multiheadatt = MultiHeadSelfAttention(entity_dim, output_dim, 20)
         self.fc1 = nn.Linear(entity_dim, 200)
         self.att = nn.Linear(200, 1)
         self.dropput_prob = 0.2

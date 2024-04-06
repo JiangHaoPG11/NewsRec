@@ -20,7 +20,7 @@ class news_encoder(torch.nn.Module):
         self.fc2 = nn.Linear(subcategory_dim, self.multi_dim, bias=True)
 
         # 单词级表征网络
-        self.multiheadatt = MultiHeadSelfAttention_2(word_dim, attention_dim * attention_heads, attention_heads)
+        self.multiheadatt = MultiHeadSelfAttention(word_dim, attention_dim * attention_heads, attention_heads)
         self.word_attention = Additive_Attention(query_vector_dim, self.multi_dim)
 
         # 实体级表征网络
@@ -72,7 +72,7 @@ class user_encoder(torch.nn.Module):
         super(user_encoder, self).__init__()
         self.multi_dim = attention_dim * attention_heads
         self.user_attention = Additive_Attention(query_vector_dim, self.multi_dim)
-        self.multiheadatt = MultiHeadSelfAttention_2(self.multi_dim, self.multi_dim, attention_heads)
+        self.multiheadatt = MultiHeadSelfAttention(self.multi_dim, self.multi_dim, attention_heads)
         self.dropout_prob = 0.2
 
     def forward(self, clicked_news_rep):
@@ -192,5 +192,5 @@ class MRNN(torch.nn.Module):
         user_rep, news_rep = self.get_user_news_rep(candidate_news, user_clicked_news_index)
         # 预测得分
         score = torch.sum(news_rep * user_rep, dim=-1).view(self.args.batch_size, -1)
-        score = torch.sigmoid(score)
+        # score = torch.sigmoid(score)
         return score

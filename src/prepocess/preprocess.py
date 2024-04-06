@@ -15,20 +15,24 @@ import seaborn as sns
 from numpy.random import randn
 import matplotlib.pyplot as plt
 
-# nltk.download('punkt')
-# nltk.download('stopwords')
+nltk.download('punkt')
+nltk.download('stopwords')
 
 #nltk.download('stopwords')
 ### 读取用户历史交互记录
-def load_data_behaviors_New():
+def load_data_behaviors():
     '''
     读取用户行为信息,新闻信息和新闻实体向量
     :return: DataFrame(user_behaviors_df),DataFrame(news_Info_df),DataFrame(entity_embedding_df)
     '''
+    # user_behaviors_df = pd.read_table('../../database/MIND_small/MINDsmall_train/behaviors.tsv',
+    #                                   header=None,
+    #                                   names=['impression_id', 'user_id', 'time', 'history', 'impressions'],
+    #                                   sep="\t", nrows = 20000 )
     user_behaviors_df = pd.read_table('../../database/MIND_small/MINDsmall_train/behaviors.tsv',
                                       header=None,
                                       names=['impression_id', 'user_id', 'time', 'history', 'impressions'],
-                                      sep="\t", nrows = 20000 )
+                                      sep="\t")
     news_Info_df = pd.read_table('../../database/MIND_small/MINDsmall_train/news.tsv',
                                 header=None,
                                 names=['id', 'category', 'subcategory', 'title', 'abstract', 'url',
@@ -132,7 +136,7 @@ def get_user_index( user_behaviors_df, user_pnewsid_nnews_id_df):
     user_index_df = user_index_df.reset_index()
     print('总共的用户数量{}'.format(user_index_df.shape[0]))
     # print(news_index_df)
-    user_index_df.to_csv('../Data/df/user_index_df.csv', index=False)
+    user_index_df.to_csv('../../data/df/user_index_df.csv', index=False)
 
     ## 获得用户点击新闻id和对应用户表示的df
     user_clicked_df = pd.DataFrame()
@@ -146,7 +150,7 @@ def get_user_index( user_behaviors_df, user_pnewsid_nnews_id_df):
     for i in range(len(user_id_list)):
         total_user_index_list.append(user_dict[user_id_list[i]])
     user_pnewsid_nnews_id_df['user_index'] = total_user_index_list
-    user_pnewsid_nnews_id_df.to_csv('../Data/df/user_pnewsid_nnews_id_df.csv')
+    user_pnewsid_nnews_id_df.to_csv('../../data/df/user_pnewsid_nnews_id_df.csv')
     # print('--------------user_pnewsid_nnews_id_df-------------')
     # print(user_pnewsid_nnews_id_df)
     print('总的用户数{}'.format(len(user_index_list)))
@@ -214,7 +218,7 @@ def cal_user_clicked_news_ratio(user_dict, user_pnewsid_nnews_id_df, user_clicke
     user_index_df['w/c'] = user_indictor
     user_index_df = user_index_df.reset_index()
     print('总共的用户数量{}'.format(user_index_df.shape[0]))
-    user_index_df.to_csv('../Data/df/user_index_df.csv', index=False)
+    user_index_df.to_csv('../../data/df/user_index_df.csv', index=False)
     # 构建用户类型np 0表示新用户 1 表示老用户 2表示正常用户
     user_type = []
     cold_user_num = 0
@@ -230,7 +234,7 @@ def cal_user_clicked_news_ratio(user_dict, user_pnewsid_nnews_id_df, user_clicke
         else:
             user_type.append(2)
             norm_user_num += 1
-    np.save('../Data/metadata/user_type', np.array(user_type))
+    np.save('../../data/metadata/user_type', np.array(user_type))
     print('热用户数量{}'.format(warm_user_num))
     print('冷用户数量{}'.format(cold_user_num))
     print('正常用户数量{}'.format(norm_user_num))
@@ -238,7 +242,7 @@ def cal_user_clicked_news_ratio(user_dict, user_pnewsid_nnews_id_df, user_clicke
 ### 计算新闻点击率
 def cal_news_clicked_user_ratio(user_pnewsid_nnews_id_df, user_clicked_df, candidate_newsid_list, news_dict):
 
-    candidate_newsindex = np.load('../Data/metadata/candidate_newsindex.npy')
+    candidate_newsindex = np.load('../../data/metadata/candidate_newsindex.npy')
 
     user_index_list = user_pnewsid_nnews_id_df['user_id'].tolist()
     pnews_list = user_pnewsid_nnews_id_df['pnews_id'].tolist()
@@ -312,7 +316,7 @@ def cal_news_clicked_user_ratio(user_pnewsid_nnews_id_df, user_clicked_df, candi
     news_index_df = news_index_df.reset_index()
     print('总共的新闻标题数量{}'.format(news_index_df.shape[0]))
     # print(new_index_df)
-    news_index_df.to_csv('../Data/df/news_index_df.csv', index=False)
+    news_index_df.to_csv('../../data/df/news_index_df.csv', index=False)
 
     # 构建新闻类型np 0表示新新闻 1 表示老新闻
     news_type = []
@@ -329,7 +333,7 @@ def cal_news_clicked_user_ratio(user_pnewsid_nnews_id_df, user_clicked_df, candi
         else:
             news_type.append(2)
             normal_news_num += 1
-    np.save('../Data/metadata/news_type', np.array(news_type))
+    np.save('../../data/metadata/news_type', np.array(news_type))
     print('热新闻数量{}'.format(warm_news_num))
     print('冷新闻数量{}'.format(cold_news_num))
     print('正常新闻数量{}'.format(normal_news_num))
@@ -358,7 +362,7 @@ def cal_news_popularity(user_clicked_df, user_pnewsid_nnews_id_df, new_dict):
         pop_list.append(pop)
     # 流行度归一化
     pop_list = [x / max for x in pop_list]
-    np.save('../Data/metadata/news_popularity', np.array(pop_list))
+    np.save('../../data/metadata/news_popularity', np.array(pop_list))
 
 ### 获取用户点击新闻id和候选新闻id映射得到index
 def get_index_clicked_newsid_cand_newsid( user_clicked_newsid_list, total_newsid_list):
@@ -391,7 +395,7 @@ def get_index_clicked_newsid_cand_newsid( user_clicked_newsid_list, total_newsid
     news_index_df = news_index_df.reset_index()
     print('总共的新闻标题数量{}'.format(news_index_df.shape[0]))
     # print(news_index_df)
-    news_index_df.to_csv('../Data/df/news_index_df.csv',index= False)
+    news_index_df.to_csv('../../data/df/news_index_df.csv',index= False)
     return news_dict
 
 ### 获取测试集数据
@@ -426,10 +430,10 @@ def get_test_news_user(news_dict, user_pnewsid_nnews_id_df):
             label_list.append(0)
             index += 1
         Bound.append([start,index])
-    np.save('../Data/test/test_user_index.npy', np.array(userindex))
-    np.save('../Data/test/test_candidate_newsindex.npy', np.array(newsindex_list))
-    np.save('../Data/test/test_label.npy', np.array(label_list))
-    np.save('../Data/test/test_bound.npy', np.array(Bound))
+    np.save('../../data/test/test_user_index.npy', np.array(userindex))
+    np.save('../../data/test/test_candidate_newsindex.npy', np.array(newsindex_list))
+    np.save('../../data/test/test_label.npy', np.array(label_list))
+    np.save('../../data/test/test_bound.npy', np.array(Bound))
 
 ### 负采样
 def negtivate_sample(user_pnewsid_nnews_id_df, news_dict):
@@ -500,25 +504,25 @@ def negtivate_sample(user_pnewsid_nnews_id_df, news_dict):
     newsindex_label_df['user_index'] = user_index
     newsindex_label_df['candidate_newsindex'] = candidate_newsindex_list
     newsindex_label_df['label'] = label_list
-    newsindex_label_df.to_csv('../Data/df/newsindex_label_df.csv')
+    newsindex_label_df.to_csv('../../data/df/newsindex_label_df.csv')
 
     ## 保存用户index列表
     user_index = np.array(user_index)
     # print('-----------user_index.npy--------------')
     # print(user_index)
-    np.save('../Data/metadata/user_index.npy', user_index)
+    np.save('../../data/metadata/user_index.npy', user_index)
 
     ## 保存候选新闻index列表
     candidate_newsindex = np.array(candidate_newsindex_list)
     # print('-----------candidate_newsindex.npy--------------')
     # print(candidate_newsindex)
-    np.save('../Data/metadata/candidate_newsindex.npy', candidate_newsindex)
+    np.save('../../data/metadata/candidate_newsindex.npy', candidate_newsindex)
 
     ## 保存label列表
     label = np.array(label_list)
     # print('-----------label.npy--------------')
     # print(label)
-    np.save('../Data/metadata/label.npy', label)
+    np.save('../../data/metadata/label.npy', label)
 
     return newsindex_label_df
 
@@ -564,10 +568,10 @@ def construct_clicked_newsindex_cand_newsindex( user_clicked_df,  user_clicked_n
     print(len(user_clicked_newsindex_list))
     # print('--------------user_clicked_newsindex---------------')
     # print(user_clicked_newsindex)
-    np.save('../Data/metadata/user_clicked_newsindex', user_clicked_newsindex)
+    np.save('../../data/metadata/user_clicked_newsindex', user_clicked_newsindex)
 
     user_clicked_df['user_clicked_newsindex'] = user_clicked_newsindex_list
-    user_clicked_df.to_csv('../Data/df/user_clicked_df.csv',index= False)
+    user_clicked_df.to_csv('../../data/df/user_clicked_df.csv',index= False)
 
     # 构建用户邻居字典
     user_index_list = user_clicked_df['user_index'].tolist()
@@ -623,8 +627,8 @@ def get_title_word(news_dict, news_Info_df):
     news_abstract = news_Info_df_select['abstract'].values.tolist()
     news_title.append('padding')
     news_abstract.append('padding')
-    np.save('../Data/pretrain-data/news_title.npy', np.array(news_title))
-    np.save('../Data/pretrain-data/news_abstract.npy', np.array(news_abstract))
+    np.save('../../data/pretrain-data/news_title.npy', np.array(news_title))
+    np.save('../../data/pretrain-data/news_abstract.npy', np.array(news_abstract))
     return news_Info_df_select, word_total_list_t, np.array(news_title)
 
 ## 获取标题嵌入
@@ -660,7 +664,7 @@ def get_news_embedding (news_title):
     # news_title_embedding = []
     # for i in range(len(title_text)+1):
     #     news_title_embedding.append(np.random.rand(400))
-    np.save('../Data/metadata/news_title_embedding.npy', np.array(news_title_embedding))
+    np.save('../../data/metadata/news_title_embedding.npy', np.array(news_title_embedding))
 
 ### 获取标题文字index
 def get_title_word_index (word_total_list_t, news_Info_df_select):
@@ -691,7 +695,7 @@ def get_title_word_index (word_total_list_t, news_Info_df_select):
     ## 构建映射矩阵
     word_index_df = pd.DataFrame(pd.Series(word_dict), columns=['word_id'])
     word_index_df = word_index_df.reset_index().rename(columns={'index': 'word'})
-    word_index_df.to_csv('../Data/df/word_index_df.csv', index= False)
+    word_index_df.to_csv('../../data/df/word_index_df.csv', index= False)
     news_Info_df_select['title_word_id'] = word_index_list[:len(word_index_list)-1]
     title_word_index = word_index_list
     ## 记录单词长度
@@ -699,7 +703,7 @@ def get_title_word_index (word_total_list_t, news_Info_df_select):
     for i in range(len(title_word_index)):
         news_title_length.append(len(title_word_index[i]))
     news_title_length = np.array(news_title_length)
-    np.save('../Data/metadata/news_title_length.npy', news_title_length)
+    np.save('../../data/metadata/news_title_length.npy', news_title_length)
     ## 求最大长度
     max_len = 0
     for i in range(len(title_word_index)):
@@ -715,7 +719,7 @@ def get_title_word_index (word_total_list_t, news_Info_df_select):
             need_len = max_len - len(title_word_index[i])
             title_word_index[i].extend([word_index_df.shape[0]-1] * need_len)
     title_word_index = np.array(title_word_index)
-    np.save('../Data/metadata/news_title_word_index.npy', title_word_index)
+    np.save('../../data/metadata/news_title_word_index.npy', title_word_index)
 
     # print('-----------word_index_df------------')
     # print(word_index_df)
@@ -791,7 +795,7 @@ def merge_title_and_abstract_list(entity_information_t ,entity_information_a, ne
     news_Info_df_select['entity_id'] = entity_id_list
     entity_index_df = pd.DataFrame()
     entity_index_df['entity_id'] = entity_id_list
-    entity_index_df.to_csv('../Data/df/entity_index_df.csv')
+    entity_index_df.to_csv('../../data/df/entity_index_df.csv')
     return news_Info_df_select, entity_id_list
 
 ### 获取实体id映射,方便提取实体嵌入
@@ -821,7 +825,7 @@ def map_entity_information(entity_id_list, news_Info_df_select, max_len):
     entity_index_df = pd.DataFrame(pd.Series(id_dict))
     entity_index_df = entity_index_df.reset_index()
     entity_index_df.columns = ['id','index']
-    entity_index_df.to_csv('../Data/df/entity_index_df.csv')
+    entity_index_df.to_csv('../../data/df/entity_index_df.csv')
     entity_index = news_Info_df_select['entity_index'].values.tolist()
     print('单个新闻最大实体个数{}'.format(max_len))
     empty_entity = [id_dict['padding']] * max_len
@@ -838,7 +842,7 @@ def map_entity_information(entity_id_list, news_Info_df_select, max_len):
 
     entity_index.append(empty_entity)
     entity_index = np.array(entity_index)
-    np.save('../Data/metadata/news_entity_index.npy', entity_index)
+    np.save('../../data/metadata/news_entity_index.npy', entity_index)
     return entity_index_df, id_dict
 
 ### 提取实体嵌入向量
@@ -869,7 +873,7 @@ def extract_entity_vector(entity_index_df, entity_embedding_df):
     embedding_list = entity_index_df['entity_embedding'].values.tolist()
     # embedding_list.append(empty_id)
     entity_embedding_index = np.array(embedding_list)
-    np.save('../Data/metadata/news_entity_embedding.npy', entity_embedding_index)
+    np.save('../../data/metadata/news_entity_embedding.npy', entity_embedding_index)
 
     return entity_index_df
 
@@ -900,9 +904,9 @@ def get_category_index(news_Info_df_select):
     category_index_df = category_index_df.reset_index().rename(columns={'index': 'category'})
     print('主题个数{}'.format(category_index_df.shape[0]))
 
-    np.save('../Data/metadata/news_category_index.npy', np.array(category_index_list))
-    np.save('../Data/metadata/category_index.npy', np.array(category_index_df['category_index'].values.tolist()))
-    category_index_df.to_csv('../Data/df/category_index_df.csv', index=False)
+    np.save('../../data/metadata/news_category_index.npy', np.array(category_index_list))
+    np.save('../../data/metadata/category_index.npy', np.array(category_index_df['category_index'].values.tolist()))
+    category_index_df.to_csv('../../data/df/category_index_df.csv', index=False)
 
     return news_Info_df_select, category_dict
 
@@ -932,17 +936,17 @@ def get_subcategory_index(news_Info_df_select):
     subcategory_index_list.append(subcategory_dict['padding'])
     subcategory_index_df = pd.DataFrame(pd.Series(subcategory_dict), columns=['subcategory_index'])
     subcategory_index_df = subcategory_index_df.reset_index().rename(columns={'index': 'subcategory'})
-    subcategory_index_df.to_csv('../Data/df/subcategory_index_df.csv', index=False)
+    subcategory_index_df.to_csv('../../data/df/subcategory_index_df.csv', index=False)
     print('子主题个数{}'.format(subcategory_index_df.shape[0]))
 
-    np.save('../Data/metadata/news_subcategory_index.npy', np.array(subcategory_index_list))
-    np.save('../Data/metadata/subcategory_index', np.array(subcategory_index_df['subcategory_index'].values.tolist()))
-    news_Info_df_select.to_csv('../Data/df/news_Info_df.csv')
+    np.save('../../data/metadata/news_subcategory_index.npy', np.array(subcategory_index_list))
+    np.save('../../data/metadata/subcategory_index', np.array(subcategory_index_df['subcategory_index'].values.tolist()))
+    news_Info_df_select.to_csv('../../data/df/news_Info_df.csv')
     return news_Info_df_select, subcategory_dict
 
 if __name__ == "__main__":
     ### 读取用户历史交互记录
-    user_behaviors_df, news_Info_df, entity_embedding_df = load_data_behaviors_New()
+    user_behaviors_df, news_Info_df, entity_embedding_df = load_data_behaviors()
     ### 获取用户id和点击新闻id
     user_pnewsid_nnews_id_df, total_newsid_list = get_total_user_id_and_label(user_behaviors_df)
     ### 获取用户index
@@ -954,28 +958,28 @@ if __name__ == "__main__":
     ## split冷热新闻
     cal_news_clicked_user_ratio(user_pnewsid_nnews_id_df, user_clicked_df, total_newsid_list, news_dict)
     # # ## 获取新闻流行度
-    # cal_news_popularity(user_clicked_df, user_pnewsid_nnews_id_df, news_dict)
-    # ## 获取测试集
-    # get_test_news_user(news_dict, user_pnewsid_nnews_id_df)
-    # ### 负采样
-    # negtivate_sample(user_pnewsid_nnews_id_df, news_dict)
-    # ### 构建用户点击新闻和候选新闻index
-    # user_clicked_df, user_one_hop_dict = construct_clicked_newsindex_cand_newsindex( user_clicked_df,  user_clicked_newsid_list, news_dict, maxlen_clicked = 50)
-    # ### 获取标题文字
-    # news_Info_df_select, word_total_list_t, news_title = get_title_word(news_dict, news_Info_df)
-    # ### 获取文章嵌入
-    # get_news_embedding(news_title)
-    # ### 获取文字index
-    # news_Info_df_select, word_id_list, max_len = get_title_word_index (word_total_list_t, news_Info_df_select)
-    # ### 读取新闻信息,提取每一个新闻的标题实体ID和摘要实体ID
-    # news_Info_df_select, entity_information_t, entity_information_a = get_title_and_abstract_entity_id( news_Info_df_select)
-    # ### 将标题实体ID和摘要实体ID列表合并
-    # news_Info_df_select, entity_id_list = merge_title_and_abstract_list( entity_information_a, entity_information_t, news_Info_df_select)
-    # ### 映射新闻实体index
-    # entity_index_df, id_dict = map_entity_information(entity_id_list, news_Info_df_select, max_len = 20)
-    # ### 获取新闻实体向量
-    # entity_index_df = extract_entity_vector(entity_index_df, entity_embedding_df)
-    # ### 获取新闻主题
-    # news_Info_df_select, category_dict = get_category_index(news_Info_df_select)
-    # ### 获取副新闻主题
-    # news_Info_df_select, subcategory_dict = get_subcategory_index(news_Info_df_select)
+    cal_news_popularity(user_clicked_df, user_pnewsid_nnews_id_df, news_dict)
+    ## 获取测试集
+    get_test_news_user(news_dict, user_pnewsid_nnews_id_df)
+    ### 负采样
+    negtivate_sample(user_pnewsid_nnews_id_df, news_dict)
+    ### 构建用户点击新闻和候选新闻index
+    user_clicked_df, user_one_hop_dict = construct_clicked_newsindex_cand_newsindex( user_clicked_df,  user_clicked_newsid_list, news_dict, maxlen_clicked = 50)
+    ### 获取标题文字
+    news_Info_df_select, word_total_list_t, news_title = get_title_word(news_dict, news_Info_df)
+    ### 获取文章嵌入
+    get_news_embedding(news_title)
+    ### 获取文字index
+    news_Info_df_select, word_id_list, max_len = get_title_word_index (word_total_list_t, news_Info_df_select)
+    ### 读取新闻信息,提取每一个新闻的标题实体ID和摘要实体ID
+    news_Info_df_select, entity_information_t, entity_information_a = get_title_and_abstract_entity_id( news_Info_df_select)
+    ### 将标题实体ID和摘要实体ID列表合并
+    news_Info_df_select, entity_id_list = merge_title_and_abstract_list( entity_information_a, entity_information_t, news_Info_df_select)
+    ### 映射新闻实体index
+    entity_index_df, id_dict = map_entity_information(entity_id_list, news_Info_df_select, max_len = 20)
+    ### 获取新闻实体向量
+    entity_index_df = extract_entity_vector(entity_index_df, entity_embedding_df)
+    ### 获取新闻主题
+    news_Info_df_select, category_dict = get_category_index(news_Info_df_select)
+    ### 获取副新闻主题
+    news_Info_df_select, subcategory_dict = get_subcategory_index(news_Info_df_select)

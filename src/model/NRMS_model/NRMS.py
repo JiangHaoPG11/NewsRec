@@ -7,11 +7,7 @@ from utils.utils import *
 class news_encoder(torch.nn.Module):
     def __init__(self, word_dim, attention_dim, attention_heads, query_vector_dim):
         super(news_encoder, self).__init__()
-        self.multiheadatt = MultiHeadSelfAttention_2(
-            word_dim, 
-            attention_dim * attention_heads, 
-            attention_heads
-        )
+        self.multiheadatt = MultiHeadSelfAttention(word_dim, attention_dim * attention_heads, attention_heads)
         self.multi_dim = attention_dim * attention_heads
         self.norm = nn.LayerNorm(self.multi_dim)
         self.word_attention = Additive_Attention(query_vector_dim, self.multi_dim)
@@ -19,31 +15,31 @@ class news_encoder(torch.nn.Module):
 
     def forward(self, word_embedding):
         word_embedding = self.multiheadatt(word_embedding)
+        word_embedding = self.norm(word_embedding)
         word_embedding = F.dropout(word_embedding, p=self.dropout_prob, training=self.training)
         news_rep = self.word_attention(word_embedding)
-        news_rep = F.dropout(news_rep, p=self.dropout_prob, training=self.training)
-
+        # news_rep = torch.tanh(news_rep)
+        #news_rep = F.dropout(news_rep, p=self.dropout_prob, training=self.training)
+        #news_rep = self.norm2(news_rep)
         return news_rep
 
 class user_encoder(torch.nn.Module):
-    def __init__(self, word_dim, attention_dim, attention_heads, query_vector_dim):
+    def __init__(self,  word_dim, attention_dim, attention_heads, query_vector_dim):
         super(user_encoder, self).__init__()
-        self.multiheadatt = MultiHeadSelfAttention_2(
-            attention_dim * attention_heads, 
-            attention_dim * attention_heads, 
-            attention_heads
-        )
-        self.user_attention = Additive_Attention(
-            query_vector_dim, 
-            attention_dim * attention_heads
-        )
+        self.news_encoder = news_encoder(word_dim, attention_dim, attention_heads, query_vector_dim)
+        self.multiheadatt = MultiHeadSelfAttention(attention_dim * attention_heads, attention_dim * attention_heads, attention_heads)
+        self.multi_dim = attention_dim * attention_heads
+        self.user_attention = Additive_Attention(query_vector_dim, self.multi_dim)
+        self.layer_norm = nn.LayerNorm(self.multi_dim)
         self.dropout_prob = 0.2
 
-    def forward(self, clicked_news_rep):
+    def forward(self, word_embedding):
+        clicked_news_rep = self.news_encoder(word_embedding).unsqueeze(0)
+        clicked_news_rep = F.dropout(clicked_news_rep, p=self.dropout_prob, training=self.training)
         user_seq_rep = self.multiheadatt(clicked_news_rep)
+        user_seq_rep = self.layer_norm(user_seq_rep)
         user_seq_rep = F.dropout(user_seq_rep, p=self.dropout_prob, training=self.training)
         user_rep = self.user_attention(user_seq_rep)
-        user_rep = F.dropout(user_rep, p=self.dropout_prob, training=self.training)
         return user_rep
 
 class NRMS(torch.nn.Module):
@@ -77,21 +73,19 @@ class NRMS(torch.nn.Module):
         ## 新闻编码器
         news_rep = None
         for i in range(self.args.sample_size):
-            title_word_embedding_one = candidate_news_word_embedding[:, i, :, :]
+            title_word_embedding_one = candidate_news_word_embedding[:, i, :]
             news_rep_one = self.news_encoder(title_word_embedding_one)
             news_rep_one = news_rep_one.unsqueeze(1)
             if i == 0:
                 news_rep = news_rep_one
             else:
                 news_rep = torch.cat([news_rep, news_rep_one], dim=1)
-        
         # 用户编码器
         user_rep = None
         for i in range(self.args.batch_size):
             clicked_word_embedding_one = user_clicked_news_word_embedding[i, :, :, :]
-            clicked_news_rep = self.news_encoder(clicked_word_embedding_one)
-            clicked_news_rep = clicked_news_rep.unsqueeze(0)
-            user_rep_one = self.user_encoder(clicked_news_rep).unsqueeze(0)
+            clicked_word_embedding_one = clicked_word_embedding_one.squeeze()
+            user_rep_one = self.user_encoder(clicked_word_embedding_one).unsqueeze(0)
             if i == 0:
                 user_rep = user_rep_one
             else:
@@ -99,6 +93,9 @@ class NRMS(torch.nn.Module):
         return user_rep, news_rep
 
     def forward(self, candidate_news, user_clicked_news_index):
+        print(candidate_news.shape)
+        print(user_clicked_news_index.shape)
+        stop
         # 新闻用户表征
         user_rep, news_rep = self.get_user_news_rep(candidate_news, user_clicked_news_index)
         # 预测得分
@@ -106,9 +103,11 @@ class NRMS(torch.nn.Module):
         return score
 
     def test(self, candidate_news, user_clicked_news_index):
+        print(candidate_news.shape)
+        print(user_clicked_news_index.shape)
+        stop
         # 新闻用户表征
         user_rep, news_rep = self.get_user_news_rep(candidate_news, user_clicked_news_index)
-        news_rep = news_rep[:, :1,:]
         # 预测得分
         score = torch.sum(news_rep * user_rep, dim=-1).view(self.args.batch_size, -1)
         # score = torch.sigmoid(score)

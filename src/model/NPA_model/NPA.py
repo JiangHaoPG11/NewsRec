@@ -28,11 +28,15 @@ class news_encoder(torch.nn.Module):
 class user_encoder(torch.nn.Module):
     def __init__(self, word_dim, num_filters, window_sizes, query_vector_dim):
         super(user_encoder, self).__init__()
+        self.news_encoder = news_encoder(word_dim, num_filters, window_sizes, query_vector_dim)
+        #self.user_attention = Additive_Attention(query_vector_dim, num_filters)
         self.user_attention = QueryAttention(query_vector_dim, num_filters)
         self.dropout_prob = 0.3
 
-    def forward(self, clicked_news_rep, user_embeding):
-        user_rep = torch.tanh(self.user_attention(user_embeding.unsqueeze(0).unsqueeze(0), clicked_news_rep.unsqueeze(0)))
+    def forward(self, word_embedding, user_embedding, user_embeding_two):
+        news_rep = self.news_encoder(word_embedding, user_embedding.unsqueeze(0).repeat(50, 1, 1))
+        news_rep = F.dropout(news_rep, p=self.dropout_prob, training=self.training)
+        user_rep = torch.tanh(self.user_attention(user_embeding_two.unsqueeze(0).unsqueeze(0),  news_rep.unsqueeze(0)))
         user_rep = F.dropout(user_rep, p=self.dropout_prob, training=self.training)
         return user_rep
 
@@ -107,10 +111,8 @@ class NPA(torch.nn.Module):
             # 用户嵌入
             user_vector_one = user_vector[i, :]
             user_vector_one_2 = user_vector_2[i, :]
-            # 点击新闻表示
-            clicked_news_rep_one = self.news_encoder(title_word_embedding_one, user_vector_one.unsqueeze(0).repeat(50, 1, 1))
-            # 用户表示
-            user_rep_one = self.user_encoder(clicked_news_rep_one, user_vector_one_2).unsqueeze(0)
+            user_rep_one = self.user_encoder(clicked_word_embedding_one, user_vector_one, user_vector_one_2).unsqueeze(0)
+
             if i == 0:
                 user_rep = user_rep_one
             else:
@@ -129,5 +131,4 @@ class NPA(torch.nn.Module):
         user_rep, news_rep = self.get_user_news_rep(user_index, candidate_news, user_clicked_news_index)
         # 预测得分
         score = torch.sum(news_rep * user_rep, dim=-1).view(self.args.batch_size, -1)
-        score = torch.sigmoid(score)
-        return score, news_rep
+        return score

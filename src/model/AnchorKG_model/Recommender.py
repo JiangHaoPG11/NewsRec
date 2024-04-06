@@ -10,7 +10,7 @@ class news_encoder(torch.nn.Module):
         self.multi_dim = attention_dim * attention_heads
         self.tanh = nn.Tanh()
         self.dropout_prob = 0.2
-        self.multiheadatt = MultiHeadSelfAttention_2(word_dim, self.multi_dim, attention_heads)
+        self.multiheadatt = MultiHeadSelfAttention(word_dim, self.multi_dim, attention_heads)
         self.word_attention = Additive_Attention(query_vector_dim, self.multi_dim)
 
     def forward(self, word_embedding):
@@ -27,10 +27,10 @@ class news_encoder(torch.nn.Module):
 #         self.multi_dim = attention_dim * attention_heads
 #         self.tanh = nn.Tanh()
 #         self.news_encoder = news_encoder(word_dim, attention_dim, attention_heads, query_vector_dim)
-#         self.multiheadatt = MultiHeadSelfAttention_2(self.multi_dim,
+#         self.multiheadatt = MultiHeadSelfAttention(self.multi_dim,
 #                                                      self.multi_dim,
 #                                                      attention_heads)
-#         self.multiheadatt2 = MultiHeadSelfAttention_2(self.multi_dim,
+#         self.multiheadatt2 = MultiHeadSelfAttention(self.multi_dim,
 #                                                       self.multi_dim,
 #                                                       attention_heads)
 #         self.user_attention = Additive_Attention(query_vector_dim, self.multi_dim)

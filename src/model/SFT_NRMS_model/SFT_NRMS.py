@@ -79,7 +79,7 @@ class user_att_encoder(torch.nn.Module):
 class news_encoder(torch.nn.Module):
     def __init__(self, word_dim, attention_dim, attention_heads, query_vector_dim):
         super(news_encoder, self).__init__()
-        self.multiheadatt = MultiHeadSelfAttention_2(word_dim, attention_dim * attention_heads, attention_heads)
+        self.multiheadatt = MultiHeadSelfAttention(word_dim, attention_dim * attention_heads, attention_heads)
         self.multi_dim = attention_dim * attention_heads
         self.norm = nn.LayerNorm(self.multi_dim)
         self.word_attention = Additive_Attention(query_vector_dim, self.multi_dim)
@@ -94,7 +94,7 @@ class news_encoder(torch.nn.Module):
 class user_encoder(torch.nn.Module):
     def __init__(self,  word_dim, attention_dim, attention_heads, query_vector_dim):
         super(user_encoder, self).__init__()
-        self.multiheadatt = MultiHeadSelfAttention_2(attention_dim * attention_heads, attention_dim * attention_heads, attention_heads)
+        self.multiheadatt = MultiHeadSelfAttention(attention_dim * attention_heads, attention_dim * attention_heads, attention_heads)
         self.multi_dim = attention_dim * attention_heads
         self.user_attention = Additive_Attention(query_vector_dim, self.multi_dim)
         self.dropout_prob = 0.2

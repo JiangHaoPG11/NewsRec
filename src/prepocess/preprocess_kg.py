@@ -2,8 +2,8 @@ from TransE_pytoch import *
 import pandas as pd
 from tqdm import tqdm
 
-news_entity_index_df = pd.read_csv('../Data/df/entity_index_df.csv')
-news_entity_embedding = np.load('../Data/metadata/news_entity_embedding.npy')
+news_entity_index_df = pd.read_csv('../../data/df/entity_index_df.csv')
+news_entity_embedding = np.load('../../data/metadata/news_entity_embedding.npy')
 
 def get_KG_construct(news_entity_index_df):
     '''
@@ -13,7 +13,7 @@ def get_KG_construct(news_entity_index_df):
     print('constructing adjacency matrix ...')
     # 加载图
     news_entity_id_list = news_entity_index_df['id'].tolist()
-    graph_file_fp = open('../wikidata-graph/wikidata-graph.tsv', 'r', encoding='utf-8')
+    graph_file_fp = open('../../database/wikidata-graph/wikidata-graph.tsv', 'r', encoding='utf-8')
     graph = []
     entity_id_list = news_entity_id_list
     # relation_id_list = ['mention', 'clicked'] #加入了新闻->实体的关系"mention"和用户->新闻的关系'clicked'。
@@ -26,8 +26,8 @@ def get_KG_construct(news_entity_index_df):
         # 保证只有新闻连接的实体加入到图中
         if len(linesplit) > 1:
             graph.append([linesplit[0], linesplit[1], linesplit[2]])
-        if index > 1000000:
-            break
+        # if index > 10000000:
+        #     break
     print('三元组个数:{}'.format(len(graph)))
     kg = {}
     index = 0
@@ -104,7 +104,7 @@ def map_graph_to_index(graph, entity_id_list, relation_id_list):
     entityid2index = pd.DataFrame(pd.Series(entity_dict))
     entityid2index = entityid2index.reset_index()
     entityid2index.columns = ['entity_id', 'index']
-    entityid2index.to_csv('../Data/KG/entityid2index.csv')
+    entityid2index.to_csv('../../data/KG/entityid2index.csv')
     print('总实体数:{} 新闻实体数:{}'.format(len(entity_dict), news_entity_num))
     # 映射关系
     relation_dict = {}
@@ -119,7 +119,7 @@ def map_graph_to_index(graph, entity_id_list, relation_id_list):
     relationid2index = pd.DataFrame(pd.Series(relation_dict))
     relationid2index = relationid2index.reset_index()
     relationid2index.columns = ['relation_id', 'index']
-    relationid2index.to_csv('../Data/KG/relationid2index.csv')
+    relationid2index.to_csv('../../data/KG/relationid2index.csv')
     print('总关系数:{} 新闻关系数:{}'.format(len(relation_dict), 2))
     # 映射三元组
     graph_index = []
@@ -133,7 +133,7 @@ def map_graph_to_index(graph, entity_id_list, relation_id_list):
         graph_index.append([h_idnex, r_index, t_idnex])
     graph = pd.DataFrame(graph_index)
     graph.columns = ['h_index', 'r_index', 't_idnex']
-    graph.to_csv('../Data/KG/graph_index.csv')
+    graph.to_csv('../../data/KG/graph_index.csv')
     return entity_index_list,  relation_index_list, graph_index, news_entity_num
 
 def get_transE_embedding(entity_index_list, relation_index_list, graph_index, news_entity_num, news_entity_embedding):
@@ -150,8 +150,8 @@ def get_transE_embedding(entity_index_list, relation_index_list, graph_index, ne
     clicked_embedding = [np.random.rand(100)]
     mention_embedding = [np.random.rand(100)]
     relations_embedding = mention_embedding + clicked_embedding + relations_embedding
-    np.save("../Data/KG/TransE_entity_embedding", np.array(entities_embedding))
-    np.save("../Data/KG/TransE_relation_embedding", np.array(relations_embedding))
+    np.save("../../data/KG/TransE_entity_embedding", np.array(entities_embedding))
+    np.save("../../data/KG/TransE_relation_embedding", np.array(relations_embedding))
 
 if __name__ == "__main__":
     graph, kg = get_KG_construct(news_entity_index_df)

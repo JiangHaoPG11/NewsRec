@@ -130,5 +130,4 @@ class NAML(torch.nn.Module):
         user_rep, news_rep = self.get_user_news_rep(candidate_news, user_clicked_news_index)
         # 预测得分
         score = torch.sum(news_rep * user_rep, dim=-1).view(self.args.batch_size, -1)
-        score = torch.sigmoid(score)
         return score, user_rep, news_rep

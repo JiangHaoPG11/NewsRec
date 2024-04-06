@@ -12,6 +12,7 @@ from model.LightGCN_model.LightGCN_Train_Test import *
 from model.RCENR_model.RCENR_Train_Test import *
 from model.MRNN_model.MRNN_Train_Test import *
 from model.NRMS_model.NRMS_Train_Test import *
+from model.MCCM_model.MCCM_Train_Test import *
 from model.NAML_model.NAML_Train_Test import *
 from model.MNN4Rec_model.MNN4Rec_Train_Test import *
 from model.LSTUR_model.LSTUR_Train_Test import *
@@ -28,6 +29,7 @@ from model.SFT_MRNN_model.SFT_MRNN_Train_Test import *
 from DataLoad import load_data
 import argparse
 import os
+import sys
 
 def str2bool(v):
     if isinstance(v, bool):
@@ -41,6 +43,7 @@ def str2bool(v):
 
 def parse_args_2w():
     parser = argparse.ArgumentParser()
+    parser.add_argument('--data_scale', type=str, default=None)
 
     parser.add_argument('--train_flag', type=str2bool, default=True)
     parser.add_argument('--test_flag', type=str2bool, default=True)
@@ -138,6 +141,11 @@ def parse_args_2w():
 
 def parse_args_5w():
     parser = argparse.ArgumentParser()
+    parser.add_argument('--data_scale', type=str, default=None)
+
+    parser.add_argument('--train_flag', type=str2bool, default=True)
+    parser.add_argument('--test_flag', type=str2bool, default=True)
+
     parser.add_argument('--user_data_mode', type=int, default=3)
     parser.add_argument('--news_data_mode', type=int, default=3)
     parser.add_argument('--mode', type=str, default='MNN4Rec')
@@ -233,6 +241,11 @@ def parse_args_5w():
 
 def parse_args_full():
     parser = argparse.ArgumentParser()
+    parser.add_argument('--data_scale', type=str, default=None)
+
+    parser.add_argument('--train_flag', type=str2bool, default=True)
+    parser.add_argument('--test_flag', type=str2bool, default=True)
+
     parser.add_argument('--user_data_mode', type=int, default=3)
     parser.add_argument('--news_data_mode', type=int, default=3)
     parser.add_argument('--mode', type=str, default='NRMS')
@@ -321,14 +334,13 @@ def parse_args_full():
     parser.add_argument('--ADAC_path_long', type=int, default=5, help='路径长度')
     return parser.parse_args()
 
-def main(path, device):
-    data_scale = "2wu"
-    
-    if data_scale == '2wu':
+def main(path, device):  
+    print(sys.argv[2])  
+    if sys.argv[2] == '2wU':
         args = parse_args_2w()
-    elif data_scale == '5wu':
+    elif sys.argv[2] == '5wU':
         args = parse_args_5w()
-    elif data_scale == 'full':
+    elif sys.argv[2] == 'full':
         args = parse_args_full()
 
     data = load_data( args, path )
@@ -490,6 +502,13 @@ def main(path, device):
             model.Test()
     if args.mode == "SFT_MRNN_ATT":
         model = SFT_MRNN_Train_Test(args, data, device)
+        if args.train_flag:
+            model.Train()
+        if args.test_flag:
+            model.Test()
+
+    if args.mode == "MCCM":
+        model = MCCM_Train_Test(args, data, device)
         if args.train_flag:
             model.Train()
         if args.test_flag:

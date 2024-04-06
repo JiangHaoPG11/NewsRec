@@ -23,7 +23,7 @@ class news_encoder(torch.nn.Module):
         self.fc2 = nn.Linear(subcategory_dim, self.multi_dim, bias=True)
         
         # 单词级表征网络
-        self.multiheadatt = MultiHeadSelfAttention_2(word_dim, attention_dim * attention_heads, attention_heads)
+        self.multiheadatt = MultiHeadSelfAttention(word_dim, attention_dim * attention_heads, attention_heads)
         self.word_attention = Additive_Attention(query_vector_dim, self.multi_dim)
 
         # 实体级表征网络
@@ -101,8 +101,8 @@ class user_encoder(torch.nn.Module):
                                          category_size, subcategory_size)
 
         # 语义和关系多头注意力
-        self.sem_multiheadatt = MultiHeadSelfAttention_2(self.multi_dim, self.multi_dim, attention_heads)
-        self.rel_multiheadatt = MultiHeadSelfAttention_2(self.multi_dim, self.multi_dim, attention_heads)
+        self.sem_multiheadatt = MultiHeadSelfAttention(self.multi_dim, self.multi_dim, attention_heads)
+        self.rel_multiheadatt = MultiHeadSelfAttention(self.multi_dim, self.multi_dim, attention_heads)
 
         # 用户注意力
         self.user_attention = Additive_Attention(query_vector_dim, self.multi_dim * 2)

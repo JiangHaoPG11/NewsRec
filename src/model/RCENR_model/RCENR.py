@@ -218,7 +218,8 @@ class RCENR(torch.nn.Module):
 
         # cos_rewards = self.cos(origin_embedding, graph_embedding + node_embedding)
         # sim_rewards = self.sim(origin_embedding, graph_embedding + node_embedding).sum(-1)
-        dot_rewards = F.softmax(torch.sum(origin_embedding * (graph_embedding + node_embedding), dim = -1), dim = -1)
+        # dot_rewards = F.softmax(torch.sum(origin_embedding * (graph_embedding + node_embedding), dim = -1), dim = -1)
+        dot_rewards = torch.sum(origin_embedding * (graph_embedding + node_embedding), dim = -1)
         graph_embedding = (graph_embedding + node_embedding).to(self.device)
         return dot_rewards, graph_embedding
 
@@ -282,7 +283,7 @@ class RCENR(torch.nn.Module):
                 next_action_t_id = torch.full(next_action_r_id.shape, 2).to(self.device)
 
             elif mode == 'User':
-                next_action_id = user_clicked_news_index[: , :10]
+                next_action_id = user_clicked_news_index[: , :20]
                 # next_action_id = user_clicked_news_index
                 next_action_r_id = torch.ones([next_action_id.shape[0],
                                                next_action_id.shape[1]]).to(self.device) # click = 1
@@ -451,19 +452,18 @@ class RCENR(torch.nn.Module):
             depth += 1
             act_probs, q_values = self.policy_net(state_input, action_embedding) # bz*5,entity_num,1; bz*5,entity_num,1 #bz,d(1-hop),20,1;bz*5,d(1-hop),20,1
             act_probs, q_values, step_user_graph_nodes, step_user_graph_relations, step_user_graph_types = self.get_subgraph_nodes(act_probs, q_values, action_id, relation_id, type_id, topk)
-
+            action_id, relation_id, type_id = self.get_action(step_user_graph_nodes, user_clicked_news_index, depth, mode="User")
+            step_reward, user_graph_embedding = self.get_user_reward(user_graph, user_graph_embedding, news_embedding, step_user_graph_nodes, depth)  # bz, d(1-hop)  # bz*5, d(1-hop) * d(2-hop) # bz*5, d(1-hop) * d(2-hop) * d(3-hop)
+            state_input = self.get_state_input(user_embedding, depth, step_user_graph_nodes, step_user_graph_relations, step_user_graph_types, mode = 'user')  # bz*5, dim # bz*5, dim # bz*5, dim
+            action_embedding = self.get_action_embedding(action_id, relation_id, type_id, mode = 'user', hop_num=depth)
+            
             user_act_probs_steps.append(act_probs) #  [[bz*5, d(1-hop) * 1], [bz*5, d(1-hop) * d(2-hop)], [bz*5, d(1-hop) * d(2-hop) * d(3-hop)]]
             user_q_values_steps.append(q_values) #  [[bz*5, d(1-hop) * 1], [bz*5, d(1-hop) * d(2-hop)], [bz*5, d(1-hop) * d(2-hop) * d(3-hop)]]
             user_graph.append(step_user_graph_nodes) # [[bz*5, d(1-hop) * 1], [bz*5, d(1-hop) * d(2-hop)], [bz*5, d(1-hop) * d(2-hop) * d(3-hop)]]
             user_graph_relation.append(step_user_graph_relations)  # [[bz*5, d(1-hop) * 1], [bz*5, d(1-hop) * d(2-hop)], [bz*5, d(1-hop) * d(2-hop) * d(3-hop)]]
             user_graph_type.append(step_user_graph_types)  # [[bz*5, d(1-hop) * 1], [bz*5, d(1-hop) * d(2-hop)], [bz*5, d(1-hop) * d(2-hop) * d(3-hop)]]
-
-            action_id, relation_id, type_id = self.get_action(step_user_graph_nodes, user_clicked_news_index, depth, mode="User")
-            step_reward, user_graph_embedding = self.get_user_reward(user_graph, user_graph_embedding, news_embedding, step_user_graph_nodes, depth)  # bz, d(1-hop)  # bz*5, d(1-hop) * d(2-hop) # bz*5, d(1-hop) * d(2-hop) * d(3-hop)
-            state_input = self.get_state_input(user_embedding, depth, step_user_graph_nodes, step_user_graph_relations, step_user_graph_types, mode = 'user')  # bz*5, dim # bz*5, dim # bz*5, dim
-            action_embedding = self.get_action_embedding(action_id, relation_id, type_id, mode = 'user', hop_num=depth)
-
             user_step_rewards.append(step_reward)
+
         return news_act_probs_steps, news_q_values_steps, news_step_rewards, news_graph, news_graph_relation, news_graph_type, \
                user_act_probs_steps, user_q_values_steps, user_step_rewards, user_graph, user_graph_relation, user_graph_type
 

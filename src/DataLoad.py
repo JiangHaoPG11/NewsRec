@@ -62,20 +62,20 @@ def parse_args():
 # # 生成候选新闻和点击新闻相关元信息
 # def metadata_generator(path):
 #     # news_title_embedding
-#     news_title_embedding = np.load(path + '/data/metadata/news_title_embedding.npy')
+#     news_title_embedding = np.load(path + f'/data_{args.data_scale}/metadata/news_title_embedding.npy')
 #     # news entity dict
-#     news_entity_index = np.load(path + '/data/metadata/news_entity_index.npy')
+#     news_entity_index = np.load(path + f'/data_{args.data_scale}/metadata/news_entity_index.npy')
 #     # 用户点击新闻
-#     user_clicked_newsindex = np.load(path + '/data/metadata/user_clicked_newsindex.npy')
+#     user_clicked_newsindex = np.load(path + f'/data_{args.data_scale}/metadata/user_clicked_newsindex.npy')
 #     # 训练集
-#     candidate_newsindex_train = np.load(path + '/data/metadata/candidate_newsindex.npy')
-#     user_index_train = np.load(path + '/data/metadata/user_index.npy')
-#     label_train = np.load(path + '/data/metadata/label.npy')
+#     candidate_newsindex_train = np.load(path + f'/data_{args.data_scale}/metadata/candidate_newsindex.npy')
+#     user_index_train = np.load(path + f'/data_{args.data_scale}/metadata/user_index.npy')
+#     label_train = np.load(path + f'/data_{args.data_scale}/metadata/label.npy')
 #     # 测试集
-#     candidate_newsindex_test = np.load(path + '/data/test/test_candidate_newsindex.npy')
-#     user_index_test = np.load(path + '/data/test/test_user_index.npy')
-#     label_test = np.load(path + '/data/test/test_label.npy')
-#     Bound_test = np.load(path + '/data/test/test_bound.npy')
+#     candidate_newsindex_test = np.load(path + f'/data_{args.data_scale}/test/test_candidate_newsindex.npy')
+#     user_index_test = np.load(path + f'/data_{args.data_scale}/test/test_user_index.npy')
+#     label_test = np.load(path + f'/data_{args.data_scale}/test/test_label.npy')
+#     Bound_test = np.load(path + f'/data_{args.data_scale}/test/test_bound.npy')
 #     # 选择bound
 #     candidate_newsindex_select = []
 #     user_index_select = []
@@ -138,25 +138,25 @@ def metadata_generator(args, path):
             return candidate_newsindex[index], user_index[index], label[index]
 
     # 嵌入数据
-    news_title_embedding = np.load(path + '/data/metadata/news_title_embedding.npy')
+    news_title_embedding = np.load(path + f'/data_{args.data_scale}/metadata/news_title_embedding.npy')
     # 新闻类型
-    news_type = np.load(path + '/data/metadata/news_type.npy')
+    news_type = np.load(path + f'/data_{args.data_scale}/metadata/news_type.npy')
     # 新闻实体index
-    news_entity_index = np.load(path + '/data/metadata/news_entity_index.npy')
+    news_entity_index = np.load(path + f'/data_{args.data_scale}/metadata/news_entity_index.npy')
     # 用户点击新闻
-    user_clicked_newsindex = np.load(path + '/data/metadata/user_clicked_newsindex.npy')
+    user_clicked_newsindex = np.load(path + f'/data_{args.data_scale}/metadata/user_clicked_newsindex.npy')
     # 用户类型类型
-    user_type = np.load(path + '/data/metadata/user_type.npy')
+    user_type = np.load(path + f'/data_{args.data_scale}/metadata/user_type.npy')
     # 训练集
-    candidate_newsindex = np.load(path + '/data/metadata/candidate_newsindex.npy')
-    user_index= np.load(path + '/data/metadata/user_index.npy')
-    label = np.load(path + '/data/metadata/label.npy')
+    candidate_newsindex = np.load(path + f'/data_{args.data_scale}/metadata/candidate_newsindex.npy')
+    user_index= np.load(path + f'/data_{args.data_scale}/metadata/user_index.npy')
+    label = np.load(path + f'/data_{args.data_scale}/metadata/label.npy')
 
     # 测试集
-    candidate_newsindex_test = np.load(path + '/data/test/test_candidate_newsindex.npy')
-    user_index_test = np.load(path + '/data/test/test_user_index.npy')
-    label_test = np.load(path + '/data/test/test_label.npy')
-    Bound_test = np.load(path + '/data/test/test_bound.npy')
+    candidate_newsindex_test = np.load(path + f'/data_{args.data_scale}/test/test_candidate_newsindex.npy')
+    user_index_test = np.load(path + f'/data_{args.data_scale}/test/test_user_index.npy')
+    label_test = np.load(path + f'/data_{args.data_scale}/test/test_label.npy')
+    Bound_test = np.load(path + f'/data_{args.data_scale}/test/test_bound.npy')
 
     # 选择bound
     candidate_newsindex_select = []
@@ -227,10 +227,10 @@ def metadata_generator(args, path):
 
 
 # 生成实体字典和关系字典
-def load_entity_relation_dict(path):
+def load_entity_relation_dict(args, path):
     print('constructing entity_dict relation_dict ...')
-    entityid2index = pd.read_csv( path + '/data/KG/entityid2index.csv')
-    relationid2index = pd.read_csv(path + '/data/KG/relationid2index.csv')
+    entityid2index = pd.read_csv(path + f'/data_{args.data_scale}/KG/entityid2index.csv')
+    relationid2index = pd.read_csv(path + f'/data_{args.data_scale}/KG/relationid2index.csv')
     entity_dict = {}
     relation_dict = {}
     entity_id_list = entityid2index['entity_id'].tolist()
@@ -280,15 +280,15 @@ def load_user_clicked(user_clicked_newsindex):
         user_click_dict.append(user_clicked_newsindex[i])
     return user_click_dict
 
-def load_word_index():
+def load_word_index(args, path):
     print('constructing word_index subcategory_index')
-    news_title_word_index = np.load('../data/metadata/news_title_word_index.npy')
+    news_title_word_index = np.load(f'../data_{args.data_scale}/metadata/news_title_word_index.npy')
     return news_title_word_index
 
-def load_category_subcategory_index():
+def load_category_subcategory_index(args, path):
     print('constructing category_index subcategory_index')
-    news_category_index = np.load('../data/metadata/news_category_index.npy')
-    news_subcategory_index = np.load('../data/metadata/news_subcategory_index.npy')
+    news_category_index = np.load(f'../data_{args.data_scale}/metadata/news_category_index.npy')
+    news_subcategory_index = np.load(f'../data_{args.data_scale}/metadata/news_subcategory_index.npy')
 
     category_news_dict = {}
     for i in range(len(news_category_index)):
@@ -307,7 +307,7 @@ def load_category_subcategory_index():
 
     return news_category_index, news_subcategory_index, category_news_dict, subcategory_news_dict
 
-def build_KG_network(path, news_entity_dict):
+def build_KG_network(args, path, news_entity_dict):
     print('constructing adjacency matrix ...')
     # 将新闻实体加入KG
     network = nx.DiGraph()
@@ -326,7 +326,7 @@ def build_KG_network(path, news_entity_dict):
     # plt.show()
     # network.add_edge(newsid, 0, label="innews", weight=0)
 
-    graph = pd.read_csv(path + '/data/KG/graph_index.csv')
+    graph = pd.read_csv(path + f'/data_{args.data_scale}/KG/graph_index.csv')
     head_entity_list = graph['h_index'].tolist()
     relation_list = graph['r_index'].tolist()
     tail_entity_list = graph['t_idnex'].tolist()
@@ -359,7 +359,6 @@ def build_KG_network(path, news_entity_dict):
         adj_relation[item] = list(map(lambda x: x[1], adj[item]))
     return adj_entity, adj_relation, network
 
-
 # 实体邻居新闻的平均嵌入
 def build_neighbor_word_index(entity_news_dict, news_title_embedding):
     print('build neiborhood embedding ...')
@@ -377,17 +376,17 @@ def build_neighbor_word_index(entity_news_dict, news_title_embedding):
             entity_neibor_num_list[key] = len(value) - 1
     return torch.FloatTensor(np.array(entity_neibor_embedding_list)), torch.FloatTensor(np.array(entity_neibor_num_list))
 
-def build_entity_relation_embedding(path):
+def build_entity_relation_embedding(args, path):
     print('constructing entity and relation embedding ...')
-    TransE_entity_embedding = np.load(path+'/data/KG/TransE_entity_embedding.npy')
-    TransE_relation_embedding = np.load(path + '/data/KG/TransE_relation_embedding.npy')
+    TransE_entity_embedding = np.load(path + f'/data_{args.data_scale}/KG/TransE_entity_embedding.npy')
+    TransE_relation_embedding = np.load(path + f'/data_{args.data_scale}/KG/TransE_relation_embedding.npy')
     TransE_relation_embedding = np.delete(TransE_relation_embedding, 0, axis = 0)
     TransE_relation_embedding = np.concatenate(([np.random.normal(-0.1, 0.1, 100)], TransE_relation_embedding), axis=0)
     return torch.FloatTensor(TransE_entity_embedding), torch.FloatTensor(TransE_relation_embedding)
 
-def build_word_embedding(path):
+def build_word_embedding(args, path):
     print('constructing word embedding ...')
-    word_embedding = np.load(path+'/data/metadata/news_title_word_embedding.npy')
+    word_embedding = np.load(path+f'/data_{args.data_scale}/metadata/news_title_word_embedding.npy')
     return torch.FloatTensor(word_embedding)
 
 
@@ -466,24 +465,38 @@ def load_data(args, path):
     user_click_dict = load_user_clicked(user_clicked_newsindex)
 
     # load entity
-    entity_dict, relation_dict = load_entity_relation_dict(path)
+    entity_dict, relation_dict = load_entity_relation_dict(args, path)
     news_entity_dict, entity_news_dict = load_news_entity(
-        args.news_num, entity_dict, news_entity_index
+        args.news_num, 
+        entity_dict, 
+        news_entity_index
     )
     
     # news feature
-    news_title_word_index = load_word_index()
+    news_title_word_index = load_word_index(args, path)
 
     news_category_index, news_subcategory_index, \
-    category_news_dict, subcategory_news_dict = load_category_subcategory_index()
+    category_news_dict, subcategory_news_dict = load_category_subcategory_index(args, path)
 
     # external entity
-    entity_adj, relation_adj, kg_env = build_KG_network(path, news_entity_dict)
+    entity_adj, relation_adj, kg_env = build_KG_network(
+        args, 
+        path, 
+        news_entity_dict
+    )
 
-
-    neibor_embedding, neibor_num = build_neighbor_word_index(entity_news_dict, news_title_embedding)
-    entity_embedding, relation_embedding = build_entity_relation_embedding(path)
-    word_embedding = build_word_embedding(path)
+    neibor_embedding, neibor_num = build_neighbor_word_index(
+        entity_news_dict, 
+        news_title_embedding
+    )
+    entity_embedding, relation_embedding = build_entity_relation_embedding(
+        args, 
+        path
+    )
+    word_embedding = build_word_embedding(
+        args, 
+        path
+    )
     
     # construct train dataloader
     train_data = Train_Dataset(
@@ -513,8 +526,10 @@ def load_data(args, path):
     )
     
     return train_dataloader, test_dataloader, vaild_dataloader, \
-           news_title_embedding, entity_adj, relation_adj, entity_dict, kg_env, news_entity_dict, entity_news_dict, user_click_dict, \
-           news_title_word_index, news_category_index, news_subcategory_index, category_news_dict, subcategory_news_dict, word_embedding, \
+           news_title_embedding, entity_adj, relation_adj, entity_dict, kg_env, \
+           news_entity_dict, entity_news_dict, user_click_dict, \
+           news_title_word_index, news_category_index, news_subcategory_index, \
+           category_news_dict, subcategory_news_dict, word_embedding, \
            neibor_embedding, neibor_num, entity_embedding, relation_embedding, user_clicked_newsindex, \
            len(vaild_data), len(train_data), len(test_data), label_test, bound_test
 

@@ -127,14 +127,23 @@ class MCCM(torch.nn.Module):
         all_scores = torch.matmul(v_u, v_neg.transpose(0, 1)) / tau
         mask = torch.eye(v_u.size(0)).bool()
         all_scores[mask] = float('-inf')
-        neg_scores_logsumexp = torch.logsumexp(all_scores, dim=1)
-        loss = -pos_scores + neg_scores_logsumexp
+        loss = torch.mean(
+            - torch.log(
+                torch.exp(pos_scores) / (torch.sum(torch.exp(all_scores), dim = 1) + torch.exp(pos_scores))
+            )
+        )
+        print(loss)
         return loss.mean()
 
     def forward(self, candidate_news, user_clicked_news_index):
         # 新闻用户表征
         user_rep, selected_user_rep, news_rep = self.get_user_news_rep(candidate_news, user_clicked_news_index)
-        contrast_loss = self.contrastive_loss(user_rep.squeeze(), selected_user_rep.squeeze(), user_rep.squeeze())
+        contrast_loss = self.contrastive_loss(
+            user_rep.squeeze(), 
+            selected_user_rep.squeeze(), 
+            user_rep.squeeze(),
+            tau=5
+        )
         # 预测得分
         score = torch.sum(news_rep * user_rep, dim=-1).view(self.args.batch_size, -1)
         return score, contrast_loss

@@ -79,7 +79,7 @@ class Trainer():
             # torch.cuda.empty_cache()
 
         pbar.close()
-        return  mean(rec_all_loss_list), mean(auc_list)
+        return  mean(rec_all_loss_list), mean(contrast_all_loss_list), mean(auc_list)
 
     def _vaild_epoch(self):
         self.MCCM_model.eval()
@@ -102,9 +102,9 @@ class Trainer():
 
     def train(self):
         for epoch in range(1, self.args.epoch+1):
-            rec_loss, rec_auc = self._train_epoch(epoch)
-            print("epoch:{}----recommend loss:{}------rec auc:{}-------".
-                  format(epoch, str(rec_loss), str(rec_auc)))
+            rec_loss, contrast_loss, rec_auc = self._train_epoch(epoch)
+            print("epoch:{}----recommend loss:{}---contrast loss: {} ---rec auc:{}-------".
+                  format(epoch, str(rec_loss), str(contrast_loss), str(rec_auc)))
 
             if epoch % self.vaild_period == 10:
                 print('start vaild ...')

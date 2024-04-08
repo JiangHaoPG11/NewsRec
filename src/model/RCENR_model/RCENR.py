@@ -218,8 +218,8 @@ class RCENR(torch.nn.Module):
 
         # cos_rewards = self.cos(origin_embedding, graph_embedding + node_embedding)
         # sim_rewards = self.sim(origin_embedding, graph_embedding + node_embedding).sum(-1)
-        # dot_rewards = F.softmax(torch.sum(origin_embedding * (graph_embedding + node_embedding), dim = -1), dim = -1)
-        dot_rewards = torch.sum(origin_embedding * (graph_embedding + node_embedding), dim = -1)
+        dot_rewards = F.softmax(torch.sum(origin_embedding * (graph_embedding + node_embedding), dim = -1), dim = -1)
+        # dot_rewards = torch.sum(origin_embedding * (graph_embedding + node_embedding), dim = -1)
         graph_embedding = (graph_embedding + node_embedding).to(self.device)
         return dot_rewards, graph_embedding
 

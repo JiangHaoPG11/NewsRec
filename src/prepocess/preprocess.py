@@ -957,29 +957,42 @@ if __name__ == "__main__":
     cal_user_clicked_news_ratio(user_dict, user_pnewsid_nnews_id_df, user_clicked_newsid_list, news_dict)
     ## split冷热新闻
     cal_news_clicked_user_ratio(user_pnewsid_nnews_id_df, user_clicked_df, total_newsid_list, news_dict)
+    print(1)
     # # ## 获取新闻流行度
-    cal_news_popularity(user_clicked_df, user_pnewsid_nnews_id_df, news_dict)
+    # cal_news_popularity(user_clicked_df, user_pnewsid_nnews_id_df, news_dict)
+    print(2)
     ## 获取测试集
     get_test_news_user(news_dict, user_pnewsid_nnews_id_df)
+    print(3)
     ### 负采样
     negtivate_sample(user_pnewsid_nnews_id_df, news_dict)
+    print(4)
     ### 构建用户点击新闻和候选新闻index
     user_clicked_df, user_one_hop_dict = construct_clicked_newsindex_cand_newsindex( user_clicked_df,  user_clicked_newsid_list, news_dict, maxlen_clicked = 50)
+    print(5)
     ### 获取标题文字
     news_Info_df_select, word_total_list_t, news_title = get_title_word(news_dict, news_Info_df)
+    print(6)
     ### 获取文章嵌入
     get_news_embedding(news_title)
+    print(7)
     ### 获取文字index
     news_Info_df_select, word_id_list, max_len = get_title_word_index (word_total_list_t, news_Info_df_select)
+    print(8)
     ### 读取新闻信息,提取每一个新闻的标题实体ID和摘要实体ID
     news_Info_df_select, entity_information_t, entity_information_a = get_title_and_abstract_entity_id( news_Info_df_select)
+    print(9)
     ### 将标题实体ID和摘要实体ID列表合并
     news_Info_df_select, entity_id_list = merge_title_and_abstract_list( entity_information_a, entity_information_t, news_Info_df_select)
+    print(10)
     ### 映射新闻实体index
     entity_index_df, id_dict = map_entity_information(entity_id_list, news_Info_df_select, max_len = 20)
+    print(11)
     ### 获取新闻实体向量
     entity_index_df = extract_entity_vector(entity_index_df, entity_embedding_df)
+    print(12)
     ### 获取新闻主题
     news_Info_df_select, category_dict = get_category_index(news_Info_df_select)
+    print(13)
     ### 获取副新闻主题
     news_Info_df_select, subcategory_dict = get_subcategory_index(news_Info_df_select)

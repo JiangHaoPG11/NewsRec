@@ -1,5 +1,5 @@
-debug_flag=true
-model_name=MCCM
+debug_flag=false
+model_name=MRNN
 epoch=60
 data_scale=2wU
 
@@ -16,5 +16,5 @@ else
         --mode $model_name \
         --epoch $epoch \
         --train_flag true \
-        --test_flag true   > ${model_name}_${data_scale}_epoch_${epoch}_result.log &
+        --test_flag true   > ${model_name}_${data_scale}_epoch_${epoch}_result_v1.log &
 fi

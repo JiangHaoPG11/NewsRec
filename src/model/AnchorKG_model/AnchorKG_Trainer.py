@@ -404,7 +404,7 @@ class Trainer():
 
         print('测试集推理路径:{}'.format(all_path_num))
         # 存储预测结果
-        folder_path = './predict/AnchorKG/'
+        folder_path = '../predict/AnchorKG/'
         if not os.path.exists(folder_path):
             os.makedirs(folder_path)
         predict_df = pd.DataFrame()
@@ -422,7 +422,7 @@ class Trainer():
         predict_df['rea_score'] = np.array(rea_score_list)[:, 0]
         predict_df['score'] = pred_label_list[:, 0]
         predict_df['label'] = self.label_test[:len(user_index_list)]
-        predict_df.to_csv(folder_path + 'AnchorKG_predict.csv', index = False)
+        predict_df.to_csv(f'{folder_path}/AnchorKG_predict.csv', index = False)
 
         test_AUC, test_MRR, test_nDCG5, test_nDCG10 = evaluate(pred_label_list, self.label_test, self.bound_test)
         print("test_AUC = %.4lf, test_MRR = %.4lf, test_nDCG5 = %.4lf, test_nDCG10 = %.4lf" %

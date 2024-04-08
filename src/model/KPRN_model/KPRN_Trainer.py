@@ -128,7 +128,7 @@ class Trainer():
         predict_df['candidate_news_type'] = news_type_list
         predict_df['score'] = pred_label_list[:, 0]
         predict_df['label'] = self.label_test[:len(user_index_list)]
-        predict_df.to_csv('KPNR_predict.csv', index = False)
+        predict_df.to_csv(f'{folder_path}/KPNR_predict.csv', index = False)
 
 
         test_AUC, test_MRR, test_nDCG5, test_nDCG10 = evaluate(pred_label_list, self.label_test, self.bound_test)

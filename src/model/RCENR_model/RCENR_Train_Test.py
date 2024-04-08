@@ -26,7 +26,7 @@ class RCENR_Train_Test():
         
         # optimizer 
         # 0.000002
-        optimizer_subgraph = torch.optim.Adam(subgraph_model.parameters(), lr=0.0001, weight_decay=0.0001)
+        optimizer_subgraph = torch.optim.Adam(subgraph_model.parameters(), lr=0.000002, weight_decay=0.000001)
         optimizer_recommender = torch.optim.Adam([{'params': model_recommender.parameters(), 'lr': 0.0001}])
         optimizer_reasoner = torch.optim.Adam([{'params': model_reasoner.parameters(), 'lr': 0.0001}])
 

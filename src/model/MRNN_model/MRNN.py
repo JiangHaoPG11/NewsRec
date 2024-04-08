@@ -46,8 +46,8 @@ class news_encoder(torch.nn.Module):
         word_embedding = self.multiheadatt(word_embedding)
         word_embedding = self.word_norm(word_embedding)
         word_embedding = F.dropout(word_embedding, p=self.dropout_prob, training=self.training)
-        word_rep = self.word_attention(word_embedding)
-        # word_rep = torch.relu(self.word_attention(word_embedding))
+        # word_rep = self.word_attention(word_embedding)
+        word_rep = torch.relu(self.word_attention(word_embedding))
         word_rep = F.dropout(word_rep, p=self.dropout_prob, training=self.training)
 
         # 实体级新闻表征
@@ -55,8 +55,8 @@ class news_encoder(torch.nn.Module):
         entity_inter = self.GCN(entity_embedding)
         entity_inter = self.entity_norm(entity_inter)
         entity_inter = F.dropout(entity_inter, p=self.dropout_prob, training=self.training)
-        entity_rep = self.entity_attention(entity_inter)
-        # entity_rep = torch.relu(self.entity_attention(entity_inter))
+        # entity_rep = self.entity_attention(entity_inter)
+        entity_rep = torch.relu(self.entity_attention(entity_inter))
         entity_rep = F.dropout(entity_rep, p=self.dropout_prob, training=self.training)
 
         # 新闻附加注意力
@@ -69,7 +69,7 @@ class news_encoder(torch.nn.Module):
             ], dim=1
         )
         news_rep = self.news_attention(news_rep)
-        news_rep = torch.tanh(news_rep)
+        news_rep = news_rep
         # news_rep = F.dropout(news_rep, p=self.dropout_prob, training=self.training)
         return news_rep
 
@@ -89,7 +89,7 @@ class user_encoder(torch.nn.Module):
         user_seq_rep = self.multiheadatt(clicked_news_rep)
         user_seq_rep = self.norm(user_seq_rep)
         user_seq_rep = F.dropout(user_seq_rep, p=self.dropout_prob, training=self.training)
-        user_rep = torch.tanh(self.user_attention(user_seq_rep))
+        user_rep = self.user_attention(user_seq_rep)
         user_rep = F.dropout(user_rep, p=self.dropout_prob, training=self.training)
         return user_rep
 

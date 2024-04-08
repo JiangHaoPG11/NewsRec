@@ -154,7 +154,8 @@ def parse_args_5w():
     parser.add_argument('--sample_size', type=int, default=5)
     parser.add_argument('--optimizer_type', type=str, default='adam')
     parser.add_argument('--loss_type', type=str, default='cross_entropy')
-    parser.add_argument('--checkpoint_dir', type=str, default='./out/save_model/', help='模型保留位置')
+    parser.add_argument('--checkpoint_dir', type=str, default='../save_model/', help='模型保留位置')
+    parser.add_argument('--train_ratio', type=float, default= 1)
 
     parser.add_argument('--user_num', type = int, default=50000)
     parser.add_argument('--user_clicked_num', type=int, default=50)
@@ -183,9 +184,6 @@ def parse_args_5w():
     parser.add_argument('--category_embedding_dim', type=int, default=100, help='主题总数')
     parser.add_argument('--subcategory_embedding_dim', type=int, default=100, help='自主题总数')
     parser.add_argument('--query_vector_dim', type=int, default=200, help='询问向量维数')
-    # RippleNet
-    parser.add_argument('--ripplenet_n_hop', type=int, default=2, help='maximum hops')
-    parser.add_argument('--ripplenet_n_memory', type=int, default=5, help='size of ripple set for each hop')
     # DKN参数
     parser.add_argument('--kcnn_num_filters', type=int, default=50, help='卷积核个数')
     parser.add_argument('--kcnn_window_sizes', type=list, default=[2, 3, 4], help='窗口大小')
@@ -222,7 +220,6 @@ def parse_args_5w():
 
     # RCENR
     parser.add_argument('--depth', type=list, default=[5, 3, 2], help='K-跳深度')
-    parser.add_argument('--checkpoint_dir', type=str, default='../save_model/', help='模型保留位置')
     # RippleNet
     parser.add_argument('--ripplenet_n_hop', type=int, default=2, help='maximum hops')
     parser.add_argument('--ripplenet_n_memory', type=int, default=5, help='size of ripple set for each hop')

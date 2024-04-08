@@ -1,5 +1,5 @@
 debug_flag=false
-model_name=RCENR
+model_name=MRNN
 epoch=50
 data_scale=2wU
 

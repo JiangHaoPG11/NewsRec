@@ -26,8 +26,8 @@ def get_KG_construct(news_entity_index_df):
         # 保证只有新闻连接的实体加入到图中
         if len(linesplit) > 1:
             graph.append([linesplit[0], linesplit[1], linesplit[2]])
-        # if index > 10000000:
-        #     break
+        if index > 10000000:
+            break
     print('三元组个数:{}'.format(len(graph)))
     kg = {}
     index = 0

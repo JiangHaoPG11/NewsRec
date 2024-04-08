@@ -13,10 +13,11 @@ class news_encoder(torch.nn.Module):
         self.dropout_prob = 0.2
         self.multiheadatt = MultiHeadSelfAttention(word_dim, self.multi_dim, attention_heads)
         self.word_attention = Additive_Attention(query_vector_dim, self.multi_dim)
+        self.layernorm1 = nn.LayerNorm(self.multi_dim)
 
     def forward(self, word_embedding, entity_embedding, category_index, subcategory_index):
-        # word_embedding = F.dropout(word_embedding, p=self.dropout_prob, training=self.training)
         word_embedding = self.multiheadatt(word_embedding)
+        word_embedding = self.layernorm1(word_embedding)
         word_embedding = F.dropout(word_embedding, p=self.dropout_prob, training=self.training)
         word_rep = self.word_attention(word_embedding)
         news_rep = F.dropout(word_rep, p=self.dropout_prob, training=self.training)

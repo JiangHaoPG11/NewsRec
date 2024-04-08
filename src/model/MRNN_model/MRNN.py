@@ -9,7 +9,7 @@ class news_encoder(torch.nn.Module):
                  category_dim, subcategory_dim, category_size, subcategory_size):
         super(news_encoder, self).__init__()
         self.multi_dim = attention_dim * attention_heads
-        self.norm = nn.LayerNorm(self.multi_dim)
+        self.word_norm = nn.LayerNorm(self.multi_dim)
 
         # 主题级表征网络
         self.embedding_layer1 = nn.Embedding(category_size, embedding_dim=category_dim)
@@ -28,7 +28,7 @@ class news_encoder(torch.nn.Module):
         self.GCN = gcn(entity_size, entity_embedding_dim, self.multi_dim)
         self.entity_attention = Additive_Attention(query_vector_dim, self.multi_dim)
         self.news_attention = Additive_Attention(query_vector_dim, self.multi_dim)
-        self.norm = nn.LayerNorm(self.multi_dim)
+        self.entity_norm = nn.LayerNorm(self.multi_dim)
         self.dropout_prob = 0.2
 
     def forward(self, word_embedding, entity_embedding, category_index, subcategory_index):
@@ -44,25 +44,33 @@ class news_encoder(torch.nn.Module):
 
         # 单词级新闻表征
         word_embedding = self.multiheadatt(word_embedding)
-        # word_embedding = self.norm(word_embedding)
+        word_embedding = self.word_norm(word_embedding)
         word_embedding = F.dropout(word_embedding, p=self.dropout_prob, training=self.training)
-        word_rep = torch.relu(self.word_attention(word_embedding))
+        word_rep = self.word_attention(word_embedding)
+        # word_rep = torch.relu(self.word_attention(word_embedding))
         word_rep = F.dropout(word_rep, p=self.dropout_prob, training=self.training)
 
         # 实体级新闻表征
         entity_embedding = torch.relu(self.fc3(entity_embedding))
         entity_inter = self.GCN(entity_embedding)
-        # entity_inter = self.norm(entity_inter)
+        entity_inter = self.entity_norm(entity_inter)
         entity_inter = F.dropout(entity_inter, p=self.dropout_prob, training=self.training)
-        entity_rep = torch.relu(self.entity_attention(entity_inter))
+        entity_rep = self.entity_attention(entity_inter)
+        # entity_rep = torch.relu(self.entity_attention(entity_inter))
         entity_rep = F.dropout(entity_rep, p=self.dropout_prob, training=self.training)
 
         # 新闻附加注意力
-        news_rep = torch.cat([word_rep.unsqueeze(1), entity_rep.unsqueeze(1),
-                              category_rep.unsqueeze(1), subcategory_rep.unsqueeze(1)], dim=1)
+        news_rep = torch.cat(
+            [
+                word_rep.unsqueeze(1), 
+                entity_rep.unsqueeze(1),
+                category_rep.unsqueeze(1), 
+                subcategory_rep.unsqueeze(1)
+            ], dim=1
+        )
         news_rep = self.news_attention(news_rep)
         news_rep = torch.tanh(news_rep)
-        news_rep = F.dropout(news_rep, p=self.dropout_prob, training=self.training)
+        # news_rep = F.dropout(news_rep, p=self.dropout_prob, training=self.training)
         return news_rep
 
 class user_encoder(torch.nn.Module):
@@ -72,11 +80,14 @@ class user_encoder(torch.nn.Module):
         super(user_encoder, self).__init__()
         self.multi_dim = attention_dim * attention_heads
         self.user_attention = Additive_Attention(query_vector_dim, self.multi_dim)
+        self.norm = nn.LayerNorm(self.multi_dim)
+
         self.multiheadatt = MultiHeadSelfAttention(self.multi_dim, self.multi_dim, attention_heads)
         self.dropout_prob = 0.2
 
     def forward(self, clicked_news_rep):
         user_seq_rep = self.multiheadatt(clicked_news_rep)
+        user_seq_rep = self.norm(user_seq_rep)
         user_seq_rep = F.dropout(user_seq_rep, p=self.dropout_prob, training=self.training)
         user_rep = torch.tanh(self.user_attention(user_seq_rep))
         user_rep = F.dropout(user_rep, p=self.dropout_prob, training=self.training)

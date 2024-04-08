@@ -437,15 +437,19 @@ class cnn(torch.nn.Module):
         self.dropout_prob= dropout_pro
         self.num_filters = num_filters
         self.window_sizes = window_sizes
-        self.conv = nn.Conv2d( in_channels= 1, out_channels=self.num_filters, kernel_size=(self.window_sizes, self.word_embedding_dim),
-                               padding=(int((self.window_sizes - 1) / 2), 0))
-        # self.additive_attention = Additive_Attention(query_vector_dim, num_filters)
-        self.new_attention = NormalAttention(num_filters)
+        self.conv = nn.Conv2d( 
+            in_channels= 1, 
+            out_channels=self.num_filters, 
+            kernel_size=(self.window_sizes, self.word_embedding_dim),
+            padding=(int((self.window_sizes - 1) / 2), 0)
+        )
+        self.additive_attention = Additive_Attention(query_vector_dim, num_filters)
+        # self.new_attention = NormalAttention(num_filters)
 
     def forward(self, word_embedding):
         convoluted_word_embedding = self.conv(word_embedding.unsqueeze(dim=1)).squeeze(dim=3)
         convoluted_word_embedding = F.dropout(F.relu(convoluted_word_embedding), p=self.dropout_prob, training=self.training)
-        new_rep = self.new_attention(convoluted_word_embedding.transpose(1, 2))
+        new_rep = self.additive_attention(convoluted_word_embedding.transpose(1, 2))
         return new_rep
 
 #################################   module_Net  ###############################

@@ -1,6 +1,6 @@
 debug_flag=false
-model_name=MRNN
-epoch=60
+model_name=RCENR
+epoch=50
 data_scale=2wU
 
 if [ "$debug_flag" == true ]; then

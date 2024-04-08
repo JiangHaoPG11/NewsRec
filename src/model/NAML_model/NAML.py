@@ -158,11 +158,11 @@ class news_encoder(torch.nn.Module):
         subcategory_embedding = self.subcategory_embedding_layer(subcategory_index.to(torch.int64))
         subcategory_rep = torch.relu(self.fc2(subcategory_embedding))
         # 单词表征
-        word_rep = torch.relu(self.cnn(word_embedding))
+        word_rep = self.cnn(word_embedding)
         word_rep = F.dropout(word_rep, p=self.dropout_prob, training=self.training)
         # 附加注意力
         news_rep = torch.cat([word_rep.unsqueeze(1), category_rep.unsqueeze(1), subcategory_rep.unsqueeze(1)], dim=1)
-        news_rep = torch.tanh(self.news_attention(news_rep))
+        news_rep = self.news_attention(news_rep)
         return news_rep
 
 class user_encoder(torch.nn.Module):
@@ -173,7 +173,7 @@ class user_encoder(torch.nn.Module):
         self.dropout_prob = 0.2
 
     def forward(self, clicked_news_rep):
-        user_rep = torch.tanh(self.user_attention(clicked_news_rep.unsqueeze(0)))
+        user_rep = self.user_attention(clicked_news_rep.unsqueeze(0))
         return user_rep
 
 class NAML(torch.nn.Module):
@@ -262,7 +262,7 @@ class NAML(torch.nn.Module):
     def test(self, candidate_news, user_clicked_news_index):
         # 新闻用户表征
         user_rep, news_rep = self.get_user_news_rep(candidate_news, user_clicked_news_index)
-        news_rep = news_rep[:,0,:]
+        # news_rep = news_rep[:,0,:]
         # 预测得分
         score = torch.sum(news_rep * user_rep, dim=-1).view(self.args.batch_size, -1)
         # score = torch.sigmoid(score)

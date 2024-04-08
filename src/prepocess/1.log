@@ -1,947 +1,4 @@
-[nltk_data] Downloading package punkt to /home/v-jiangha/nltk_data...
-[nltk_data]   Package punkt is already up-to-date!
-[nltk_data] Downloading package stopwords to
-[nltk_data]     /home/v-jiangha/nltk_data...
-[nltk_data]   Package stopwords is already up-to-date!
-/home/v-jiangha/workspace/NewsRec/src/prepocess/preprocess.py:183: FutureWarning: 
-
-`shade` is now deprecated in favor of `fill`; setting `fill=True`.
-This will become an error in seaborn v0.14.0; please update your code.
-
-  sns.kdeplot(user_clicked_news_num_list_sort, shade=True, color = c2,label = 'user clicked nums')
-/home/v-jiangha/workspace/NewsRec/src/prepocess/preprocess.py:284: FutureWarning: 
-
-`shade` is now deprecated in favor of `fill`; setting `fill=True`.
-This will become an error in seaborn v0.14.0; please update your code.
-
-  sns.kdeplot(news_exposure_num_list, shade=True, color = c1, label = 'news clicked nums')
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-总共的用户数量50000
-总的用户数50000
-总共的新闻标题数量51283
-总共的用户数量50000
-热用户数量27593
-冷用户数量816
-正常用户数量21591
-109875
-109875
-冷新闻最大曝光数：0
-51283
-总共的新闻标题数量51283
-热新闻数量2745
-冷新闻数量42491
-正常新闻数量6047
-1
-2
-3
-4
-最大点击数50
-50000
-5
-6
-Processing News Embedding:   0%|          | 0/1026 [00:00<?, ?it/s]Processing News Embedding:   0%|          | 1/1026 [00:06<1:45:54,  6.20s/it]Processing News Embedding:   0%|          | 2/1026 [00:06<50:10,  2.94s/it]  Processing News Embedding:   0%|          | 3/1026 [00:07<29:01,  1.70s/it]Processing News Embedding:   0%|          | 4/1026 [00:07<19:07,  1.12s/it]Processing News Embedding:   0%|          | 5/1026 [00:07<13:49,  1.23it/s]Processing News Embedding:   1%|          | 6/1026 [00:07<10:37,  1.60it/s]Processing News Embedding:   1%|          | 7/1026 [00:08<08:14,  2.06it/s]Processing News Embedding:   1%|          | 8/1026 [00:08<06:46,  2.51it/s]Processing News Embedding:   1%|          | 9/1026 [00:08<05:42,  2.97it/s]Processing News Embedding:   1%|          | 10/1026 [00:12<24:46,  1.46s/it]Processing News Embedding:   1%|          | 11/1026 [00:18<50:21,  2.98s/it]Processing News Embedding:   1%|          | 12/1026 [00:25<1:07:40,  4.00s/it]Processing News Embedding:   1%|▏         | 13/1026 [00:31<1:19:18,  4.70s/it]Processing News Embedding:   1%|▏         | 14/1026 [00:37<1:27:39,  5.20s/it]Processing News Embedding:   1%|▏         | 15/1026 [00:44<1:33:46,  5.57s/it]Processing News Embedding:   2%|▏         | 16/1026 [00:50<1:38:01,  5.82s/it]Processing News Embedding:   2%|▏         | 17/1026 [00:57<1:40:23,  5.97s/it]Processing News Embedding:   2%|▏         | 18/1026 [01:03<1:42:26,  6.10s/it]Processing News Embedding:   2%|▏         | 19/1026 [01:09<1:43:31,  6.17s/it]Processing News Embedding:   2%|▏         | 20/1026 [01:16<1:44:46,  6.25s/it]Processing News Embedding:   2%|▏         | 21/1026 [01:22<1:44:22,  6.23s/it]Processing News Embedding:   2%|▏         | 22/1026 [01:28<1:45:21,  6.30s/it]Processing News Embedding:   2%|▏         | 23/1026 [01:35<1:46:39,  6.38s/it]Processing News Embedding:   2%|▏         | 24/1026 [01:41<1:47:27,  6.43s/it]Processing News Embedding:   2%|▏         | 25/1026 [01:48<1:47:32,  6.45s/it]Processing News Embedding:   3%|▎         | 26/1026 [01:54<1:47:13,  6.43s/it]Processing News Embedding:   3%|▎         | 27/1026 [02:01<1:47:17,  6.44s/it]Processing News Embedding:   3%|▎         | 28/1026 [02:08<1:48:51,  6.54s/it]Processing News Embedding:   3%|▎         | 29/1026 [02:14<1:48:54,  6.55s/it]Processing News Embedding:   3%|▎         | 30/1026 [02:21<1:51:01,  6.69s/it]Processing News Embedding:   3%|▎         | 31/1026 [02:28<1:51:42,  6.74s/it]Processing News Embedding:   3%|▎         | 32/1026 [02:35<1:52:24,  6.79s/it]Processing News Embedding:   3%|▎         | 33/1026 [02:42<1:52:43,  6.81s/it]Processing News Embedding:   3%|▎         | 34/1026 [02:48<1:52:02,  6.78s/it]Processing News Embedding:   3%|▎         | 35/1026 [02:55<1:52:20,  6.80s/it]Processing News Embedding:   4%|▎         | 36/1026 [03:02<1:52:40,  6.83s/it]Processing News Embedding:   4%|▎         | 37/1026 [03:09<1:52:53,  6.85s/it]Processing News Embedding:   4%|▎         | 38/1026 [03:16<1:52:20,  6.82s/it]Processing News Embedding:   4%|▍         | 39/1026 [03:23<1:52:17,  6.83s/it]Processing News Embedding:   4%|▍         | 40/1026 [03:30<1:52:43,  6.86s/it]Processing News Embedding:   4%|▍         | 41/1026 [03:37<1:52:40,  6.86s/it]Processing News Embedding:   4%|▍         | 42/1026 [03:43<1:52:40,  6.87s/it]Processing News Embedding:   4%|▍         | 43/1026 [03:50<1:52:14,  6.85s/it]Processing News Embedding:   4%|▍         | 44/1026 [03:57<1:52:24,  6.87s/it]Processing News Embedding:   4%|▍         | 45/1026 [04:04<1:52:13,  6.86s/it]Processing News Embedding:   4%|▍         | 46/1026 [04:11<1:52:01,  6.86s/it]Processing News Embedding:   5%|▍         | 47/1026 [04:18<1:51:16,  6.82s/it]Processing News Embedding:   5%|▍         | 48/1026 [04:24<1:50:52,  6.80s/it]Processing News Embedding:   5%|▍         | 49/1026 [04:31<1:50:56,  6.81s/it]Processing News Embedding:   5%|▍         | 50/1026 [04:38<1:51:01,  6.83s/it]Processing News Embedding:   5%|▍         | 51/1026 [04:45<1:50:19,  6.79s/it]Processing News Embedding:   5%|▌         | 52/1026 [04:52<1:50:51,  6.83s/it]Processing News Embedding:   5%|▌         | 53/1026 [04:58<1:50:41,  6.83s/it]Processing News Embedding:   5%|▌         | 54/1026 [05:05<1:50:26,  6.82s/it]Processing News Embedding:   5%|▌         | 55/1026 [05:12<1:50:20,  6.82s/it]Processing News Embedding:   5%|▌         | 56/1026 [05:19<1:50:18,  6.82s/it]Processing News Embedding:   6%|▌         | 57/1026 [05:26<1:50:14,  6.83s/it]Processing News Embedding:   6%|▌         | 58/1026 [05:32<1:49:45,  6.80s/it]Processing News Embedding:   6%|▌         | 59/1026 [05:39<1:50:09,  6.84s/it]Processing News Embedding:   6%|▌         | 60/1026 [05:46<1:49:47,  6.82s/it]Processing News Embedding:   6%|▌         | 61/1026 [05:53<1:49:31,  6.81s/it]Processing News Embedding:   6%|▌         | 62/1026 [06:00<1:49:48,  6.83s/it]Processing News Embedding:   6%|▌         | 63/1026 [06:07<1:49:27,  6.82s/it]Processing News Embedding:   6%|▌         | 64/1026 [06:13<1:49:15,  6.81s/it]Processing News Embedding:   6%|▋         | 65/1026 [06:20<1:49:24,  6.83s/it]Processing News Embedding:   6%|▋         | 66/1026 [06:27<1:49:34,  6.85s/it]Processing News Embedding:   7%|▋         | 67/1026 [06:34<1:49:00,  6.82s/it]Processing News Embedding:   7%|▋         | 68/1026 [06:41<1:48:54,  6.82s/it]Processing News Embedding:   7%|▋         | 69/1026 [06:48<1:49:15,  6.85s/it]Processing News Embedding:   7%|▋         | 70/1026 [06:54<1:48:50,  6.83s/it]Processing News Embedding:   7%|▋         | 71/1026 [07:01<1:48:15,  6.80s/it]Processing News Embedding:   7%|▋         | 72/1026 [07:08<1:47:53,  6.79s/it]Processing News Embedding:   7%|▋         | 73/1026 [07:15<1:47:55,  6.79s/it]Processing News Embedding:   7%|▋         | 74/1026 [07:22<1:48:32,  6.84s/it]Processing News Embedding:   7%|▋         | 75/1026 [07:28<1:48:00,  6.81s/it]Processing News Embedding:   7%|▋         | 76/1026 [07:35<1:48:00,  6.82s/it]Processing News Embedding:   8%|▊         | 77/1026 [07:42<1:48:11,  6.84s/it]Processing News Embedding:   8%|▊         | 78/1026 [07:49<1:48:10,  6.85s/it]Processing News Embedding:   8%|▊         | 79/1026 [07:56<1:47:26,  6.81s/it]Processing News Embedding:   8%|▊         | 80/1026 [08:03<1:47:20,  6.81s/it]Processing News Embedding:   8%|▊         | 81/1026 [08:10<1:48:36,  6.90s/it]Processing News Embedding:   8%|▊         | 82/1026 [08:16<1:47:40,  6.84s/it]Processing News Embedding:   8%|▊         | 83/1026 [08:23<1:47:53,  6.86s/it]Processing News Embedding:   8%|▊         | 84/1026 [08:30<1:48:22,  6.90s/it]Processing News Embedding:   8%|▊         | 85/1026 [08:37<1:47:46,  6.87s/it]Processing News Embedding:   8%|▊         | 86/1026 [08:44<1:47:31,  6.86s/it]Processing News Embedding:   8%|▊         | 87/1026 [08:51<1:48:18,  6.92s/it]Processing News Embedding:   9%|▊         | 88/1026 [08:58<1:47:20,  6.87s/it]Processing News Embedding:   9%|▊         | 89/1026 [09:05<1:46:44,  6.84s/it]Processing News Embedding:   9%|▉         | 90/1026 [09:11<1:46:49,  6.85s/it]Processing News Embedding:   9%|▉         | 91/1026 [09:18<1:46:13,  6.82s/it]Processing News Embedding:   9%|▉         | 92/1026 [09:25<1:46:20,  6.83s/it]Processing News Embedding:   9%|▉         | 93/1026 [09:32<1:46:47,  6.87s/it]Processing News Embedding:   9%|▉         | 94/1026 [09:39<1:47:02,  6.89s/it]Processing News Embedding:   9%|▉         | 95/1026 [09:46<1:46:47,  6.88s/it]Processing News Embedding:   9%|▉         | 96/1026 [09:53<1:46:46,  6.89s/it]Processing News Embedding:   9%|▉         | 97/1026 [09:59<1:46:13,  6.86s/it]Processing News Embedding:  10%|▉         | 98/1026 [10:06<1:45:51,  6.84s/it]Processing News Embedding:  10%|▉         | 99/1026 [10:13<1:45:35,  6.83s/it]Processing News Embedding:  10%|▉         | 100/1026 [10:20<1:46:40,  6.91s/it]Processing News Embedding:  10%|▉         | 101/1026 [10:27<1:45:59,  6.88s/it]Processing News Embedding:  10%|▉         | 102/1026 [10:34<1:45:27,  6.85s/it]Processing News Embedding:  10%|█         | 103/1026 [10:41<1:45:05,  6.83s/it]Processing News Embedding:  10%|█         | 104/1026 [10:48<1:47:53,  7.02s/it]Processing News Embedding:  10%|█         | 105/1026 [10:55<1:47:14,  6.99s/it]Processing News Embedding:  10%|█         | 106/1026 [11:02<1:46:31,  6.95s/it]Processing News Embedding:  10%|█         | 107/1026 [11:09<1:46:19,  6.94s/it]Processing News Embedding:  11%|█         | 108/1026 [11:15<1:45:13,  6.88s/it]Processing News Embedding:  11%|█         | 109/1026 [11:22<1:45:06,  6.88s/it]Processing News Embedding:  11%|█         | 110/1026 [11:29<1:45:07,  6.89s/it]Processing News Embedding:  11%|█         | 111/1026 [11:36<1:44:42,  6.87s/it]Processing News Embedding:  11%|█         | 112/1026 [11:43<1:46:14,  6.97s/it]Processing News Embedding:  11%|█         | 113/1026 [11:50<1:47:06,  7.04s/it]Processing News Embedding:  11%|█         | 114/1026 [11:58<1:47:58,  7.10s/it]Processing News Embedding:  11%|█         | 115/1026 [12:05<1:48:14,  7.13s/it]Processing News Embedding:  11%|█▏        | 116/1026 [12:12<1:47:34,  7.09s/it]Processing News Embedding:  11%|█▏        | 117/1026 [12:19<1:49:22,  7.22s/it]Processing News Embedding:  12%|█▏        | 118/1026 [12:27<1:50:01,  7.27s/it]Processing News Embedding:  12%|█▏        | 119/1026 [12:34<1:50:37,  7.32s/it]Processing News Embedding:  12%|█▏        | 120/1026 [12:41<1:50:18,  7.30s/it]Processing News Embedding:  12%|█▏        | 121/1026 [12:49<1:49:43,  7.27s/it]Processing News Embedding:  12%|█▏        | 122/1026 [12:56<1:50:48,  7.35s/it]Processing News Embedding:  12%|█▏        | 123/1026 [13:03<1:49:59,  7.31s/it]Processing News Embedding:  12%|█▏        | 124/1026 [13:11<1:51:00,  7.38s/it]Processing News Embedding:  12%|█▏        | 125/1026 [13:18<1:50:32,  7.36s/it]Processing News Embedding:  12%|█▏        | 126/1026 [13:25<1:49:33,  7.30s/it]Processing News Embedding:  12%|█▏        | 127/1026 [13:33<1:48:43,  7.26s/it]Processing News Embedding:  12%|█▏        | 128/1026 [13:40<1:48:16,  7.23s/it]Processing News Embedding:  13%|█▎        | 129/1026 [13:47<1:47:26,  7.19s/it]Processing News Embedding:  13%|█▎        | 130/1026 [13:54<1:47:45,  7.22s/it]Processing News Embedding:  13%|█▎        | 131/1026 [14:01<1:47:18,  7.19s/it]Processing News Embedding:  13%|█▎        | 132/1026 [14:08<1:46:29,  7.15s/it]Processing News Embedding:  13%|█▎        | 133/1026 [14:16<1:46:48,  7.18s/it]Processing News Embedding:  13%|█▎        | 134/1026 [14:23<1:46:53,  7.19s/it]Processing News Embedding:  13%|█▎        | 135/1026 [14:30<1:46:24,  7.17s/it]Processing News Embedding:  13%|█▎        | 136/1026 [14:37<1:46:40,  7.19s/it]Processing News Embedding:  13%|█▎        | 137/1026 [14:44<1:46:37,  7.20s/it]Processing News Embedding:  13%|█▎        | 138/1026 [14:52<1:47:01,  7.23s/it]Processing News Embedding:  14%|█▎        | 139/1026 [14:59<1:47:32,  7.27s/it]Processing News Embedding:  14%|█▎        | 140/1026 [15:06<1:47:18,  7.27s/it]Processing News Embedding:  14%|█▎        | 141/1026 [15:14<1:47:38,  7.30s/it]Processing News Embedding:  14%|█▍        | 142/1026 [15:21<1:46:24,  7.22s/it]Processing News Embedding:  14%|█▍        | 143/1026 [15:28<1:46:12,  7.22s/it]Processing News Embedding:  14%|█▍        | 144/1026 [15:35<1:45:03,  7.15s/it]Processing News Embedding:  14%|█▍        | 145/1026 [15:42<1:45:31,  7.19s/it]Processing News Embedding:  14%|█▍        | 146/1026 [15:49<1:45:09,  7.17s/it]Processing News Embedding:  14%|█▍        | 147/1026 [15:57<1:45:02,  7.17s/it]Processing News Embedding:  14%|█▍        | 148/1026 [16:04<1:45:25,  7.20s/it]Processing News Embedding:  15%|█▍        | 149/1026 [16:11<1:44:38,  7.16s/it]Processing News Embedding:  15%|█▍        | 150/1026 [16:18<1:44:51,  7.18s/it]Processing News Embedding:  15%|█▍        | 151/1026 [16:25<1:44:22,  7.16s/it]Processing News Embedding:  15%|█▍        | 152/1026 [16:33<1:45:16,  7.23s/it]Processing News Embedding:  15%|█▍        | 153/1026 [16:40<1:44:59,  7.22s/it]Processing News Embedding:  15%|█▌        | 154/1026 [16:47<1:44:47,  7.21s/it]Processing News Embedding:  15%|█▌        | 155/1026 [16:54<1:44:23,  7.19s/it]Processing News Embedding:  15%|█▌        | 156/1026 [17:01<1:44:38,  7.22s/it]Processing News Embedding:  15%|█▌        | 157/1026 [17:09<1:44:13,  7.20s/it]Processing News Embedding:  15%|█▌        | 158/1026 [17:16<1:43:39,  7.17s/it]Processing News Embedding:  15%|█▌        | 159/1026 [17:23<1:43:59,  7.20s/it]Processing News Embedding:  16%|█▌        | 160/1026 [17:30<1:43:20,  7.16s/it]Processing News Embedding:  16%|█▌        | 161/1026 [17:37<1:43:55,  7.21s/it]Processing News Embedding:  16%|█▌        | 162/1026 [17:44<1:43:18,  7.17s/it]Processing News Embedding:  16%|█▌        | 163/1026 [17:52<1:43:17,  7.18s/it]Processing News Embedding:  16%|█▌        | 164/1026 [17:59<1:43:18,  7.19s/it]Processing News Embedding:  16%|█▌        | 165/1026 [18:06<1:43:22,  7.20s/it]Processing News Embedding:  16%|█▌        | 166/1026 [18:14<1:44:29,  7.29s/it]Processing News Embedding:  16%|█▋        | 167/1026 [18:21<1:45:06,  7.34s/it]Processing News Embedding:  16%|█▋        | 168/1026 [18:28<1:43:48,  7.26s/it]Processing News Embedding:  16%|█▋        | 169/1026 [18:35<1:44:06,  7.29s/it]Processing News Embedding:  17%|█▋        | 170/1026 [18:43<1:43:29,  7.25s/it]Processing News Embedding:  17%|█▋        | 171/1026 [18:50<1:43:42,  7.28s/it]Processing News Embedding:  17%|█▋        | 172/1026 [18:57<1:42:59,  7.24s/it]Processing News Embedding:  17%|█▋        | 173/1026 [19:04<1:42:39,  7.22s/it]Processing News Embedding:  17%|█▋        | 174/1026 [19:11<1:41:43,  7.16s/it]Processing News Embedding:  17%|█▋        | 175/1026 [19:19<1:42:53,  7.25s/it]Processing News Embedding:  17%|█▋        | 176/1026 [19:26<1:43:28,  7.30s/it]Processing News Embedding:  17%|█▋        | 177/1026 [19:34<1:44:42,  7.40s/it]Processing News Embedding:  17%|█▋        | 178/1026 [19:41<1:44:33,  7.40s/it]Processing News Embedding:  17%|█▋        | 179/1026 [19:49<1:45:05,  7.44s/it]Processing News Embedding:  18%|█▊        | 180/1026 [19:56<1:45:33,  7.49s/it]Processing News Embedding:  18%|█▊        | 181/1026 [20:04<1:44:52,  7.45s/it]Processing News Embedding:  18%|█▊        | 182/1026 [20:11<1:45:48,  7.52s/it]Processing News Embedding:  18%|█▊        | 183/1026 [20:19<1:45:15,  7.49s/it]Processing News Embedding:  18%|█▊        | 184/1026 [20:26<1:45:19,  7.51s/it]Processing News Embedding:  18%|█▊        | 185/1026 [20:34<1:44:53,  7.48s/it]Processing News Embedding:  18%|█▊        | 186/1026 [20:41<1:44:45,  7.48s/it]Processing News Embedding:  18%|█▊        | 187/1026 [20:49<1:45:04,  7.51s/it]Processing News Embedding:  18%|█▊        | 188/1026 [20:56<1:44:18,  7.47s/it]Processing News Embedding:  18%|█▊        | 189/1026 [21:04<1:44:42,  7.51s/it]Processing News Embedding:  19%|█▊        | 190/1026 [21:11<1:44:21,  7.49s/it]Processing News Embedding:  19%|█▊        | 191/1026 [21:19<1:44:05,  7.48s/it]Processing News Embedding:  19%|█▊        | 192/1026 [21:26<1:43:41,  7.46s/it]Processing News Embedding:  19%|█▉        | 193/1026 [21:34<1:43:38,  7.47s/it]Processing News Embedding:  19%|█▉        | 194/1026 [21:41<1:42:12,  7.37s/it]Processing News Embedding:  19%|█▉        | 195/1026 [21:48<1:41:43,  7.35s/it]Processing News Embedding:  19%|█▉        | 196/1026 [21:55<1:41:58,  7.37s/it]Processing News Embedding:  19%|█▉        | 197/1026 [22:03<1:41:31,  7.35s/it]Processing News Embedding:  19%|█▉        | 198/1026 [22:11<1:43:10,  7.48s/it]Processing News Embedding:  19%|█▉        | 199/1026 [22:18<1:43:16,  7.49s/it]Processing News Embedding:  19%|█▉        | 200/1026 [22:26<1:44:17,  7.58s/it]Processing News Embedding:  20%|█▉        | 201/1026 [22:34<1:45:39,  7.68s/it]Processing News Embedding:  20%|█▉        | 202/1026 [22:41<1:45:18,  7.67s/it]Processing News Embedding:  20%|█▉        | 203/1026 [22:49<1:45:38,  7.70s/it]Processing News Embedding:  20%|█▉        | 204/1026 [22:57<1:45:02,  7.67s/it]Processing News Embedding:  20%|█▉        | 205/1026 [23:04<1:44:58,  7.67s/it]Processing News Embedding:  20%|██        | 206/1026 [23:12<1:44:33,  7.65s/it]Processing News Embedding:  20%|██        | 207/1026 [23:20<1:44:52,  7.68s/it]Processing News Embedding:  20%|██        | 208/1026 [23:27<1:44:48,  7.69s/it]Processing News Embedding:  20%|██        | 209/1026 [23:35<1:44:54,  7.70s/it]Processing News Embedding:  20%|██        | 210/1026 [23:43<1:43:52,  7.64s/it]Processing News Embedding:  21%|██        | 211/1026 [23:50<1:43:34,  7.63s/it]Processing News Embedding:  21%|██        | 212/1026 [23:58<1:42:43,  7.57s/it]Processing News Embedding:  21%|██        | 213/1026 [24:05<1:42:54,  7.60s/it]Processing News Embedding:  21%|██        | 214/1026 [24:13<1:43:16,  7.63s/it]Processing News Embedding:  21%|██        | 215/1026 [24:21<1:43:29,  7.66s/it]Processing News Embedding:  21%|██        | 216/1026 [24:29<1:43:32,  7.67s/it]Processing News Embedding:  21%|██        | 217/1026 [24:36<1:42:49,  7.63s/it]Processing News Embedding:  21%|██        | 218/1026 [24:44<1:42:39,  7.62s/it]Processing News Embedding:  21%|██▏       | 219/1026 [24:51<1:42:49,  7.64s/it]Processing News Embedding:  21%|██▏       | 220/1026 [24:59<1:41:37,  7.57s/it]Processing News Embedding:  22%|██▏       | 221/1026 [25:07<1:42:23,  7.63s/it]Processing News Embedding:  22%|██▏       | 222/1026 [25:14<1:41:54,  7.61s/it]Processing News Embedding:  22%|██▏       | 223/1026 [25:22<1:41:57,  7.62s/it]Processing News Embedding:  22%|██▏       | 224/1026 [25:29<1:42:05,  7.64s/it]Processing News Embedding:  22%|██▏       | 225/1026 [25:37<1:41:26,  7.60s/it]Processing News Embedding:  22%|██▏       | 226/1026 [25:45<1:41:40,  7.63s/it]Processing News Embedding:  22%|██▏       | 227/1026 [25:52<1:42:32,  7.70s/it]Processing News Embedding:  22%|██▏       | 228/1026 [26:00<1:41:56,  7.66s/it]Processing News Embedding:  22%|██▏       | 229/1026 [26:08<1:42:23,  7.71s/it]Processing News Embedding:  22%|██▏       | 230/1026 [26:15<1:41:38,  7.66s/it]Processing News Embedding:  23%|██▎       | 231/1026 [26:23<1:41:32,  7.66s/it]Processing News Embedding:  23%|██▎       | 232/1026 [26:31<1:40:40,  7.61s/it]Processing News Embedding:  23%|██▎       | 233/1026 [26:38<1:40:40,  7.62s/it]Processing News Embedding:  23%|██▎       | 234/1026 [26:46<1:40:57,  7.65s/it]Processing News Embedding:  23%|██▎       | 235/1026 [26:53<1:40:06,  7.59s/it]Processing News Embedding:  23%|██▎       | 236/1026 [27:01<1:41:07,  7.68s/it]Processing News Embedding:  23%|██▎       | 237/1026 [27:09<1:40:55,  7.67s/it]Processing News Embedding:  23%|██▎       | 238/1026 [27:17<1:40:23,  7.64s/it]Processing News Embedding:  23%|██▎       | 239/1026 [27:24<1:40:35,  7.67s/it]Processing News Embedding:  23%|██▎       | 240/1026 [27:32<1:39:58,  7.63s/it]Processing News Embedding:  23%|██▎       | 241/1026 [27:39<1:39:44,  7.62s/it]Processing News Embedding:  24%|██▎       | 242/1026 [27:47<1:39:33,  7.62s/it]Processing News Embedding:  24%|██▎       | 243/1026 [27:55<1:39:21,  7.61s/it]Processing News Embedding:  24%|██▍       | 244/1026 [28:02<1:39:26,  7.63s/it]Processing News Embedding:  24%|██▍       | 245/1026 [28:10<1:39:29,  7.64s/it]Processing News Embedding:  24%|██▍       | 246/1026 [28:18<1:39:51,  7.68s/it]Processing News Embedding:  24%|██▍       | 247/1026 [28:25<1:39:45,  7.68s/it]Processing News Embedding:  24%|██▍       | 248/1026 [28:33<1:38:54,  7.63s/it]Processing News Embedding:  24%|██▍       | 249/1026 [28:40<1:38:27,  7.60s/it]Processing News Embedding:  24%|██▍       | 250/1026 [28:48<1:38:28,  7.61s/it]Processing News Embedding:  24%|██▍       | 251/1026 [28:56<1:37:54,  7.58s/it]Processing News Embedding:  25%|██▍       | 252/1026 [29:03<1:38:18,  7.62s/it]Processing News Embedding:  25%|██▍       | 253/1026 [29:11<1:37:28,  7.57s/it]Processing News Embedding:  25%|██▍       | 254/1026 [29:18<1:36:55,  7.53s/it]Processing News Embedding:  25%|██▍       | 255/1026 [29:26<1:36:58,  7.55s/it]Processing News Embedding:  25%|██▍       | 256/1026 [29:33<1:36:55,  7.55s/it]Processing News Embedding:  25%|██▌       | 257/1026 [29:41<1:37:27,  7.60s/it]Processing News Embedding:  25%|██▌       | 258/1026 [29:49<1:37:11,  7.59s/it]Processing News Embedding:  25%|██▌       | 259/1026 [29:56<1:37:05,  7.59s/it]Processing News Embedding:  25%|██▌       | 260/1026 [30:04<1:36:42,  7.57s/it]Processing News Embedding:  25%|██▌       | 261/1026 [30:11<1:36:58,  7.61s/it]Processing News Embedding:  26%|██▌       | 262/1026 [30:19<1:36:55,  7.61s/it]Processing News Embedding:  26%|██▌       | 263/1026 [30:27<1:37:02,  7.63s/it]Processing News Embedding:  26%|██▌       | 264/1026 [30:34<1:37:15,  7.66s/it]Processing News Embedding:  26%|██▌       | 265/1026 [30:42<1:37:23,  7.68s/it]Processing News Embedding:  26%|██▌       | 266/1026 [30:50<1:36:11,  7.59s/it]Processing News Embedding:  26%|██▌       | 267/1026 [30:57<1:36:19,  7.61s/it]Processing News Embedding:  26%|██▌       | 268/1026 [31:05<1:36:13,  7.62s/it]Processing News Embedding:  26%|██▌       | 269/1026 [31:12<1:35:37,  7.58s/it]Processing News Embedding:  26%|██▋       | 270/1026 [31:20<1:35:47,  7.60s/it]Processing News Embedding:  26%|██▋       | 271/1026 [31:28<1:35:34,  7.59s/it]Processing News Embedding:  27%|██▋       | 272/1026 [31:35<1:36:08,  7.65s/it]Processing News Embedding:  27%|██▋       | 273/1026 [31:43<1:36:26,  7.69s/it]Processing News Embedding:  27%|██▋       | 274/1026 [31:51<1:35:33,  7.62s/it]Processing News Embedding:  27%|██▋       | 275/1026 [31:58<1:35:07,  7.60s/it]Processing News Embedding:  27%|██▋       | 276/1026 [32:06<1:35:08,  7.61s/it]Processing News Embedding:  27%|██▋       | 277/1026 [32:13<1:34:38,  7.58s/it]Processing News Embedding:  27%|██▋       | 278/1026 [32:21<1:34:58,  7.62s/it]Processing News Embedding:  27%|██▋       | 279/1026 [32:29<1:35:16,  7.65s/it]Processing News Embedding:  27%|██▋       | 280/1026 [32:36<1:35:05,  7.65s/it]Processing News Embedding:  27%|██▋       | 281/1026 [32:44<1:35:46,  7.71s/it]Processing News Embedding:  27%|██▋       | 282/1026 [32:52<1:34:59,  7.66s/it]Processing News Embedding:  28%|██▊       | 283/1026 [32:59<1:34:32,  7.63s/it]Processing News Embedding:  28%|██▊       | 284/1026 [33:07<1:34:09,  7.61s/it]Processing News Embedding:  28%|██▊       | 285/1026 [33:14<1:33:30,  7.57s/it]Processing News Embedding:  28%|██▊       | 286/1026 [33:22<1:33:27,  7.58s/it]Processing News Embedding:  28%|██▊       | 287/1026 [33:30<1:33:54,  7.63s/it]Processing News Embedding:  28%|██▊       | 288/1026 [33:37<1:33:30,  7.60s/it]Processing News Embedding:  28%|██▊       | 289/1026 [33:45<1:33:55,  7.65s/it]Processing News Embedding:  28%|██▊       | 290/1026 [33:53<1:34:10,  7.68s/it]Processing News Embedding:  28%|██▊       | 291/1026 [34:00<1:33:49,  7.66s/it]Processing News Embedding:  28%|██▊       | 292/1026 [34:08<1:33:31,  7.65s/it]Processing News Embedding:  29%|██▊       | 293/1026 [34:16<1:33:42,  7.67s/it]Processing News Embedding:  29%|██▊       | 294/1026 [34:23<1:33:22,  7.65s/it]Processing News Embedding:  29%|██▉       | 295/1026 [34:31<1:33:24,  7.67s/it]Processing News Embedding:  29%|██▉       | 296/1026 [34:39<1:33:16,  7.67s/it]Processing News Embedding:  29%|██▉       | 297/1026 [34:46<1:31:59,  7.57s/it]Processing News Embedding:  29%|██▉       | 298/1026 [34:54<1:31:29,  7.54s/it]Processing News Embedding:  29%|██▉       | 299/1026 [35:01<1:31:25,  7.55s/it]Processing News Embedding:  29%|██▉       | 300/1026 [35:09<1:31:16,  7.54s/it]Processing News Embedding:  29%|██▉       | 301/1026 [35:16<1:31:34,  7.58s/it]Processing News Embedding:  29%|██▉       | 302/1026 [35:24<1:32:19,  7.65s/it]Processing News Embedding:  30%|██▉       | 303/1026 [35:32<1:31:33,  7.60s/it]Processing News Embedding:  30%|██▉       | 304/1026 [35:39<1:31:52,  7.64s/it]Processing News Embedding:  30%|██▉       | 305/1026 [35:47<1:31:44,  7.64s/it]Processing News Embedding:  30%|██▉       | 306/1026 [35:55<1:31:29,  7.62s/it]Processing News Embedding:  30%|██▉       | 307/1026 [36:02<1:31:20,  7.62s/it]Processing News Embedding:  30%|███       | 308/1026 [36:10<1:31:37,  7.66s/it]Processing News Embedding:  30%|███       | 309/1026 [36:17<1:30:50,  7.60s/it]Processing News Embedding:  30%|███       | 310/1026 [36:25<1:31:06,  7.63s/it]Processing News Embedding:  30%|███       | 311/1026 [36:33<1:30:46,  7.62s/it]Processing News Embedding:  30%|███       | 312/1026 [36:40<1:31:01,  7.65s/it]Processing News Embedding:  31%|███       | 313/1026 [36:48<1:31:08,  7.67s/it]Processing News Embedding:  31%|███       | 314/1026 [36:56<1:30:42,  7.64s/it]Processing News Embedding:  31%|███       | 315/1026 [37:03<1:30:31,  7.64s/it]Processing News Embedding:  31%|███       | 316/1026 [37:11<1:30:31,  7.65s/it]Processing News Embedding:  31%|███       | 317/1026 [37:19<1:30:38,  7.67s/it]Processing News Embedding:  31%|███       | 318/1026 [37:26<1:30:17,  7.65s/it]Processing News Embedding:  31%|███       | 319/1026 [37:34<1:30:04,  7.64s/it]Processing News Embedding:  31%|███       | 320/1026 [37:42<1:29:45,  7.63s/it]Processing News Embedding:  31%|███▏      | 321/1026 [37:49<1:29:56,  7.65s/it]Processing News Embedding:  31%|███▏      | 322/1026 [37:57<1:29:00,  7.59s/it]Processing News Embedding:  31%|███▏      | 323/1026 [38:04<1:28:31,  7.55s/it]Processing News Embedding:  32%|███▏      | 324/1026 [38:12<1:30:13,  7.71s/it]Processing News Embedding:  32%|███▏      | 325/1026 [38:20<1:30:12,  7.72s/it]Processing News Embedding:  32%|███▏      | 326/1026 [38:28<1:29:48,  7.70s/it]Processing News Embedding:  32%|███▏      | 327/1026 [38:35<1:29:44,  7.70s/it]Processing News Embedding:  32%|███▏      | 328/1026 [38:43<1:29:00,  7.65s/it]Processing News Embedding:  32%|███▏      | 329/1026 [38:51<1:29:22,  7.69s/it]Processing News Embedding:  32%|███▏      | 330/1026 [38:58<1:27:59,  7.59s/it]Processing News Embedding:  32%|███▏      | 331/1026 [39:06<1:28:32,  7.64s/it]Processing News Embedding:  32%|███▏      | 332/1026 [39:14<1:28:44,  7.67s/it]Processing News Embedding:  32%|███▏      | 333/1026 [39:21<1:28:53,  7.70s/it]Processing News Embedding:  33%|███▎      | 334/1026 [39:29<1:27:20,  7.57s/it]Processing News Embedding:  33%|███▎      | 335/1026 [39:36<1:27:08,  7.57s/it]Processing News Embedding:  33%|███▎      | 336/1026 [39:44<1:26:49,  7.55s/it]Processing News Embedding:  33%|███▎      | 337/1026 [39:51<1:26:58,  7.57s/it]Processing News Embedding:  33%|███▎      | 338/1026 [39:59<1:26:31,  7.55s/it]Processing News Embedding:  33%|███▎      | 339/1026 [40:06<1:26:40,  7.57s/it]Processing News Embedding:  33%|███▎      | 340/1026 [40:14<1:26:54,  7.60s/it]Processing News Embedding:  33%|███▎      | 341/1026 [40:22<1:27:05,  7.63s/it]Processing News Embedding:  33%|███▎      | 342/1026 [40:29<1:26:48,  7.61s/it]Processing News Embedding:  33%|███▎      | 343/1026 [40:37<1:27:19,  7.67s/it]Processing News Embedding:  34%|███▎      | 344/1026 [40:45<1:26:54,  7.65s/it]Processing News Embedding:  34%|███▎      | 345/1026 [40:52<1:26:22,  7.61s/it]Processing News Embedding:  34%|███▎      | 346/1026 [41:00<1:27:00,  7.68s/it]Processing News Embedding:  34%|███▍      | 347/1026 [41:08<1:26:32,  7.65s/it]Processing News Embedding:  34%|███▍      | 348/1026 [41:15<1:26:09,  7.62s/it]Processing News Embedding:  34%|███▍      | 349/1026 [41:23<1:26:05,  7.63s/it]Processing News Embedding:  34%|███▍      | 350/1026 [41:30<1:26:02,  7.64s/it]Processing News Embedding:  34%|███▍      | 351/1026 [41:38<1:25:23,  7.59s/it]Processing News Embedding:  34%|███▍      | 352/1026 [41:45<1:24:32,  7.53s/it]Processing News Embedding:  34%|███▍      | 353/1026 [41:53<1:25:06,  7.59s/it]Processing News Embedding:  35%|███▍      | 354/1026 [42:01<1:25:11,  7.61s/it]Processing News Embedding:  35%|███▍      | 355/1026 [42:08<1:24:41,  7.57s/it]Processing News Embedding:  35%|███▍      | 356/1026 [42:16<1:24:52,  7.60s/it]Processing News Embedding:  35%|███▍      | 357/1026 [42:24<1:24:48,  7.61s/it]Processing News Embedding:  35%|███▍      | 358/1026 [42:31<1:24:10,  7.56s/it]Processing News Embedding:  35%|███▍      | 359/1026 [42:39<1:24:22,  7.59s/it]Processing News Embedding:  35%|███▌      | 360/1026 [42:46<1:24:15,  7.59s/it]Processing News Embedding:  35%|███▌      | 361/1026 [42:54<1:24:37,  7.64s/it]Processing News Embedding:  35%|███▌      | 362/1026 [43:02<1:24:24,  7.63s/it]Processing News Embedding:  35%|███▌      | 363/1026 [43:09<1:23:08,  7.52s/it]Processing News Embedding:  35%|███▌      | 364/1026 [43:17<1:24:15,  7.64s/it]Processing News Embedding:  36%|███▌      | 365/1026 [43:24<1:23:53,  7.61s/it]Processing News Embedding:  36%|███▌      | 366/1026 [43:32<1:23:39,  7.60s/it]Processing News Embedding:  36%|███▌      | 367/1026 [43:40<1:23:41,  7.62s/it]Processing News Embedding:  36%|███▌      | 368/1026 [43:47<1:23:32,  7.62s/it]Processing News Embedding:  36%|███▌      | 369/1026 [43:55<1:23:01,  7.58s/it]Processing News Embedding:  36%|███▌      | 370/1026 [44:02<1:23:19,  7.62s/it]Processing News Embedding:  36%|███▌      | 371/1026 [44:10<1:23:14,  7.63s/it]Processing News Embedding:  36%|███▋      | 372/1026 [44:17<1:22:13,  7.54s/it]Processing News Embedding:  36%|███▋      | 373/1026 [44:25<1:22:56,  7.62s/it]Processing News Embedding:  36%|███▋      | 374/1026 [44:32<1:21:25,  7.49s/it]Processing News Embedding:  37%|███▋      | 375/1026 [44:40<1:21:27,  7.51s/it]Processing News Embedding:  37%|███▋      | 376/1026 [44:47<1:20:26,  7.42s/it]Processing News Embedding:  37%|███▋      | 377/1026 [44:54<1:19:45,  7.37s/it]Processing News Embedding:  37%|███▋      | 378/1026 [45:02<1:19:30,  7.36s/it]Processing News Embedding:  37%|███▋      | 379/1026 [45:09<1:18:50,  7.31s/it]Processing News Embedding:  37%|███▋      | 380/1026 [45:16<1:17:50,  7.23s/it]Processing News Embedding:  37%|███▋      | 381/1026 [45:23<1:16:48,  7.15s/it]Processing News Embedding:  37%|███▋      | 382/1026 [45:30<1:16:13,  7.10s/it]Processing News Embedding:  37%|███▋      | 383/1026 [45:37<1:16:34,  7.15s/it]Processing News Embedding:  37%|███▋      | 384/1026 [45:44<1:16:28,  7.15s/it]Processing News Embedding:  38%|███▊      | 385/1026 [45:51<1:15:53,  7.10s/it]Processing News Embedding:  38%|███▊      | 386/1026 [45:59<1:16:13,  7.15s/it]Processing News Embedding:  38%|███▊      | 387/1026 [46:06<1:15:40,  7.11s/it]Processing News Embedding:  38%|███▊      | 388/1026 [46:12<1:14:51,  7.04s/it]Processing News Embedding:  38%|███▊      | 389/1026 [46:20<1:14:58,  7.06s/it]Processing News Embedding:  38%|███▊      | 390/1026 [46:26<1:14:14,  7.00s/it]Processing News Embedding:  38%|███▊      | 391/1026 [46:33<1:14:09,  7.01s/it]Processing News Embedding:  38%|███▊      | 392/1026 [46:40<1:14:09,  7.02s/it]Processing News Embedding:  38%|███▊      | 393/1026 [46:48<1:14:20,  7.05s/it]Processing News Embedding:  38%|███▊      | 394/1026 [46:55<1:14:11,  7.04s/it]Processing News Embedding:  38%|███▊      | 395/1026 [47:02<1:13:56,  7.03s/it]Processing News Embedding:  39%|███▊      | 396/1026 [47:09<1:13:34,  7.01s/it]Processing News Embedding:  39%|███▊      | 397/1026 [47:16<1:14:18,  7.09s/it]Processing News Embedding:  39%|███▉      | 398/1026 [47:24<1:16:23,  7.30s/it]Processing News Embedding:  39%|███▉      | 399/1026 [47:31<1:17:54,  7.46s/it]Processing News Embedding:  39%|███▉      | 400/1026 [47:40<1:20:04,  7.68s/it]Processing News Embedding:  39%|███▉      | 401/1026 [47:49<1:23:56,  8.06s/it]Processing News Embedding:  39%|███▉      | 402/1026 [47:57<1:25:59,  8.27s/it]Processing News Embedding:  39%|███▉      | 403/1026 [48:06<1:28:06,  8.49s/it]Processing News Embedding:  39%|███▉      | 404/1026 [48:15<1:29:12,  8.61s/it]Processing News Embedding:  39%|███▉      | 405/1026 [48:24<1:30:38,  8.76s/it]Processing News Embedding:  40%|███▉      | 406/1026 [48:33<1:31:12,  8.83s/it]Processing News Embedding:  40%|███▉      | 407/1026 [48:42<1:31:04,  8.83s/it]Processing News Embedding:  40%|███▉      | 408/1026 [48:51<1:30:17,  8.77s/it]Processing News Embedding:  40%|███▉      | 409/1026 [49:00<1:30:55,  8.84s/it]Processing News Embedding:  40%|███▉      | 410/1026 [49:09<1:30:22,  8.80s/it]Processing News Embedding:  40%|████      | 411/1026 [49:17<1:28:23,  8.62s/it]Processing News Embedding:  40%|████      | 412/1026 [49:25<1:27:37,  8.56s/it]Processing News Embedding:  40%|████      | 413/1026 [49:33<1:26:41,  8.49s/it]Processing News Embedding:  40%|████      | 414/1026 [49:42<1:26:27,  8.48s/it]Processing News Embedding:  40%|████      | 415/1026 [49:50<1:25:46,  8.42s/it]Processing News Embedding:  41%|████      | 416/1026 [49:59<1:25:35,  8.42s/it]Processing News Embedding:  41%|████      | 417/1026 [50:07<1:24:50,  8.36s/it]Processing News Embedding:  41%|████      | 418/1026 [50:15<1:23:48,  8.27s/it]Processing News Embedding:  41%|████      | 419/1026 [50:23<1:23:10,  8.22s/it]Processing News Embedding:  41%|████      | 420/1026 [50:31<1:22:50,  8.20s/it]Processing News Embedding:  41%|████      | 421/1026 [50:39<1:22:32,  8.19s/it]Processing News Embedding:  41%|████      | 422/1026 [50:47<1:22:11,  8.17s/it]Processing News Embedding:  41%|████      | 423/1026 [50:55<1:21:34,  8.12s/it]Processing News Embedding:  41%|████▏     | 424/1026 [51:04<1:21:24,  8.11s/it]Processing News Embedding:  41%|████▏     | 425/1026 [51:12<1:21:14,  8.11s/it]Processing News Embedding:  42%|████▏     | 426/1026 [51:20<1:21:08,  8.11s/it]Processing News Embedding:  42%|████▏     | 427/1026 [51:28<1:21:07,  8.13s/it]Processing News Embedding:  42%|████▏     | 428/1026 [51:36<1:21:30,  8.18s/it]Processing News Embedding:  42%|████▏     | 429/1026 [51:44<1:20:39,  8.11s/it]Processing News Embedding:  42%|████▏     | 430/1026 [51:52<1:20:02,  8.06s/it]Processing News Embedding:  42%|████▏     | 431/1026 [52:00<1:20:14,  8.09s/it]Processing News Embedding:  42%|████▏     | 432/1026 [52:09<1:20:29,  8.13s/it]Processing News Embedding:  42%|████▏     | 433/1026 [52:17<1:20:45,  8.17s/it]Processing News Embedding:  42%|████▏     | 434/1026 [52:25<1:19:32,  8.06s/it]Processing News Embedding:  42%|████▏     | 435/1026 [52:33<1:19:26,  8.06s/it]Processing News Embedding:  42%|████▏     | 436/1026 [52:41<1:19:15,  8.06s/it]Processing News Embedding:  43%|████▎     | 437/1026 [52:49<1:18:51,  8.03s/it]Processing News Embedding:  43%|████▎     | 438/1026 [52:57<1:18:27,  8.01s/it]Processing News Embedding:  43%|████▎     | 439/1026 [53:05<1:18:10,  7.99s/it]Processing News Embedding:  43%|████▎     | 440/1026 [53:13<1:18:09,  8.00s/it]Processing News Embedding:  43%|████▎     | 441/1026 [53:21<1:18:15,  8.03s/it]Processing News Embedding:  43%|████▎     | 442/1026 [53:29<1:18:14,  8.04s/it]Processing News Embedding:  43%|████▎     | 443/1026 [53:37<1:18:36,  8.09s/it]Processing News Embedding:  43%|████▎     | 444/1026 [53:45<1:17:52,  8.03s/it]Processing News Embedding:  43%|████▎     | 445/1026 [53:53<1:17:24,  7.99s/it]Processing News Embedding:  43%|████▎     | 446/1026 [54:01<1:18:12,  8.09s/it]Processing News Embedding:  44%|████▎     | 447/1026 [54:09<1:17:40,  8.05s/it]Processing News Embedding:  44%|████▎     | 448/1026 [54:17<1:17:35,  8.05s/it]Processing News Embedding:  44%|████▍     | 449/1026 [54:25<1:17:22,  8.05s/it]Processing News Embedding:  44%|████▍     | 450/1026 [54:33<1:17:46,  8.10s/it]Processing News Embedding:  44%|████▍     | 451/1026 [54:41<1:17:33,  8.09s/it]Processing News Embedding:  44%|████▍     | 452/1026 [54:50<1:17:37,  8.11s/it]Processing News Embedding:  44%|████▍     | 453/1026 [54:58<1:17:20,  8.10s/it]Processing News Embedding:  44%|████▍     | 454/1026 [55:06<1:16:50,  8.06s/it]Processing News Embedding:  44%|████▍     | 455/1026 [55:14<1:16:43,  8.06s/it]Processing News Embedding:  44%|████▍     | 456/1026 [55:22<1:16:55,  8.10s/it]Processing News Embedding:  45%|████▍     | 457/1026 [55:30<1:16:38,  8.08s/it]Processing News Embedding:  45%|████▍     | 458/1026 [55:38<1:16:18,  8.06s/it]Processing News Embedding:  45%|████▍     | 459/1026 [55:46<1:16:04,  8.05s/it]Processing News Embedding:  45%|████▍     | 460/1026 [55:54<1:15:58,  8.05s/it]Processing News Embedding:  45%|████▍     | 461/1026 [56:02<1:15:58,  8.07s/it]Processing News Embedding:  45%|████▌     | 462/1026 [56:10<1:16:02,  8.09s/it]Processing News Embedding:  45%|████▌     | 463/1026 [56:18<1:15:59,  8.10s/it]Processing News Embedding:  45%|████▌     | 464/1026 [56:26<1:15:33,  8.07s/it]Processing News Embedding:  45%|████▌     | 465/1026 [56:35<1:15:46,  8.10s/it]Processing News Embedding:  45%|████▌     | 466/1026 [56:43<1:15:28,  8.09s/it]Processing News Embedding:  46%|████▌     | 467/1026 [56:51<1:15:16,  8.08s/it]Processing News Embedding:  46%|████▌     | 468/1026 [56:59<1:15:40,  8.14s/it]Processing News Embedding:  46%|████▌     | 469/1026 [57:07<1:15:01,  8.08s/it]Processing News Embedding:  46%|████▌     | 470/1026 [57:15<1:14:58,  8.09s/it]Processing News Embedding:  46%|████▌     | 471/1026 [57:23<1:15:06,  8.12s/it]Processing News Embedding:  46%|████▌     | 472/1026 [57:31<1:14:37,  8.08s/it]Processing News Embedding:  46%|████▌     | 473/1026 [57:39<1:14:43,  8.11s/it]Processing News Embedding:  46%|████▌     | 474/1026 [57:47<1:14:14,  8.07s/it]Processing News Embedding:  46%|████▋     | 475/1026 [57:55<1:14:21,  8.10s/it]Processing News Embedding:  46%|████▋     | 476/1026 [58:03<1:12:02,  7.86s/it]Processing News Embedding:  46%|████▋     | 477/1026 [58:09<1:08:23,  7.47s/it]Processing News Embedding:  47%|████▋     | 478/1026 [58:16<1:06:09,  7.24s/it]Processing News Embedding:  47%|████▋     | 479/1026 [58:23<1:04:24,  7.06s/it]Processing News Embedding:  47%|████▋     | 480/1026 [58:30<1:03:42,  7.00s/it]Processing News Embedding:  47%|████▋     | 481/1026 [58:36<1:02:33,  6.89s/it]Processing News Embedding:  47%|████▋     | 482/1026 [58:43<1:01:12,  6.75s/it]Processing News Embedding:  47%|████▋     | 483/1026 [58:48<57:45,  6.38s/it]  Processing News Embedding:  47%|████▋     | 484/1026 [58:53<54:42,  6.06s/it]Processing News Embedding:  47%|████▋     | 485/1026 [58:59<52:44,  5.85s/it]Processing News Embedding:  47%|████▋     | 486/1026 [59:04<51:16,  5.70s/it]Processing News Embedding:  47%|████▋     | 487/1026 [59:10<50:17,  5.60s/it]Processing News Embedding:  48%|████▊     | 488/1026 [59:15<49:36,  5.53s/it]Processing News Embedding:  48%|████▊     | 489/1026 [59:20<49:12,  5.50s/it]Processing News Embedding:  48%|████▊     | 490/1026 [59:26<48:20,  5.41s/it]Processing News Embedding:  48%|████▊     | 491/1026 [59:31<47:37,  5.34s/it]Processing News Embedding:  48%|████▊     | 492/1026 [59:36<46:26,  5.22s/it]Processing News Embedding:  48%|████▊     | 493/1026 [59:41<46:08,  5.19s/it]Processing News Embedding:  48%|████▊     | 494/1026 [59:46<46:12,  5.21s/it]Processing News Embedding:  48%|████▊     | 495/1026 [59:51<45:02,  5.09s/it]Processing News Embedding:  48%|████▊     | 496/1026 [59:56<45:32,  5.16s/it]Processing News Embedding:  48%|████▊     | 497/1026 [1:00:01<44:04,  5.00s/it]Processing News Embedding:  49%|████▊     | 498/1026 [1:00:06<44:40,  5.08s/it]Processing News Embedding:  49%|████▊     | 499/1026 [1:00:11<43:36,  4.97s/it]Processing News Embedding:  49%|████▊     | 500/1026 [1:00:16<44:11,  5.04s/it]Processing News Embedding:  49%|████▉     | 501/1026 [1:00:21<44:55,  5.13s/it]Processing News Embedding:  49%|████▉     | 502/1026 [1:00:26<44:59,  5.15s/it]Processing News Embedding:  49%|████▉     | 503/1026 [1:00:31<44:02,  5.05s/it]Processing News Embedding:  49%|████▉     | 504/1026 [1:00:36<43:56,  5.05s/it]Processing News Embedding:  49%|████▉     | 505/1026 [1:00:41<41:49,  4.82s/it]Processing News Embedding:  49%|████▉     | 506/1026 [1:00:46<43:14,  4.99s/it]Processing News Embedding:  49%|████▉     | 507/1026 [1:00:51<44:03,  5.09s/it]Processing News Embedding:  50%|████▉     | 508/1026 [1:00:56<43:47,  5.07s/it]Processing News Embedding:  50%|████▉     | 509/1026 [1:01:02<44:18,  5.14s/it]Processing News Embedding:  50%|████▉     | 510/1026 [1:01:07<44:32,  5.18s/it]Processing News Embedding:  50%|████▉     | 511/1026 [1:01:12<44:05,  5.14s/it]Processing News Embedding:  50%|████▉     | 512/1026 [1:01:17<44:31,  5.20s/it]Processing News Embedding:  50%|█████     | 513/1026 [1:01:22<42:07,  4.93s/it]Processing News Embedding:  50%|█████     | 514/1026 [1:01:27<42:58,  5.04s/it]Processing News Embedding:  50%|█████     | 515/1026 [1:01:32<43:33,  5.11s/it]Processing News Embedding:  50%|█████     | 516/1026 [1:01:38<43:56,  5.17s/it]Processing News Embedding:  50%|█████     | 517/1026 [1:01:43<43:53,  5.17s/it]Processing News Embedding:  50%|█████     | 518/1026 [1:01:48<44:09,  5.22s/it]Processing News Embedding:  51%|█████     | 519/1026 [1:01:53<44:18,  5.24s/it]Processing News Embedding:  51%|█████     | 520/1026 [1:01:58<43:54,  5.21s/it]Processing News Embedding:  51%|█████     | 521/1026 [1:02:03<42:50,  5.09s/it]Processing News Embedding:  51%|█████     | 522/1026 [1:02:08<43:02,  5.12s/it]Processing News Embedding:  51%|█████     | 523/1026 [1:02:14<43:02,  5.13s/it]Processing News Embedding:  51%|█████     | 524/1026 [1:02:19<42:51,  5.12s/it]Processing News Embedding:  51%|█████     | 525/1026 [1:02:23<40:30,  4.85s/it]Processing News Embedding:  51%|█████▏    | 526/1026 [1:02:28<41:20,  4.96s/it]Processing News Embedding:  51%|█████▏    | 527/1026 [1:02:33<41:42,  5.02s/it]Processing News Embedding:  51%|█████▏    | 528/1026 [1:02:38<40:43,  4.91s/it]Processing News Embedding:  52%|█████▏    | 529/1026 [1:02:43<41:14,  4.98s/it]Processing News Embedding:  52%|█████▏    | 530/1026 [1:02:48<40:34,  4.91s/it]Processing News Embedding:  52%|█████▏    | 531/1026 [1:02:53<41:11,  4.99s/it]Processing News Embedding:  52%|█████▏    | 532/1026 [1:02:58<40:32,  4.92s/it]Processing News Embedding:  52%|█████▏    | 533/1026 [1:03:03<40:59,  4.99s/it]Processing News Embedding:  52%|█████▏    | 534/1026 [1:03:08<41:17,  5.04s/it]Processing News Embedding:  52%|█████▏    | 535/1026 [1:03:13<40:38,  4.97s/it]Processing News Embedding:  52%|█████▏    | 536/1026 [1:03:18<41:12,  5.05s/it]Processing News Embedding:  52%|█████▏    | 537/1026 [1:03:23<41:28,  5.09s/it]Processing News Embedding:  52%|█████▏    | 538/1026 [1:03:28<40:53,  5.03s/it]Processing News Embedding:  53%|█████▎    | 539/1026 [1:03:33<41:01,  5.05s/it]Processing News Embedding:  53%|█████▎    | 540/1026 [1:03:38<41:00,  5.06s/it]Processing News Embedding:  53%|█████▎    | 541/1026 [1:03:44<41:18,  5.11s/it]Processing News Embedding:  53%|█████▎    | 542/1026 [1:03:48<40:23,  5.01s/it]Processing News Embedding:  53%|█████▎    | 543/1026 [1:03:53<40:29,  5.03s/it]Processing News Embedding:  53%|█████▎    | 544/1026 [1:03:59<40:40,  5.06s/it]Processing News Embedding:  53%|█████▎    | 545/1026 [1:04:04<40:42,  5.08s/it]Processing News Embedding:  53%|█████▎    | 546/1026 [1:04:09<40:47,  5.10s/it]Processing News Embedding:  53%|█████▎    | 547/1026 [1:04:14<40:53,  5.12s/it]Processing News Embedding:  53%|█████▎    | 548/1026 [1:04:19<40:28,  5.08s/it]Processing News Embedding:  54%|█████▎    | 549/1026 [1:04:24<39:53,  5.02s/it]Processing News Embedding:  54%|█████▎    | 550/1026 [1:04:29<40:21,  5.09s/it]Processing News Embedding:  54%|█████▎    | 551/1026 [1:04:34<40:16,  5.09s/it]Processing News Embedding:  54%|█████▍    | 552/1026 [1:04:39<39:59,  5.06s/it]Processing News Embedding:  54%|█████▍    | 553/1026 [1:04:44<40:20,  5.12s/it]Processing News Embedding:  54%|█████▍    | 554/1026 [1:04:50<40:26,  5.14s/it]Processing News Embedding:  54%|█████▍    | 555/1026 [1:04:55<40:26,  5.15s/it]Processing News Embedding:  54%|█████▍    | 556/1026 [1:05:00<40:16,  5.14s/it]Processing News Embedding:  54%|█████▍    | 557/1026 [1:05:05<39:46,  5.09s/it]Processing News Embedding:  54%|█████▍    | 558/1026 [1:05:10<39:53,  5.12s/it]Processing News Embedding:  54%|█████▍    | 559/1026 [1:05:15<39:42,  5.10s/it]Processing News Embedding:  55%|█████▍    | 560/1026 [1:05:20<39:05,  5.03s/it]Processing News Embedding:  55%|█████▍    | 561/1026 [1:05:25<39:37,  5.11s/it]Processing News Embedding:  55%|█████▍    | 562/1026 [1:05:31<39:47,  5.14s/it]Processing News Embedding:  55%|█████▍    | 563/1026 [1:05:36<39:54,  5.17s/it]Processing News Embedding:  55%|█████▍    | 564/1026 [1:05:41<39:44,  5.16s/it]Processing News Embedding:  55%|█████▌    | 565/1026 [1:05:46<39:24,  5.13s/it]Processing News Embedding:  55%|█████▌    | 566/1026 [1:05:51<39:28,  5.15s/it]Processing News Embedding:  55%|█████▌    | 567/1026 [1:05:56<39:29,  5.16s/it]Processing News Embedding:  55%|█████▌    | 568/1026 [1:06:01<38:41,  5.07s/it]Processing News Embedding:  55%|█████▌    | 569/1026 [1:06:06<38:44,  5.09s/it]Processing News Embedding:  56%|█████▌    | 570/1026 [1:06:12<38:57,  5.13s/it]Processing News Embedding:  56%|█████▌    | 571/1026 [1:06:17<39:08,  5.16s/it]Processing News Embedding:  56%|█████▌    | 572/1026 [1:06:22<38:55,  5.14s/it]Processing News Embedding:  56%|█████▌    | 573/1026 [1:06:27<38:08,  5.05s/it]Processing News Embedding:  56%|█████▌    | 574/1026 [1:06:31<36:57,  4.91s/it]Processing News Embedding:  56%|█████▌    | 575/1026 [1:06:36<35:30,  4.72s/it]Processing News Embedding:  56%|█████▌    | 576/1026 [1:06:41<35:46,  4.77s/it]Processing News Embedding:  56%|█████▌    | 577/1026 [1:06:45<36:08,  4.83s/it]Processing News Embedding:  56%|█████▋    | 578/1026 [1:06:51<36:39,  4.91s/it]Processing News Embedding:  56%|█████▋    | 579/1026 [1:06:55<36:05,  4.85s/it]Processing News Embedding:  57%|█████▋    | 580/1026 [1:07:00<36:16,  4.88s/it]Processing News Embedding:  57%|█████▋    | 581/1026 [1:07:05<36:50,  4.97s/it]Processing News Embedding:  57%|█████▋    | 582/1026 [1:07:11<37:13,  5.03s/it]Processing News Embedding:  57%|█████▋    | 583/1026 [1:07:15<36:44,  4.98s/it]Processing News Embedding:  57%|█████▋    | 584/1026 [1:07:20<36:20,  4.93s/it]Processing News Embedding:  57%|█████▋    | 585/1026 [1:07:25<35:48,  4.87s/it]Processing News Embedding:  57%|█████▋    | 586/1026 [1:07:30<36:34,  4.99s/it]Processing News Embedding:  57%|█████▋    | 587/1026 [1:07:35<36:55,  5.05s/it]Processing News Embedding:  57%|█████▋    | 588/1026 [1:07:41<36:52,  5.05s/it]Processing News Embedding:  57%|█████▋    | 589/1026 [1:07:46<37:00,  5.08s/it]Processing News Embedding:  58%|█████▊    | 590/1026 [1:07:50<36:06,  4.97s/it]Processing News Embedding:  58%|█████▊    | 591/1026 [1:07:56<36:27,  5.03s/it]Processing News Embedding:  58%|█████▊    | 592/1026 [1:08:01<36:39,  5.07s/it]Processing News Embedding:  58%|█████▊    | 593/1026 [1:08:05<35:56,  4.98s/it]Processing News Embedding:  58%|█████▊    | 594/1026 [1:08:11<36:13,  5.03s/it]Processing News Embedding:  58%|█████▊    | 595/1026 [1:08:16<36:17,  5.05s/it]Processing News Embedding:  58%|█████▊    | 596/1026 [1:08:21<36:33,  5.10s/it]Processing News Embedding:  58%|█████▊    | 597/1026 [1:08:26<36:35,  5.12s/it]Processing News Embedding:  58%|█████▊    | 598/1026 [1:08:31<36:11,  5.07s/it]Processing News Embedding:  58%|█████▊    | 599/1026 [1:08:36<36:18,  5.10s/it]Processing News Embedding:  58%|█████▊    | 600/1026 [1:08:41<36:17,  5.11s/it]Processing News Embedding:  59%|█████▊    | 601/1026 [1:08:46<35:42,  5.04s/it]Processing News Embedding:  59%|█████▊    | 602/1026 [1:08:51<35:57,  5.09s/it]Processing News Embedding:  59%|█████▉    | 603/1026 [1:08:57<36:10,  5.13s/it]Processing News Embedding:  59%|█████▉    | 604/1026 [1:09:02<35:52,  5.10s/it]Processing News Embedding:  59%|█████▉    | 605/1026 [1:09:07<36:05,  5.14s/it]Processing News Embedding:  59%|█████▉    | 606/1026 [1:09:12<36:32,  5.22s/it]Processing News Embedding:  59%|█████▉    | 607/1026 [1:09:17<35:52,  5.14s/it]Processing News Embedding:  59%|█████▉    | 608/1026 [1:09:23<36:09,  5.19s/it]Processing News Embedding:  59%|█████▉    | 609/1026 [1:09:28<36:00,  5.18s/it]Processing News Embedding:  59%|█████▉    | 610/1026 [1:09:33<36:00,  5.19s/it]Processing News Embedding:  60%|█████▉    | 611/1026 [1:09:38<35:41,  5.16s/it]Processing News Embedding:  60%|█████▉    | 612/1026 [1:09:43<35:43,  5.18s/it]Processing News Embedding:  60%|█████▉    | 613/1026 [1:09:48<35:41,  5.18s/it]Processing News Embedding:  60%|█████▉    | 614/1026 [1:09:54<35:39,  5.19s/it]Processing News Embedding:  60%|█████▉    | 615/1026 [1:09:59<35:31,  5.19s/it]Processing News Embedding:  60%|██████    | 616/1026 [1:10:04<35:29,  5.19s/it]Processing News Embedding:  60%|██████    | 617/1026 [1:10:09<35:25,  5.20s/it]Processing News Embedding:  60%|██████    | 618/1026 [1:10:14<35:17,  5.19s/it]Processing News Embedding:  60%|██████    | 619/1026 [1:10:19<34:33,  5.09s/it]Processing News Embedding:  60%|██████    | 620/1026 [1:10:24<33:10,  4.90s/it]Processing News Embedding:  61%|██████    | 621/1026 [1:10:29<33:37,  4.98s/it]Processing News Embedding:  61%|██████    | 622/1026 [1:10:34<33:54,  5.04s/it]Processing News Embedding:  61%|██████    | 623/1026 [1:10:39<34:05,  5.08s/it]Processing News Embedding:  61%|██████    | 624/1026 [1:10:44<34:06,  5.09s/it]Processing News Embedding:  61%|██████    | 625/1026 [1:10:50<34:15,  5.13s/it]Processing News Embedding:  61%|██████    | 626/1026 [1:10:55<34:09,  5.12s/it]Processing News Embedding:  61%|██████    | 627/1026 [1:10:59<32:37,  4.91s/it]Processing News Embedding:  61%|██████    | 628/1026 [1:11:04<33:09,  5.00s/it]Processing News Embedding:  61%|██████▏   | 629/1026 [1:11:09<33:11,  5.02s/it]Processing News Embedding:  61%|██████▏   | 630/1026 [1:11:15<33:25,  5.06s/it]Processing News Embedding:  62%|██████▏   | 631/1026 [1:11:19<32:42,  4.97s/it]Processing News Embedding:  62%|██████▏   | 632/1026 [1:11:24<32:25,  4.94s/it]Processing News Embedding:  62%|██████▏   | 633/1026 [1:11:29<32:44,  5.00s/it]Processing News Embedding:  62%|██████▏   | 634/1026 [1:11:35<32:59,  5.05s/it]Processing News Embedding:  62%|██████▏   | 635/1026 [1:11:40<32:53,  5.05s/it]Processing News Embedding:  62%|██████▏   | 636/1026 [1:11:45<33:01,  5.08s/it]Processing News Embedding:  62%|██████▏   | 637/1026 [1:11:50<32:33,  5.02s/it]Processing News Embedding:  62%|██████▏   | 638/1026 [1:11:54<31:27,  4.87s/it]Processing News Embedding:  62%|██████▏   | 639/1026 [1:11:59<31:56,  4.95s/it]Processing News Embedding:  62%|██████▏   | 640/1026 [1:12:04<32:26,  5.04s/it]Processing News Embedding:  62%|██████▏   | 641/1026 [1:12:10<32:19,  5.04s/it]Processing News Embedding:  63%|██████▎   | 642/1026 [1:12:15<32:31,  5.08s/it]Processing News Embedding:  63%|██████▎   | 643/1026 [1:12:20<32:38,  5.11s/it]Processing News Embedding:  63%|██████▎   | 644/1026 [1:12:25<32:09,  5.05s/it]Processing News Embedding:  63%|██████▎   | 645/1026 [1:12:30<32:18,  5.09s/it]Processing News Embedding:  63%|██████▎   | 646/1026 [1:12:35<31:40,  5.00s/it]Processing News Embedding:  63%|██████▎   | 647/1026 [1:12:40<31:49,  5.04s/it]Processing News Embedding:  63%|██████▎   | 648/1026 [1:12:45<31:29,  5.00s/it]Processing News Embedding:  63%|██████▎   | 649/1026 [1:12:50<31:02,  4.94s/it]Processing News Embedding:  63%|██████▎   | 650/1026 [1:12:55<31:24,  5.01s/it]Processing News Embedding:  63%|██████▎   | 651/1026 [1:13:00<31:35,  5.05s/it]Processing News Embedding:  64%|██████▎   | 652/1026 [1:13:05<31:14,  5.01s/it]Processing News Embedding:  64%|██████▎   | 653/1026 [1:13:10<31:26,  5.06s/it]Processing News Embedding:  64%|██████▎   | 654/1026 [1:13:15<31:35,  5.09s/it]Processing News Embedding:  64%|██████▍   | 655/1026 [1:13:21<31:55,  5.16s/it]Processing News Embedding:  64%|██████▍   | 656/1026 [1:13:26<31:52,  5.17s/it]Processing News Embedding:  64%|██████▍   | 657/1026 [1:13:31<31:53,  5.19s/it]Processing News Embedding:  64%|██████▍   | 658/1026 [1:13:36<31:49,  5.19s/it]Processing News Embedding:  64%|██████▍   | 659/1026 [1:13:42<32:26,  5.30s/it]Processing News Embedding:  64%|██████▍   | 660/1026 [1:13:47<32:10,  5.27s/it]Processing News Embedding:  64%|██████▍   | 661/1026 [1:13:52<31:54,  5.24s/it]Processing News Embedding:  65%|██████▍   | 662/1026 [1:13:57<31:34,  5.20s/it]Processing News Embedding:  65%|██████▍   | 663/1026 [1:14:02<31:30,  5.21s/it]Processing News Embedding:  65%|██████▍   | 664/1026 [1:14:08<31:28,  5.22s/it]Processing News Embedding:  65%|██████▍   | 665/1026 [1:14:13<31:30,  5.24s/it]Processing News Embedding:  65%|██████▍   | 666/1026 [1:14:18<30:45,  5.13s/it]Processing News Embedding:  65%|██████▌   | 667/1026 [1:14:23<31:00,  5.18s/it]Processing News Embedding:  65%|██████▌   | 668/1026 [1:14:28<31:06,  5.21s/it]Processing News Embedding:  65%|██████▌   | 669/1026 [1:14:34<30:50,  5.18s/it]Processing News Embedding:  65%|██████▌   | 670/1026 [1:14:38<29:58,  5.05s/it]Processing News Embedding:  65%|██████▌   | 671/1026 [1:14:43<30:00,  5.07s/it]Processing News Embedding:  65%|██████▌   | 672/1026 [1:14:49<30:02,  5.09s/it]Processing News Embedding:  66%|██████▌   | 673/1026 [1:14:54<30:11,  5.13s/it]Processing News Embedding:  66%|██████▌   | 674/1026 [1:14:58<29:23,  5.01s/it]Processing News Embedding:  66%|██████▌   | 675/1026 [1:15:04<29:50,  5.10s/it]Processing News Embedding:  66%|██████▌   | 676/1026 [1:15:09<29:51,  5.12s/it]Processing News Embedding:  66%|██████▌   | 677/1026 [1:15:14<29:46,  5.12s/it]Processing News Embedding:  66%|██████▌   | 678/1026 [1:15:19<29:43,  5.13s/it]Processing News Embedding:  66%|██████▌   | 679/1026 [1:15:24<29:22,  5.08s/it]Processing News Embedding:  66%|██████▋   | 680/1026 [1:15:29<29:28,  5.11s/it]Processing News Embedding:  66%|██████▋   | 681/1026 [1:15:35<29:32,  5.14s/it]Processing News Embedding:  66%|██████▋   | 682/1026 [1:15:40<29:38,  5.17s/it]Processing News Embedding:  67%|██████▋   | 683/1026 [1:15:45<29:32,  5.17s/it]Processing News Embedding:  67%|██████▋   | 684/1026 [1:15:50<28:26,  4.99s/it]Processing News Embedding:  67%|██████▋   | 685/1026 [1:15:54<28:03,  4.94s/it]Processing News Embedding:  67%|██████▋   | 686/1026 [1:15:59<27:58,  4.94s/it]Processing News Embedding:  67%|██████▋   | 687/1026 [1:16:04<28:15,  5.00s/it]Processing News Embedding:  67%|██████▋   | 688/1026 [1:16:09<27:58,  4.97s/it]Processing News Embedding:  67%|██████▋   | 689/1026 [1:16:14<27:38,  4.92s/it]Processing News Embedding:  67%|██████▋   | 690/1026 [1:16:19<27:56,  4.99s/it]Processing News Embedding:  67%|██████▋   | 691/1026 [1:16:25<28:21,  5.08s/it]Processing News Embedding:  67%|██████▋   | 692/1026 [1:16:30<28:08,  5.05s/it]Processing News Embedding:  68%|██████▊   | 693/1026 [1:16:35<28:25,  5.12s/it]Processing News Embedding:  68%|██████▊   | 694/1026 [1:16:40<28:29,  5.15s/it]Processing News Embedding:  68%|██████▊   | 695/1026 [1:16:45<28:15,  5.12s/it]Processing News Embedding:  68%|██████▊   | 696/1026 [1:16:50<28:28,  5.18s/it]Processing News Embedding:  68%|██████▊   | 697/1026 [1:16:56<28:25,  5.18s/it]Processing News Embedding:  68%|██████▊   | 698/1026 [1:17:01<28:20,  5.18s/it]Processing News Embedding:  68%|██████▊   | 699/1026 [1:17:06<28:15,  5.19s/it]Processing News Embedding:  68%|██████▊   | 700/1026 [1:17:11<28:07,  5.18s/it]Processing News Embedding:  68%|██████▊   | 701/1026 [1:17:16<27:59,  5.17s/it]Processing News Embedding:  68%|██████▊   | 702/1026 [1:17:21<27:45,  5.14s/it]Processing News Embedding:  69%|██████▊   | 703/1026 [1:17:27<27:47,  5.16s/it]Processing News Embedding:  69%|██████▊   | 704/1026 [1:17:32<27:44,  5.17s/it]Processing News Embedding:  69%|██████▊   | 705/1026 [1:17:37<27:50,  5.20s/it]Processing News Embedding:  69%|██████▉   | 706/1026 [1:17:42<27:37,  5.18s/it]Processing News Embedding:  69%|██████▉   | 707/1026 [1:17:47<27:29,  5.17s/it]Processing News Embedding:  69%|██████▉   | 708/1026 [1:17:53<27:27,  5.18s/it]Processing News Embedding:  69%|██████▉   | 709/1026 [1:17:58<27:17,  5.17s/it]Processing News Embedding:  69%|██████▉   | 710/1026 [1:18:03<27:16,  5.18s/it]Processing News Embedding:  69%|██████▉   | 711/1026 [1:18:08<27:13,  5.19s/it]Processing News Embedding:  69%|██████▉   | 712/1026 [1:18:13<27:12,  5.20s/it]Processing News Embedding:  69%|██████▉   | 713/1026 [1:18:18<26:45,  5.13s/it]Processing News Embedding:  70%|██████▉   | 714/1026 [1:18:24<26:56,  5.18s/it]Processing News Embedding:  70%|██████▉   | 715/1026 [1:18:28<26:13,  5.06s/it]Processing News Embedding:  70%|██████▉   | 716/1026 [1:18:33<26:15,  5.08s/it]Processing News Embedding:  70%|██████▉   | 717/1026 [1:18:38<25:15,  4.90s/it]Processing News Embedding:  70%|██████▉   | 718/1026 [1:18:43<25:29,  4.97s/it]Processing News Embedding:  70%|███████   | 719/1026 [1:18:48<25:49,  5.05s/it]Processing News Embedding:  70%|███████   | 720/1026 [1:18:53<25:54,  5.08s/it]Processing News Embedding:  70%|███████   | 721/1026 [1:18:58<24:23,  4.80s/it]Processing News Embedding:  70%|███████   | 722/1026 [1:19:03<24:55,  4.92s/it]Processing News Embedding:  70%|███████   | 723/1026 [1:19:07<24:24,  4.83s/it]Processing News Embedding:  71%|███████   | 724/1026 [1:19:13<24:55,  4.95s/it]Processing News Embedding:  71%|███████   | 725/1026 [1:19:18<24:57,  4.97s/it]Processing News Embedding:  71%|███████   | 726/1026 [1:19:23<24:39,  4.93s/it]Processing News Embedding:  71%|███████   | 727/1026 [1:19:27<24:19,  4.88s/it]Processing News Embedding:  71%|███████   | 728/1026 [1:19:33<24:47,  4.99s/it]Processing News Embedding:  71%|███████   | 729/1026 [1:19:37<24:12,  4.89s/it]Processing News Embedding:  71%|███████   | 730/1026 [1:19:42<24:35,  4.99s/it]Processing News Embedding:  71%|███████   | 731/1026 [1:19:48<24:48,  5.04s/it]Processing News Embedding:  71%|███████▏  | 732/1026 [1:19:53<25:05,  5.12s/it]Processing News Embedding:  71%|███████▏  | 733/1026 [1:19:58<24:21,  4.99s/it]Processing News Embedding:  72%|███████▏  | 734/1026 [1:20:03<24:27,  5.03s/it]Processing News Embedding:  72%|███████▏  | 735/1026 [1:20:08<24:40,  5.09s/it]Processing News Embedding:  72%|███████▏  | 736/1026 [1:20:13<24:45,  5.12s/it]Processing News Embedding:  72%|███████▏  | 737/1026 [1:20:18<24:44,  5.14s/it]Processing News Embedding:  72%|███████▏  | 738/1026 [1:20:23<24:14,  5.05s/it]Processing News Embedding:  72%|███████▏  | 739/1026 [1:20:28<24:01,  5.02s/it]Processing News Embedding:  72%|███████▏  | 740/1026 [1:20:33<24:03,  5.05s/it]Processing News Embedding:  72%|███████▏  | 741/1026 [1:20:38<24:11,  5.09s/it]Processing News Embedding:  72%|███████▏  | 742/1026 [1:20:43<23:46,  5.02s/it]Processing News Embedding:  72%|███████▏  | 743/1026 [1:20:48<23:57,  5.08s/it]Processing News Embedding:  73%|███████▎  | 744/1026 [1:20:53<23:31,  5.00s/it]Processing News Embedding:  73%|███████▎  | 745/1026 [1:20:58<22:54,  4.89s/it]Processing News Embedding:  73%|███████▎  | 746/1026 [1:21:03<23:16,  4.99s/it]Processing News Embedding:  73%|███████▎  | 747/1026 [1:21:08<23:20,  5.02s/it]Processing News Embedding:  73%|███████▎  | 748/1026 [1:21:13<23:31,  5.08s/it]Processing News Embedding:  73%|███████▎  | 749/1026 [1:21:19<23:37,  5.12s/it]Processing News Embedding:  73%|███████▎  | 750/1026 [1:21:24<23:47,  5.17s/it]Processing News Embedding:  73%|███████▎  | 751/1026 [1:21:29<23:29,  5.12s/it]Processing News Embedding:  73%|███████▎  | 752/1026 [1:21:34<23:26,  5.13s/it]Processing News Embedding:  73%|███████▎  | 753/1026 [1:21:39<23:31,  5.17s/it]Processing News Embedding:  73%|███████▎  | 754/1026 [1:21:45<23:27,  5.17s/it]Processing News Embedding:  74%|███████▎  | 755/1026 [1:21:50<23:34,  5.22s/it]Processing News Embedding:  74%|███████▎  | 756/1026 [1:21:55<23:29,  5.22s/it]Processing News Embedding:  74%|███████▍  | 757/1026 [1:22:00<22:56,  5.12s/it]Processing News Embedding:  74%|███████▍  | 758/1026 [1:22:05<23:09,  5.18s/it]Processing News Embedding:  74%|███████▍  | 759/1026 [1:22:11<23:05,  5.19s/it]Processing News Embedding:  74%|███████▍  | 760/1026 [1:22:15<22:23,  5.05s/it]Processing News Embedding:  74%|███████▍  | 761/1026 [1:22:21<22:36,  5.12s/it]Processing News Embedding:  74%|███████▍  | 762/1026 [1:22:26<22:40,  5.15s/it]Processing News Embedding:  74%|███████▍  | 763/1026 [1:22:31<22:48,  5.20s/it]Processing News Embedding:  74%|███████▍  | 764/1026 [1:22:36<22:43,  5.20s/it]Processing News Embedding:  75%|███████▍  | 765/1026 [1:22:42<22:38,  5.21s/it]Processing News Embedding:  75%|███████▍  | 766/1026 [1:22:47<22:36,  5.22s/it]Processing News Embedding:  75%|███████▍  | 767/1026 [1:22:52<22:39,  5.25s/it]Processing News Embedding:  75%|███████▍  | 768/1026 [1:22:57<22:33,  5.25s/it]Processing News Embedding:  75%|███████▍  | 769/1026 [1:23:02<21:33,  5.03s/it]Processing News Embedding:  75%|███████▌  | 770/1026 [1:23:06<20:58,  4.92s/it]Processing News Embedding:  75%|███████▌  | 771/1026 [1:23:12<21:08,  4.97s/it]Processing News Embedding:  75%|███████▌  | 772/1026 [1:23:16<20:34,  4.86s/it]Processing News Embedding:  75%|███████▌  | 773/1026 [1:23:21<20:58,  4.97s/it]Processing News Embedding:  75%|███████▌  | 774/1026 [1:23:27<21:17,  5.07s/it]Processing News Embedding:  76%|███████▌  | 775/1026 [1:23:32<21:25,  5.12s/it]Processing News Embedding:  76%|███████▌  | 776/1026 [1:23:37<21:36,  5.19s/it]Processing News Embedding:  76%|███████▌  | 777/1026 [1:23:42<21:24,  5.16s/it]Processing News Embedding:  76%|███████▌  | 778/1026 [1:23:48<21:28,  5.20s/it]Processing News Embedding:  76%|███████▌  | 779/1026 [1:23:53<21:32,  5.23s/it]Processing News Embedding:  76%|███████▌  | 780/1026 [1:23:58<21:32,  5.26s/it]Processing News Embedding:  76%|███████▌  | 781/1026 [1:24:04<21:23,  5.24s/it]Processing News Embedding:  76%|███████▌  | 782/1026 [1:24:09<21:17,  5.23s/it]Processing News Embedding:  76%|███████▋  | 783/1026 [1:24:14<21:13,  5.24s/it]Processing News Embedding:  76%|███████▋  | 784/1026 [1:24:19<20:58,  5.20s/it]Processing News Embedding:  77%|███████▋  | 785/1026 [1:24:24<20:46,  5.17s/it]Processing News Embedding:  77%|███████▋  | 786/1026 [1:24:29<20:21,  5.09s/it]Processing News Embedding:  77%|███████▋  | 787/1026 [1:24:34<20:22,  5.11s/it]Processing News Embedding:  77%|███████▋  | 788/1026 [1:24:39<20:22,  5.14s/it]Processing News Embedding:  77%|███████▋  | 789/1026 [1:24:45<20:16,  5.13s/it]Processing News Embedding:  77%|███████▋  | 790/1026 [1:24:50<20:18,  5.16s/it]Processing News Embedding:  77%|███████▋  | 791/1026 [1:24:55<20:13,  5.16s/it]Processing News Embedding:  77%|███████▋  | 792/1026 [1:25:00<20:07,  5.16s/it]Processing News Embedding:  77%|███████▋  | 793/1026 [1:25:05<20:03,  5.17s/it]Processing News Embedding:  77%|███████▋  | 794/1026 [1:25:11<20:04,  5.19s/it]Processing News Embedding:  77%|███████▋  | 795/1026 [1:25:16<20:04,  5.22s/it]Processing News Embedding:  78%|███████▊  | 796/1026 [1:25:21<19:39,  5.13s/it]Processing News Embedding:  78%|███████▊  | 797/1026 [1:25:26<19:39,  5.15s/it]Processing News Embedding:  78%|███████▊  | 798/1026 [1:25:31<19:40,  5.18s/it]Processing News Embedding:  78%|███████▊  | 799/1026 [1:25:36<19:11,  5.07s/it]Processing News Embedding:  78%|███████▊  | 800/1026 [1:25:41<19:13,  5.10s/it]Processing News Embedding:  78%|███████▊  | 801/1026 [1:25:46<19:08,  5.11s/it]Processing News Embedding:  78%|███████▊  | 802/1026 [1:25:51<19:02,  5.10s/it]Processing News Embedding:  78%|███████▊  | 803/1026 [1:25:57<19:06,  5.14s/it]Processing News Embedding:  78%|███████▊  | 804/1026 [1:26:02<19:03,  5.15s/it]Processing News Embedding:  78%|███████▊  | 805/1026 [1:26:07<18:33,  5.04s/it]Processing News Embedding:  79%|███████▊  | 806/1026 [1:26:11<18:15,  4.98s/it]Processing News Embedding:  79%|███████▊  | 807/1026 [1:26:17<18:21,  5.03s/it]Processing News Embedding:  79%|███████▉  | 808/1026 [1:26:21<17:53,  4.93s/it]Processing News Embedding:  79%|███████▉  | 809/1026 [1:26:26<18:05,  5.00s/it]Processing News Embedding:  79%|███████▉  | 810/1026 [1:26:32<18:18,  5.08s/it]Processing News Embedding:  79%|███████▉  | 811/1026 [1:26:36<17:49,  4.97s/it]Processing News Embedding:  79%|███████▉  | 812/1026 [1:26:41<17:40,  4.96s/it]Processing News Embedding:  79%|███████▉  | 813/1026 [1:26:46<17:29,  4.93s/it]Processing News Embedding:  79%|███████▉  | 814/1026 [1:26:51<17:16,  4.89s/it]Processing News Embedding:  79%|███████▉  | 815/1026 [1:26:56<17:04,  4.86s/it]Processing News Embedding:  80%|███████▉  | 816/1026 [1:27:01<17:22,  4.96s/it]Processing News Embedding:  80%|███████▉  | 817/1026 [1:27:06<17:35,  5.05s/it]Processing News Embedding:  80%|███████▉  | 818/1026 [1:27:11<16:48,  4.85s/it]Processing News Embedding:  80%|███████▉  | 819/1026 [1:27:16<16:50,  4.88s/it]Processing News Embedding:  80%|███████▉  | 820/1026 [1:27:21<17:05,  4.98s/it]Processing News Embedding:  80%|████████  | 821/1026 [1:27:26<17:12,  5.04s/it]Processing News Embedding:  80%|████████  | 822/1026 [1:27:31<17:13,  5.07s/it]Processing News Embedding:  80%|████████  | 823/1026 [1:27:36<17:20,  5.12s/it]Processing News Embedding:  80%|████████  | 824/1026 [1:27:41<17:14,  5.12s/it]Processing News Embedding:  80%|████████  | 825/1026 [1:27:47<17:09,  5.12s/it]Processing News Embedding:  81%|████████  | 826/1026 [1:27:52<17:10,  5.15s/it]Processing News Embedding:  81%|████████  | 827/1026 [1:27:56<16:29,  4.97s/it]Processing News Embedding:  81%|████████  | 828/1026 [1:28:01<16:13,  4.92s/it]Processing News Embedding:  81%|████████  | 829/1026 [1:28:06<15:47,  4.81s/it]Processing News Embedding:  81%|████████  | 830/1026 [1:28:11<15:50,  4.85s/it]Processing News Embedding:  81%|████████  | 831/1026 [1:28:16<16:06,  4.96s/it]Processing News Embedding:  81%|████████  | 832/1026 [1:28:21<16:15,  5.03s/it]Processing News Embedding:  81%|████████  | 833/1026 [1:28:26<16:17,  5.07s/it]Processing News Embedding:  81%|████████▏ | 834/1026 [1:28:31<16:18,  5.10s/it]Processing News Embedding:  81%|████████▏ | 835/1026 [1:28:37<16:21,  5.14s/it]Processing News Embedding:  81%|████████▏ | 836/1026 [1:28:42<16:09,  5.10s/it]Processing News Embedding:  82%|████████▏ | 837/1026 [1:28:46<15:28,  4.91s/it]Processing News Embedding:  82%|████████▏ | 838/1026 [1:28:51<15:39,  5.00s/it]Processing News Embedding:  82%|████████▏ | 839/1026 [1:28:56<15:39,  5.03s/it]Processing News Embedding:  82%|████████▏ | 840/1026 [1:29:02<15:41,  5.06s/it]Processing News Embedding:  82%|████████▏ | 841/1026 [1:29:07<15:48,  5.13s/it]Processing News Embedding:  82%|████████▏ | 842/1026 [1:29:12<15:52,  5.18s/it]Processing News Embedding:  82%|████████▏ | 843/1026 [1:29:17<15:51,  5.20s/it]Processing News Embedding:  82%|████████▏ | 844/1026 [1:29:22<15:34,  5.14s/it]Processing News Embedding:  82%|████████▏ | 845/1026 [1:29:27<15:21,  5.09s/it]Processing News Embedding:  82%|████████▏ | 846/1026 [1:29:32<15:05,  5.03s/it]Processing News Embedding:  83%|████████▎ | 847/1026 [1:29:37<15:06,  5.06s/it]Processing News Embedding:  83%|████████▎ | 848/1026 [1:29:43<15:05,  5.09s/it]Processing News Embedding:  83%|████████▎ | 849/1026 [1:29:48<15:06,  5.12s/it]Processing News Embedding:  83%|████████▎ | 850/1026 [1:29:53<15:02,  5.13s/it]Processing News Embedding:  83%|████████▎ | 851/1026 [1:29:58<14:59,  5.14s/it]Processing News Embedding:  83%|████████▎ | 852/1026 [1:30:03<14:54,  5.14s/it]Processing News Embedding:  83%|████████▎ | 853/1026 [1:30:08<14:37,  5.07s/it]Processing News Embedding:  83%|████████▎ | 854/1026 [1:30:13<14:38,  5.11s/it]Processing News Embedding:  83%|████████▎ | 855/1026 [1:30:18<14:36,  5.13s/it]Processing News Embedding:  83%|████████▎ | 856/1026 [1:30:23<14:15,  5.03s/it]Processing News Embedding:  84%|████████▎ | 857/1026 [1:30:28<14:10,  5.03s/it]Processing News Embedding:  84%|████████▎ | 858/1026 [1:30:34<14:18,  5.11s/it]Processing News Embedding:  84%|████████▎ | 859/1026 [1:30:38<14:02,  5.04s/it]Processing News Embedding:  84%|████████▍ | 860/1026 [1:30:43<13:53,  5.02s/it]Processing News Embedding:  84%|████████▍ | 861/1026 [1:30:49<13:58,  5.08s/it]Processing News Embedding:  84%|████████▍ | 862/1026 [1:30:54<13:57,  5.11s/it]Processing News Embedding:  84%|████████▍ | 863/1026 [1:30:59<13:38,  5.02s/it]Processing News Embedding:  84%|████████▍ | 864/1026 [1:31:04<13:38,  5.06s/it]Processing News Embedding:  84%|████████▍ | 865/1026 [1:31:09<13:31,  5.04s/it]Processing News Embedding:  84%|████████▍ | 866/1026 [1:31:14<13:23,  5.02s/it]Processing News Embedding:  85%|████████▍ | 867/1026 [1:31:18<13:03,  4.93s/it]Processing News Embedding:  85%|████████▍ | 868/1026 [1:31:24<13:12,  5.01s/it]Processing News Embedding:  85%|████████▍ | 869/1026 [1:31:29<13:17,  5.08s/it]Processing News Embedding:  85%|████████▍ | 870/1026 [1:31:34<13:18,  5.12s/it]Processing News Embedding:  85%|████████▍ | 871/1026 [1:31:39<13:01,  5.04s/it]Processing News Embedding:  85%|████████▍ | 872/1026 [1:31:44<13:01,  5.07s/it]Processing News Embedding:  85%|████████▌ | 873/1026 [1:31:49<12:59,  5.10s/it]Processing News Embedding:  85%|████████▌ | 874/1026 [1:31:54<12:27,  4.92s/it]Processing News Embedding:  85%|████████▌ | 875/1026 [1:31:59<12:36,  5.01s/it]Processing News Embedding:  85%|████████▌ | 876/1026 [1:32:04<12:42,  5.08s/it]Processing News Embedding:  85%|████████▌ | 877/1026 [1:32:09<12:41,  5.11s/it]Processing News Embedding:  86%|████████▌ | 878/1026 [1:32:14<12:21,  5.01s/it]Processing News Embedding:  86%|████████▌ | 879/1026 [1:32:19<12:14,  4.99s/it]Processing News Embedding:  86%|████████▌ | 880/1026 [1:32:24<12:11,  5.01s/it]Processing News Embedding:  86%|████████▌ | 881/1026 [1:32:29<12:16,  5.08s/it]Processing News Embedding:  86%|████████▌ | 882/1026 [1:32:35<12:17,  5.12s/it]Processing News Embedding:  86%|████████▌ | 883/1026 [1:32:40<12:10,  5.11s/it]Processing News Embedding:  86%|████████▌ | 884/1026 [1:32:45<12:08,  5.13s/it]Processing News Embedding:  86%|████████▋ | 885/1026 [1:32:50<12:08,  5.17s/it]Processing News Embedding:  86%|████████▋ | 886/1026 [1:32:55<12:04,  5.18s/it]Processing News Embedding:  86%|████████▋ | 887/1026 [1:33:01<12:00,  5.18s/it]Processing News Embedding:  87%|████████▋ | 888/1026 [1:33:06<11:56,  5.19s/it]Processing News Embedding:  87%|████████▋ | 889/1026 [1:33:11<11:56,  5.23s/it]Processing News Embedding:  87%|████████▋ | 890/1026 [1:33:16<11:34,  5.11s/it]Processing News Embedding:  87%|████████▋ | 891/1026 [1:33:21<11:33,  5.14s/it]Processing News Embedding:  87%|████████▋ | 892/1026 [1:33:26<11:34,  5.18s/it]Processing News Embedding:  87%|████████▋ | 893/1026 [1:33:31<11:20,  5.12s/it]Processing News Embedding:  87%|████████▋ | 894/1026 [1:33:36<11:08,  5.06s/it]Processing News Embedding:  87%|████████▋ | 895/1026 [1:33:41<11:05,  5.08s/it]Processing News Embedding:  87%|████████▋ | 896/1026 [1:33:47<11:00,  5.08s/it]Processing News Embedding:  87%|████████▋ | 897/1026 [1:33:52<11:00,  5.12s/it]Processing News Embedding:  88%|████████▊ | 898/1026 [1:33:57<10:57,  5.13s/it]Processing News Embedding:  88%|████████▊ | 899/1026 [1:34:02<10:51,  5.13s/it]Processing News Embedding:  88%|████████▊ | 900/1026 [1:34:07<10:48,  5.15s/it]Processing News Embedding:  88%|████████▊ | 901/1026 [1:34:12<10:19,  4.96s/it]Processing News Embedding:  88%|████████▊ | 902/1026 [1:34:17<10:11,  4.93s/it]Processing News Embedding:  88%|████████▊ | 903/1026 [1:34:22<10:14,  5.00s/it]Processing News Embedding:  88%|████████▊ | 904/1026 [1:34:27<10:12,  5.02s/it]Processing News Embedding:  88%|████████▊ | 905/1026 [1:34:32<10:14,  5.08s/it]Processing News Embedding:  88%|████████▊ | 906/1026 [1:34:37<10:07,  5.06s/it]Processing News Embedding:  88%|████████▊ | 907/1026 [1:34:42<10:03,  5.07s/it]Processing News Embedding:  88%|████████▊ | 908/1026 [1:34:47<10:04,  5.12s/it]Processing News Embedding:  89%|████████▊ | 909/1026 [1:34:53<10:03,  5.16s/it]Processing News Embedding:  89%|████████▊ | 910/1026 [1:34:58<10:00,  5.18s/it]Processing News Embedding:  89%|████████▉ | 911/1026 [1:35:03<09:57,  5.19s/it]Processing News Embedding:  89%|████████▉ | 912/1026 [1:35:08<09:49,  5.18s/it]Processing News Embedding:  89%|████████▉ | 913/1026 [1:35:13<09:44,  5.17s/it]Processing News Embedding:  89%|████████▉ | 914/1026 [1:35:18<09:27,  5.07s/it]Processing News Embedding:  89%|████████▉ | 915/1026 [1:35:23<09:26,  5.10s/it]Processing News Embedding:  89%|████████▉ | 916/1026 [1:35:28<09:18,  5.07s/it]Processing News Embedding:  89%|████████▉ | 917/1026 [1:35:34<09:20,  5.14s/it]Processing News Embedding:  89%|████████▉ | 918/1026 [1:35:39<09:15,  5.15s/it]Processing News Embedding:  90%|████████▉ | 919/1026 [1:35:44<09:00,  5.05s/it]Processing News Embedding:  90%|████████▉ | 920/1026 [1:35:49<08:57,  5.07s/it]Processing News Embedding:  90%|████████▉ | 921/1026 [1:35:54<08:58,  5.13s/it]Processing News Embedding:  90%|████████▉ | 922/1026 [1:35:59<08:47,  5.07s/it]Processing News Embedding:  90%|████████▉ | 923/1026 [1:36:04<08:46,  5.11s/it]Processing News Embedding:  90%|█████████ | 924/1026 [1:36:09<08:43,  5.13s/it]Processing News Embedding:  90%|█████████ | 925/1026 [1:36:15<08:39,  5.14s/it]Processing News Embedding:  90%|█████████ | 926/1026 [1:36:20<08:35,  5.16s/it]Processing News Embedding:  90%|█████████ | 927/1026 [1:36:25<08:32,  5.18s/it]Processing News Embedding:  90%|█████████ | 928/1026 [1:36:30<08:24,  5.15s/it]Processing News Embedding:  91%|█████████ | 929/1026 [1:36:35<08:10,  5.06s/it]Processing News Embedding:  91%|█████████ | 930/1026 [1:36:40<08:08,  5.09s/it]Processing News Embedding:  91%|█████████ | 931/1026 [1:36:45<08:00,  5.05s/it]Processing News Embedding:  91%|█████████ | 932/1026 [1:36:50<07:58,  5.09s/it]Processing News Embedding:  91%|█████████ | 933/1026 [1:36:55<07:51,  5.07s/it]Processing News Embedding:  91%|█████████ | 934/1026 [1:37:00<07:49,  5.11s/it]Processing News Embedding:  91%|█████████ | 935/1026 [1:37:06<07:46,  5.13s/it]Processing News Embedding:  91%|█████████ | 936/1026 [1:37:11<07:43,  5.15s/it]Processing News Embedding:  91%|█████████▏| 937/1026 [1:37:16<07:39,  5.16s/it]Processing News Embedding:  91%|█████████▏| 938/1026 [1:37:21<07:15,  4.95s/it]Processing News Embedding:  92%|█████████▏| 939/1026 [1:37:25<07:06,  4.90s/it]Processing News Embedding:  92%|█████████▏| 940/1026 [1:37:30<07:02,  4.91s/it]Processing News Embedding:  92%|█████████▏| 941/1026 [1:37:35<06:59,  4.93s/it]Processing News Embedding:  92%|█████████▏| 942/1026 [1:37:40<07:00,  5.00s/it]Processing News Embedding:  92%|█████████▏| 943/1026 [1:37:45<06:52,  4.97s/it]Processing News Embedding:  92%|█████████▏| 944/1026 [1:37:50<06:52,  5.04s/it]Processing News Embedding:  92%|█████████▏| 945/1026 [1:37:56<06:52,  5.09s/it]Processing News Embedding:  92%|█████████▏| 946/1026 [1:38:01<06:49,  5.12s/it]Processing News Embedding:  92%|█████████▏| 947/1026 [1:38:06<06:38,  5.04s/it]Processing News Embedding:  92%|█████████▏| 948/1026 [1:38:11<06:35,  5.06s/it]Processing News Embedding:  92%|█████████▏| 949/1026 [1:38:16<06:28,  5.04s/it]Processing News Embedding:  93%|█████████▎| 950/1026 [1:38:21<06:26,  5.09s/it]Processing News Embedding:  93%|█████████▎| 951/1026 [1:38:26<06:23,  5.12s/it]Processing News Embedding:  93%|█████████▎| 952/1026 [1:38:31<06:10,  5.01s/it]Processing News Embedding:  93%|█████████▎| 953/1026 [1:38:36<06:05,  5.01s/it]Processing News Embedding:  93%|█████████▎| 954/1026 [1:38:41<06:04,  5.06s/it]Processing News Embedding:  93%|█████████▎| 955/1026 [1:38:46<05:58,  5.04s/it]Processing News Embedding:  93%|█████████▎| 956/1026 [1:38:51<05:50,  5.01s/it]Processing News Embedding:  93%|█████████▎| 957/1026 [1:38:56<05:50,  5.07s/it]Processing News Embedding:  93%|█████████▎| 958/1026 [1:39:02<05:49,  5.14s/it]Processing News Embedding:  93%|█████████▎| 959/1026 [1:39:07<05:45,  5.16s/it]Processing News Embedding:  94%|█████████▎| 960/1026 [1:39:12<05:32,  5.04s/it]Processing News Embedding:  94%|█████████▎| 961/1026 [1:39:16<05:21,  4.95s/it]Processing News Embedding:  94%|█████████▍| 962/1026 [1:39:21<05:19,  4.99s/it]Processing News Embedding:  94%|█████████▍| 963/1026 [1:39:27<05:16,  5.03s/it]Processing News Embedding:  94%|█████████▍| 964/1026 [1:39:32<05:13,  5.06s/it]Processing News Embedding:  94%|█████████▍| 965/1026 [1:39:37<05:12,  5.12s/it]Processing News Embedding:  94%|█████████▍| 966/1026 [1:39:42<05:09,  5.16s/it]Processing News Embedding:  94%|█████████▍| 967/1026 [1:39:47<04:50,  4.92s/it]Processing News Embedding:  94%|█████████▍| 968/1026 [1:39:51<04:44,  4.91s/it]Processing News Embedding:  94%|█████████▍| 969/1026 [1:39:57<04:44,  4.99s/it]Processing News Embedding:  95%|█████████▍| 970/1026 [1:40:02<04:39,  4.99s/it]Processing News Embedding:  95%|█████████▍| 971/1026 [1:40:07<04:38,  5.06s/it]Processing News Embedding:  95%|█████████▍| 972/1026 [1:40:12<04:35,  5.11s/it]Processing News Embedding:  95%|█████████▍| 973/1026 [1:40:17<04:32,  5.13s/it]Processing News Embedding:  95%|█████████▍| 974/1026 [1:40:22<04:23,  5.06s/it]Processing News Embedding:  95%|█████████▌| 975/1026 [1:40:27<04:18,  5.07s/it]Processing News Embedding:  95%|█████████▌| 976/1026 [1:40:32<04:14,  5.09s/it]Processing News Embedding:  95%|█████████▌| 977/1026 [1:40:38<04:10,  5.12s/it]Processing News Embedding:  95%|█████████▌| 978/1026 [1:40:43<04:05,  5.12s/it]Processing News Embedding:  95%|█████████▌| 979/1026 [1:40:48<04:01,  5.13s/it]Processing News Embedding:  96%|█████████▌| 980/1026 [1:40:53<03:57,  5.16s/it]Processing News Embedding:  96%|█████████▌| 981/1026 [1:40:58<03:52,  5.18s/it]Processing News Embedding:  96%|█████████▌| 982/1026 [1:41:03<03:48,  5.19s/it]Processing News Embedding:  96%|█████████▌| 983/1026 [1:41:09<03:44,  5.21s/it]Processing News Embedding:  96%|█████████▌| 984/1026 [1:41:14<03:37,  5.18s/it]Processing News Embedding:  96%|█████████▌| 985/1026 [1:41:19<03:27,  5.06s/it]Processing News Embedding:  96%|█████████▌| 986/1026 [1:41:23<03:19,  4.98s/it]Processing News Embedding:  96%|█████████▌| 987/1026 [1:41:28<03:13,  4.97s/it]Processing News Embedding:  96%|█████████▋| 988/1026 [1:41:33<03:09,  4.98s/it]Processing News Embedding:  96%|█████████▋| 989/1026 [1:41:39<03:07,  5.06s/it]Processing News Embedding:  96%|█████████▋| 990/1026 [1:41:44<03:03,  5.08s/it]Processing News Embedding:  97%|█████████▋| 991/1026 [1:41:49<02:59,  5.13s/it]Processing News Embedding:  97%|█████████▋| 992/1026 [1:41:54<02:55,  5.15s/it]Processing News Embedding:  97%|█████████▋| 993/1026 [1:41:59<02:48,  5.10s/it]Processing News Embedding:  97%|█████████▋| 994/1026 [1:42:04<02:43,  5.12s/it]Processing News Embedding:  97%|█████████▋| 995/1026 [1:42:09<02:36,  5.04s/it]Processing News Embedding:  97%|█████████▋| 996/1026 [1:42:14<02:32,  5.09s/it]Processing News Embedding:  97%|█████████▋| 997/1026 [1:42:19<02:26,  5.07s/it]Processing News Embedding:  97%|█████████▋| 998/1026 [1:42:24<02:20,  5.02s/it]Processing News Embedding:  97%|█████████▋| 999/1026 [1:42:29<02:16,  5.06s/it]Processing News Embedding:  97%|█████████▋| 1000/1026 [1:42:35<02:12,  5.09s/it]Processing News Embedding:  98%|█████████▊| 1001/1026 [1:42:40<02:07,  5.12s/it]Processing News Embedding:  98%|█████████▊| 1002/1026 [1:42:45<02:02,  5.12s/it]Processing News Embedding:  98%|█████████▊| 1003/1026 [1:42:50<01:57,  5.13s/it]Processing News Embedding:  98%|█████████▊| 1004/1026 [1:42:55<01:51,  5.07s/it]Processing News Embedding:  98%|█████████▊| 1005/1026 [1:43:00<01:47,  5.10s/it]Processing News Embedding:  98%|█████████▊| 1006/1026 [1:43:05<01:40,  5.02s/it]Processing News Embedding:  98%|█████████▊| 1007/1026 [1:43:10<01:33,  4.90s/it]Processing News Embedding:  98%|█████████▊| 1008/1026 [1:43:15<01:29,  4.99s/it]Processing News Embedding:  98%|█████████▊| 1009/1026 [1:43:20<01:25,  5.06s/it]Processing News Embedding:  98%|█████████▊| 1010/1026 [1:43:25<01:21,  5.06s/it]Processing News Embedding:  99%|█████████▊| 1011/1026 [1:43:30<01:16,  5.10s/it]Processing News Embedding:  99%|█████████▊| 1012/1026 [1:43:35<01:11,  5.10s/it]Processing News Embedding:  99%|█████████▊| 1013/1026 [1:43:40<01:05,  5.07s/it]Processing News Embedding:  99%|█████████▉| 1014/1026 [1:43:46<01:01,  5.09s/it]Processing News Embedding:  99%|█████████▉| 1015/1026 [1:43:50<00:55,  5.03s/it]Processing News Embedding:  99%|█████████▉| 1016/1026 [1:43:55<00:50,  5.03s/it]Processing News Embedding:  99%|█████████▉| 1017/1026 [1:44:00<00:44,  4.96s/it]Processing News Embedding:  99%|█████████▉| 1018/1026 [1:44:05<00:40,  5.03s/it]Processing News Embedding:  99%|█████████▉| 1019/1026 [1:44:10<00:34,  4.96s/it]Processing News Embedding:  99%|█████████▉| 1020/1026 [1:44:15<00:30,  5.02s/it]Processing News Embedding: 100%|█████████▉| 1021/1026 [1:44:21<00:25,  5.07s/it]Processing News Embedding: 100%|█████████▉| 1022/1026 [1:44:26<00:20,  5.12s/it]Processing News Embedding: 100%|█████████▉| 1023/1026 [1:44:31<00:15,  5.12s/it]Processing News Embedding: 100%|█████████▉| 1024/1026 [1:44:36<00:10,  5.02s/it]Processing News Embedding: 100%|█████████▉| 1025/1026 [1:44:41<00:05,  5.08s/it]Processing News Embedding: 100%|██████████| 1026/1026 [1:44:46<00:00,  5.08s/it]Processing News Embedding: 100%|██████████| 1026/1026 [1:44:46<00:00,  6.13s/it]
-/home/v-jiangha/workspace/NewsRec/src/prepocess/preprocess.py:872: FutureWarning: DataFrame.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
-  entity_index_df = entity_index_df.fillna(method='ffill')
-7
-词袋数 47978
-新闻标题最大长度 39
-8
-9
-10
-单个新闻最大实体个数20
-11
-12
-主题个数18
-13
-子主题个数265
+constructing adjacency matrix ...
+三元组个数:10000001
+get one_hop neighbor entities and select news graph......
+  0%|          | 0/27760 [00:00<?, ?it/s]  0%|          | 111/27760 [00:00<00:58, 471.27it/s]  1%|          | 333/27760 [00:00<00:24, 1123.39it/s]  3%|▎         | 817/27760 [00:00<00:11, 2390.54it/s]  4%|▍         | 1111/27760 [00:03<01:45, 253.02it/s]  6%|▌         | 1682/27760 [00:03<00:53, 488.40it/s] 10%|█         | 2892/27760 [00:03<00:21, 1167.02it/s] 12%|█▏        | 3462/27760 [00:03<00:16, 1469.93it/s] 18%|█▊        | 4861/27760 [00:03<00:08, 2678.99it/s] 22%|██▏       | 6210/27760 [00:03<00:05, 3989.54it/s] 30%|███       | 8445/27760 [00:03<00:02, 6696.22it/s] 39%|███▊      | 10742/27760 [00:04<00:01, 9381.76it/s] 45%|████▌     | 12621/27760 [00:04<00:01, 10880.88it/s] 58%|█████▊    | 16112/27760 [00:04<00:00, 15913.17it/s] 75%|███████▍  | 20810/27760 [00:04<00:00, 23145.19it/s] 89%|████████▉ | 24826/27760 [00:04<00:00, 27378.77it/s]100%|██████████| 27760/27760 [00:04<00:00, 6067.41it/s] 

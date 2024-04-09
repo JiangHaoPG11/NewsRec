@@ -387,7 +387,7 @@ class Recommender(torch.nn.Module):
         return user_rep, news_rep
 
     def forward(self, candidate_news, user_clicked_news_index, news_graph, user_graph):
-        weight = 0.8
+        weight = 0.5
         self.node_embedding = self._reconstruct_node_embedding()
         candidate_news = candidate_news.to(self.device)
         user_clicked_news_index = user_clicked_news_index.to(self.device)
@@ -404,5 +404,5 @@ class Recommender(torch.nn.Module):
             news_graph_embedding * user_graph_embedding, dim=-1
         ).view(self.args.batch_size, -1) 
         
-        score = weight * score + (1 - weight) * graph_score
+        score = score + weight * graph_score
         return score

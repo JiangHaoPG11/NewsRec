@@ -283,7 +283,7 @@ class RCENR(torch.nn.Module):
                 next_action_t_id = torch.full(next_action_r_id.shape, 2).to(self.device)
 
             elif mode == 'User':
-                next_action_id = user_clicked_news_index[: , :20]
+                next_action_id = user_clicked_news_index[: , :10]
                 # next_action_id = user_clicked_news_index
                 next_action_r_id = torch.ones([next_action_id.shape[0],
                                                next_action_id.shape[1]]).to(self.device) # click = 1

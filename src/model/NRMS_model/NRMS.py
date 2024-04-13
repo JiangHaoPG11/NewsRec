@@ -17,7 +17,9 @@ class news_encoder(torch.nn.Module):
         word_embedding = self.multiheadatt(word_embedding)
         word_embedding = F.dropout(word_embedding, p=self.dropout_prob, training=self.training)
         word_embedding = self.norm(word_embedding)
-        news_rep = torch.tanh(self.word_attention(word_embedding))
+        news_rep = self.word_attention(word_embedding)
+
+        # news_rep = torch.tanh(self.word_attention(word_embedding))
         return news_rep
 
 class user_encoder(torch.nn.Module):
@@ -33,7 +35,7 @@ class user_encoder(torch.nn.Module):
         user_seq_rep = self.multiheadatt(clicked_news_rep)
         user_seq_rep = self.norm(user_seq_rep)
         user_seq_rep = F.dropout(user_seq_rep, p=self.dropout_prob, training=self.training)
-        user_rep = torch.tanh(self.user_attention(user_seq_rep))
+        user_rep = self.user_attention(user_seq_rep)
         return user_rep
 
 class NRMS(torch.nn.Module):
@@ -60,13 +62,17 @@ class NRMS(torch.nn.Module):
         self.relation_adj = relation_adj
         self.news_entity_dict = news_entity_dict
 
-    def get_user_news_rep(self, candidate_news_index, user_clicked_news_index):
+    def get_user_news_rep(self, candidate_news_index, user_clicked_news_index, test_flag=False):
         # 新闻单词
         candidate_news_word_embedding = self.word_embedding[self.news_title_word_dict[candidate_news_index]].to(self.device)
         user_clicked_news_word_embedding = self.word_embedding[self.news_title_word_dict[user_clicked_news_index]].to(self.device)
         ## 新闻编码器
+        if test_flag:
+            candidate_news_num = 1
+        else:
+            candidate_news_num = self.args.sample_size
         news_rep = None
-        for i in range(self.args.sample_size):
+        for i in range(candidate_news_num):
             title_word_embedding_one = candidate_news_word_embedding[:, i, :, :]
             news_rep_one = self.news_encoder(title_word_embedding_one)
             news_rep_one = news_rep_one.unsqueeze(1)
@@ -96,7 +102,7 @@ class NRMS(torch.nn.Module):
 
     def test(self, candidate_news, user_clicked_news_index):
         # 新闻用户表征
-        user_rep, news_rep = self.get_user_news_rep(candidate_news, user_clicked_news_index)
+        user_rep, news_rep = self.get_user_news_rep(candidate_news, user_clicked_news_index, True)
         # news_rep = news_rep[:,0,:]
         # 预测得分
         score = torch.sum(news_rep * user_rep, dim=-1).view(self.args.batch_size, -1)

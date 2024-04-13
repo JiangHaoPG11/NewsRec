@@ -131,13 +131,13 @@ class Trainer():
                 candidate_newsindex, user_index, user_clicked_newsindex, user_type_index, news_type_index = data
                 rec_score, user_rep, news_rep = self.NRMS_model.test(candidate_newsindex, user_clicked_newsindex)
                 score = rec_score
-                pred_label_list.extend(score.cpu().numpy())
+                pred_label_list.extend(score.cpu().numpy()[:, 0])
 
-                user_rep_list.extend(user_rep.cpu().numpy()[:, 0])
-                news_rep_list.extend(news_rep.cpu().numpy()[:, 0])
-
-                news_index_list.extend(candidate_newsindex.cpu().numpy()[:, 0])
+                # user_rep_list.extend(user_rep.cpu().numpy()[:, 0])
+                # news_rep_list.extend(news_rep.cpu().numpy()[:, 0])
+                # news_index_list.extend(candidate_newsindex.cpu().numpy()[:, 0])
                 user_index_list.extend(user_index.cpu().numpy())
+                
                 user_type_list.extend(user_type_index.cpu().numpy())
                 news_type_list.extend(news_type_index.cpu().numpy())
                 candidate_newsindex_list.extend(candidate_newsindex.cpu().numpy()[:,0])

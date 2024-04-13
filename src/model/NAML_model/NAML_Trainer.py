@@ -121,19 +121,22 @@ class Trainer():
                 candidate_newsindex, user_index, user_clicked_newsindex, user_type_index, news_type_index = data
                 rec_score, user_rep, news_rep = self.NAML_model.test(candidate_newsindex, user_clicked_newsindex)
                 score = rec_score
-                candidate_newscategory_list.extend(self.news_category_index[candidate_newsindex.cpu().numpy()])
-                user_rep_list.extend(user_rep.cpu().numpy()[:, 0])
-                news_rep_list.extend(news_rep.cpu().numpy()[:, 0])
+                # candidate_newscategory_list.extend(self.news_category_index[candidate_newsindex.cpu().numpy()])
+                # user_rep_list.extend(user_rep.cpu().numpy()[:, 0])
+                # news_rep_list.extend(news_rep.cpu().numpy()[:, 0])
+                # news_index_list.extend(candidate_newsindex.cpu().numpy()[:, 0])
+                user_index_list.extend(user_index.cpu().numpy())                
                 pred_label_list.extend(score.cpu().numpy())
-                user_index_list.extend(user_index.cpu().numpy())
-                news_index_list.extend(candidate_newsindex.cpu().numpy()[:, 0])
                 user_type_list.extend(user_type_index.cpu().numpy())
                 news_type_list.extend(news_type_index.cpu().numpy())
                 candidate_newsindex_list.extend(candidate_newsindex.cpu().numpy()[:,0])
                 pbar.update(self.args.batch_size)
+
+
             pred_label_list = np.vstack(pred_label_list)
-            candidate_newscategory_list = np.vstack(candidate_newscategory_list)
+            # candidate_newscategory_list = np.vstack(candidate_newscategory_list)
             pbar.close()
+            print(pred_label_list)
 
         # user_type_list1 = np.array(user_type_list)
         # pca = PCA(n_components=2)

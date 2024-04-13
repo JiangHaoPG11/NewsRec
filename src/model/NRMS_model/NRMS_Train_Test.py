@@ -17,6 +17,7 @@ class NRMS_Train_Test():
         self.trainer = Trainer(args, NRMS_model, optimizer_NRMS, data)
         self.NRMS_model = NRMS_model
         self.args = args
+        self.device =device
 
     def Train(self):
         print('training begining ...')
@@ -27,5 +28,7 @@ class NRMS_Train_Test():
         self.trainer.test()
 
     def Test_load(self):
-        self.NRMS_model.load_state_dict(torch.load(self.args.checkpoint_dir + 'checkpoint-' + self.args.mode + '-epochfinal.pth'))
+        self.NRMS_model.load_state_dict(
+            torch.load(self.args.checkpoint_dir + 'checkpoint-' + self.args.mode + '-epochfinal.pth')
+        )
         self.trainer.test()

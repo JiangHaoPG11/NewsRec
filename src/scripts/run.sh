@@ -1,6 +1,6 @@
-debug_flag=false
-model_name=MRNN
-epoch=50
+debug_flag=true
+model_name=MCCM
+epoch=10
 data_scale=2wU
 
 if [ "$debug_flag" == true ]; then

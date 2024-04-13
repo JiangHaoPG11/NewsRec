@@ -126,7 +126,7 @@ class Trainer():
             pred_label_list = np.vstack(pred_label_list)
             pbar.close()
         # 存储预测结果
-        folder_path = './predict/MNN4Rec_update/'
+        folder_path = '../predict/MNN4Rec_update/'
         if not os.path.exists(folder_path):
             os.makedirs(folder_path)
         predict_df = pd.DataFrame()

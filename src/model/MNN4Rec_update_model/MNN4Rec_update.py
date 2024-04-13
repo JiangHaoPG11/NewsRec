@@ -85,12 +85,22 @@ class user_encoder(torch.nn.Module):
         self.user_attention = Additive_Attention(query_vector_dim, self.multi_dim)
         self.dropout_prob = 0.2
 
-    def forward(self, word_embedding, entity_embedding, category_index, subcategory_index):
+    # def forward(self, word_embedding, entity_embedding, category_index, subcategory_index):
+    #     # 点击新闻表征
+    #     news_rep = self.news_encoder(word_embedding, entity_embedding,
+    #                                  category_index, subcategory_index).unsqueeze(0)
+    #     news_rep = F.dropout(news_rep, p=self.dropout_prob, training=self.training)
+    #     news_rep = self.multiheadatt(news_rep)
+    #     news_rep = F.dropout(news_rep, p=self.dropout_prob, training=self.training)
+    #     # 用户表征
+    #     user_rep = torch.tanh(self.user_attention(news_rep))
+    #     user_rep = F.dropout(user_rep, p=self.dropout_prob, training=self.training)
+    #     return user_rep
+
+    def forward(self, user_clicked_seq):
         # 点击新闻表征
-        news_rep = self.news_encoder(word_embedding, entity_embedding,
-                                     category_index, subcategory_index).unsqueeze(0)
-        news_rep = F.dropout(news_rep, p=self.dropout_prob, training=self.training)
-        news_rep = self.multiheadatt(news_rep)
+        # news_rep = F.dropout(news_rep, p=self.dropout_prob, training=self.training)
+        news_rep = self.multiheadatt(user_clicked_seq)
         news_rep = F.dropout(news_rep, p=self.dropout_prob, training=self.training)
         # 用户表征
         user_rep = torch.tanh(self.user_attention(news_rep))
@@ -345,7 +355,7 @@ class MNN4Rec_update(torch.nn.Module):
             return [semantic_news_rep.view(self.args.batch_size, 1, -1)]
 
 
-    def get_user_news_rep(self, user_index, candidate_news_index, user_clicked_news_index):
+    def get_user_news_rep(self, user_index, candidate_news_index, user_clicked_news_index, test_flag = False):
         # 候选新闻特征
         candidate_news_word_embedding, candidate_news_entity_embedding, \
         candidate_news_category_index,  candidate_news_subcategory_index, \
@@ -353,7 +363,13 @@ class MNN4Rec_update(torch.nn.Module):
 
         # 新闻编码器
         news_rep = None
-        for i in range(self.args.sample_size):
+        
+        if test_flag:
+            candidate_news_num = 1
+        else:
+            candidate_news_num = self.args.sample_size
+
+        for i in range(candidate_news_num):
             news_word_embedding_one = candidate_news_word_embedding[:, i, :, :]
             news_entity_embedding_one = candidate_news_entity_embedding[:, i, :, :]
             news_category_index = candidate_news_category_index[:, i]
@@ -396,9 +412,13 @@ class MNN4Rec_update(torch.nn.Module):
             clicked_news_category_index = user_clicked_news_category_index[i, :]
             # 点击新闻副主题index
             clicked_news_subcategory_index = user_clicked_news_subcategory_index[i, :]
+
+            clicked_news_rep = self.news_encoder(
+                clicked_news_word_embedding_one, clicked_news_entity_embedding_one,
+                clicked_news_category_index, clicked_news_subcategory_index
+            ).unsqueeze(0)
             # 用户表征
-            user_rep_one = self.user_encoder(clicked_news_word_embedding_one, clicked_news_entity_embedding_one,
-                                             clicked_news_category_index, clicked_news_subcategory_index).unsqueeze(0)
+            user_rep_one = self.user_encoder(clicked_news_rep).unsqueeze(0)
             if i == 0:
                 user_rep = user_rep_one
             else:
@@ -421,7 +441,7 @@ class MNN4Rec_update(torch.nn.Module):
     def test(self, user_index, candidate_news, user_clicked_news_index):
         #candidate_news = torch.flatten(candidate_news, 0, 1)
         # 新闻用户表征
-        user_rep, news_rep = self.get_user_news_rep(user_index, candidate_news, user_clicked_news_index)
+        user_rep, news_rep = self.get_user_news_rep(user_index, candidate_news, user_clicked_news_index, True)
         score = torch.sum(news_rep * user_rep, dim=-1).view(self.args.batch_size, -1)
         # 预测得分
         # if self.use_news_relation == False:

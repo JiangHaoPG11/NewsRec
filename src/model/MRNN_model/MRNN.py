@@ -35,29 +35,29 @@ class news_encoder(torch.nn.Module):
         # 主题级表征
         category_embedding = self.embedding_layer1(category_index.to(torch.int64))
         category_rep = torch.relu(self.fc1(category_embedding))
-        category_rep = F.dropout(category_rep, p=self.dropout_prob, training=self.training)
+        # category_rep = F.dropout(category_rep, p=self.dropout_prob, training=self.training)
 
         # 副主题级表征
         subcategory_embedding = self.embedding_layer2(subcategory_index.to(torch.int64))
         subcategory_rep = torch.relu(self.fc2(subcategory_embedding))
-        subcategory_rep = F.dropout(subcategory_rep, p=self.dropout_prob, training=self.training)
+        # subcategory_rep = F.dropout(subcategory_rep, p=self.dropout_prob, training=self.training)
 
         # 单词级新闻表征
         word_embedding = self.multiheadatt(word_embedding)
         word_embedding = self.word_norm(word_embedding)
         word_embedding = F.dropout(word_embedding, p=self.dropout_prob, training=self.training)
-        # word_rep = self.word_attention(word_embedding)
-        word_rep = torch.relu(self.word_attention(word_embedding))
-        word_rep = F.dropout(word_rep, p=self.dropout_prob, training=self.training)
+        word_rep = self.word_attention(word_embedding)
+        # word_rep = torch.relu(self.word_attention(word_embedding))
+        # word_rep = F.dropout(word_rep, p=self.dropout_prob, training=self.training)
 
         # 实体级新闻表征
         entity_embedding = torch.relu(self.fc3(entity_embedding))
         entity_inter = self.GCN(entity_embedding)
         entity_inter = self.entity_norm(entity_inter)
         entity_inter = F.dropout(entity_inter, p=self.dropout_prob, training=self.training)
-        # entity_rep = self.entity_attention(entity_inter)
-        entity_rep = torch.relu(self.entity_attention(entity_inter))
-        entity_rep = F.dropout(entity_rep, p=self.dropout_prob, training=self.training)
+        entity_rep = self.entity_attention(entity_inter)
+        # entity_rep = torch.relu(self.entity_attention(entity_inter))
+        # entity_rep = F.dropout(entity_rep, p=self.dropout_prob, training=self.training)
 
         # 新闻附加注意力
         news_rep = torch.cat(
@@ -138,7 +138,7 @@ class MRNN(torch.nn.Module):
                 news_entities[-1][-1].append(self.news_entity_dict[int(newsids[i, j])][:self.args.news_entity_size])
         return np.array(news_entities)
 
-    def get_user_news_rep(self, candidate_news_index, user_clicked_news_index):
+    def get_user_news_rep(self, candidate_news_index, user_clicked_news_index, test_flag=False):
         # 新闻单词
         candidate_news_word_embedding = self.word_embedding[self.news_title_word_dict[candidate_news_index]].to(self.device)
         user_clicked_news_word_embedding = self.word_embedding[self.news_title_word_dict[user_clicked_news_index]].to(self.device)
@@ -152,9 +152,13 @@ class MRNN(torch.nn.Module):
         candidate_news_subcategory_index = torch.IntTensor(self.news_subcategory_dict[np.array(candidate_news_index.cpu())]).to(self.device)
         user_clicked_news_subcategory_index = torch.IntTensor(self.news_subcategory_dict[np.array(user_clicked_news_index.cpu())]).to(self.device)
 
-        # 新闻编码器
+        ## 新闻编码器
+        if test_flag:
+            candidate_news_num = 1
+        else:
+            candidate_news_num = self.args.sample_size
         news_rep = None
-        for i in range(self.args.sample_size):
+        for i in range(candidate_news_num):
             news_word_embedding_one = candidate_news_word_embedding[:, i, :, :]
             news_entity_embedding_one = candidate_news_entity_embedding[:, i, :, :]
             news_category_index = candidate_news_category_index[:, i]
@@ -179,8 +183,13 @@ class MRNN(torch.nn.Module):
             # 点击新闻副主题index
             clicked_news_subcategory_index = user_clicked_news_subcategory_index[i, :]
             # 点击新闻表示
-            clicked_news_rep = self.news_encoder(clicked_news_word_embedding_one, clicked_news_entity_embedding_one, 
-                                                 clicked_news_category_index, clicked_news_subcategory_index).unsqueeze(0)
+            clicked_news_rep = self.news_encoder(
+                clicked_news_word_embedding_one, 
+                clicked_news_entity_embedding_one, 
+                clicked_news_category_index, 
+                clicked_news_subcategory_index
+            ).unsqueeze(0)
+
             # 用户表征
             user_rep_one = self.user_encoder(clicked_news_rep).unsqueeze(0)
             if i == 0:
@@ -200,7 +209,7 @@ class MRNN(torch.nn.Module):
     def test(self, candidate_news, user_clicked_news_index):
         # candidate_news = torch.flatten(candidate_news, 0, 1)
         # 新闻用户表征
-        user_rep, news_rep = self.get_user_news_rep(candidate_news, user_clicked_news_index)
+        user_rep, news_rep = self.get_user_news_rep(candidate_news, user_clicked_news_index, True)
         # 预测得分
         score = torch.sum(news_rep * user_rep, dim=-1).view(self.args.batch_size, -1)
         # score = torch.sigmoid(score)

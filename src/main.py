@@ -418,19 +418,19 @@ def main(path, device):
         if args.train_flag:
             model.Train()
         if args.test_flag:
-            model.Test()
+            model.Test_load()
     if args.mode == "NAML":
         model = NAML_Train_Test(args, data, device)
         if args.train_flag:
             model.Train()
         if args.test_flag:
-            model.Test()
+            model.Test_load()
     if args.mode == "MNN4Rec":
         model = MNN4Rec_Train_Test(args, data, device)
         if args.train_flag:
             model.Train()
         if args.test_flag:
-            model.Test()
+            model.Test_load()
     if args.mode == "LSTUR":
         model = LSTUR_Train_Test(args, data, device)
         if args.train_flag:
@@ -460,7 +460,7 @@ def main(path, device):
         if args.train_flag:
             model.Train()
         if args.test_flag:
-            model.Test()
+            model.Test_load()
     if args.mode == "NPA":
         model = NPA_Train_Test(args, data, device)
         if args.train_flag:

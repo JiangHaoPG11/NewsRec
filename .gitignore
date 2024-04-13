@@ -5,3 +5,4 @@ data_5wU
 database
 save_model
 src/*.log
+predict

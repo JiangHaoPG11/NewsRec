@@ -209,7 +209,7 @@ class NAML(torch.nn.Module):
         self.relation_adj = relation_adj
         self.news_entity_dict = news_entity_dict
 
-    def get_user_news_rep(self, candidate_news_index, user_clicked_news_index):
+    def get_user_news_rep(self, candidate_news_index, user_clicked_news_index,test_flag=False):
         # 新闻单词
         candidate_news_word_embedding = self.word_embedding[self.news_title_word_dict[candidate_news_index]].to(self.device)
         user_clicked_news_word_embedding = self.word_embedding[self.news_title_word_dict[user_clicked_news_index]].to(self.device)
@@ -221,9 +221,13 @@ class NAML(torch.nn.Module):
         candidate_news_subcategory_index = torch.IntTensor(self.news_subcategory_dict[np.array(candidate_news_index.cpu())]).to(self.device)
         user_clicked_news_subcategory_index = torch.IntTensor(self.news_subcategory_dict[np.array(user_clicked_news_index.cpu())]).to(self.device)
         
-        # 新闻编码器
+        ## 新闻编码器
+        if test_flag:
+            candidate_news_num = 1
+        else:
+            candidate_news_num = self.args.sample_size
         news_rep = None
-        for i in range(self.args.sample_size):
+        for i in range(candidate_news_num):
             news_word_embedding_one = candidate_news_word_embedding[:, i, :]
             news_category_index = candidate_news_category_index[:, i]
             news_subcategory_index = candidate_news_subcategory_index[:, i]
@@ -261,8 +265,7 @@ class NAML(torch.nn.Module):
 
     def test(self, candidate_news, user_clicked_news_index):
         # 新闻用户表征
-        user_rep, news_rep = self.get_user_news_rep(candidate_news, user_clicked_news_index)
-        # news_rep = news_rep[:,0,:]
+        user_rep, news_rep = self.get_user_news_rep(candidate_news, user_clicked_news_index, True)
         # 预测得分
         score = torch.sum(news_rep * user_rep, dim=-1).view(self.args.batch_size, -1)
         # score = torch.sigmoid(score)

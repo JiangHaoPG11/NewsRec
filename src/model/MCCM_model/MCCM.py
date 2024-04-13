@@ -7,22 +7,17 @@ from utils.utils import *
 class news_encoder(torch.nn.Module):
     def __init__(self, word_dim, attention_dim, attention_heads, query_vector_dim):
         super(news_encoder, self).__init__()
+        self.multiheadatt = MultiHeadSelfAttention(word_dim, attention_dim * attention_heads, attention_heads)
         self.multi_dim = attention_dim * attention_heads
-        self.multiheadatt = MultiHeadSelfAttention(
-            word_dim, 
-            self.multi_dim, 
-            attention_heads
-        )
+        self.norm = nn.LayerNorm(self.multi_dim)
         self.word_attention = Additive_Attention(query_vector_dim, self.multi_dim)
-        self.fc1 = nn.Linear(self.multi_dim, self.multi_dim)
-        self.fc2 = nn.Linear(self.multi_dim, self.multi_dim)
         self.dropout_prob = 0.2
 
     def forward(self, word_embedding):
         word_embedding = self.multiheadatt(word_embedding)
         word_embedding = F.dropout(word_embedding, p=self.dropout_prob, training=self.training)
-        news_rep = self.fc2(torch.relu(self.fc1(word_embedding)))
-        news_rep = self.word_attention(word_embedding)
+        word_embedding = self.norm(word_embedding)
+        news_rep = torch.tanh(self.word_attention(word_embedding))
         return news_rep
 
 class user_encoder(torch.nn.Module):
@@ -36,25 +31,14 @@ class user_encoder(torch.nn.Module):
         )
         self.multi_dim = attention_dim * attention_heads
         self.user_attention = Additive_Attention(query_vector_dim, self.multi_dim)
-        self.norm1 = nn.LayerNorm(self.multi_dim)
-        self.norm2 = nn.LayerNorm(self.multi_dim)
-
         self.dropout_prob = 0.2
 
-    def forward(self, word_embedding):
-        
-        clicked_news_rep = self.news_encoder(word_embedding).unsqueeze(0)
-        clicked_news_rep = F.dropout(clicked_news_rep, p=self.dropout_prob, training=self.training)
+    def forward(self, clicked_news_rep):
         user_seq_rep = self.user_attention(clicked_news_rep)
-        user_seq_rep = self.norm1(user_seq_rep)
-
         # sample num 
-        user_clicked_selected = torch.randperm(word_embedding.shape[0])[:40].sort().values
-        word_embedding_selected = word_embedding[user_clicked_selected]
-        selected_clicked_news_rep = self.news_encoder(word_embedding_selected).unsqueeze(0)
+        user_clicked_selected = torch.randperm(clicked_news_rep.shape[1])[:40].sort().values
+        selected_clicked_news_rep = clicked_news_rep[:,user_clicked_selected]
         selected_user_seq_rep = self.user_attention(selected_clicked_news_rep)
-        selected_user_seq_rep = self.norm2(selected_user_seq_rep)
-        
         return user_seq_rep, selected_user_seq_rep
 
 class MCCM(torch.nn.Module):
@@ -91,14 +75,18 @@ class MCCM(torch.nn.Module):
         self.relation_adj = relation_adj
         self.news_entity_dict = news_entity_dict
 
-    def get_user_news_rep(self, candidate_news_index, user_clicked_news_index):
+    def get_user_news_rep(self, candidate_news_index, user_clicked_news_index, test_flag=False):
         # 新闻单词
         candidate_news_word_embedding = self.word_embedding[self.news_title_word_dict[candidate_news_index]].to(self.device)
         user_clicked_news_word_embedding = self.word_embedding[self.news_title_word_dict[user_clicked_news_index]].to(self.device)
 
         ## 新闻编码器
+        if test_flag:
+            candidate_news_num = 1
+        else:
+            candidate_news_num = self.args.sample_size
         news_rep = None
-        for i in range(self.args.sample_size):
+        for i in range(candidate_news_num):
             title_word_embedding_one = candidate_news_word_embedding[:, i, :]
             news_rep_one = self.news_encoder(title_word_embedding_one)
             news_rep_one = news_rep_one.unsqueeze(1)
@@ -106,13 +94,15 @@ class MCCM(torch.nn.Module):
                 news_rep = news_rep_one
             else:
                 news_rep = torch.cat([news_rep, news_rep_one], dim=1)
+
         # 用户编码器
         user_rep = None
         selected_user_rep = None
         for i in range(self.args.batch_size):
-            clicked_word_embedding_one = user_clicked_news_word_embedding[i, :, :, :]
-            clicked_word_embedding_one = clicked_word_embedding_one.squeeze()
-            user_rep_one, selected_user_rep_one = self.user_encoder(clicked_word_embedding_one)
+            clicked_word_embedding_one = user_clicked_news_word_embedding[i, :, :, :].squeeze()
+
+            clicked_news_rep_one = self.news_encoder(clicked_word_embedding_one).unsqueeze(0)
+            user_rep_one, selected_user_rep_one = self.user_encoder(clicked_news_rep_one)
             if i == 0:
                 user_rep = user_rep_one.unsqueeze(0)
                 selected_user_rep = selected_user_rep_one.unsqueeze(0)

@@ -229,9 +229,10 @@ class RCENR(torch.nn.Module):
         if depth > 1:
             history_graph = graph[depth - 2]
             history_node_embedding = self.get_nodes_embedding(history_graph, depth - 1, mode)
-            nodes_embedding = nodes_embedding.reshape(self.args.batch_size * self.args.sample_size,
-                                                      history_node_embedding.shape[1],
-                                                      -1, self.args.embedding_dim)
+            nodes_embedding = nodes_embedding.reshape(
+                self.args.batch_size * self.args.sample_num,
+                history_node_embedding.shape[1], -1, self.args.embedding_dim
+            )
             history_node_embedding = history_node_embedding.unsqueeze(-2).repeat(1, 1, nodes_embedding.shape[2], 1)
             exter_const_reward = torch.flatten(F.normalize(self.sim(nodes_embedding, history_node_embedding).sum(-1)), -2, -1)
             return -exter_const_reward

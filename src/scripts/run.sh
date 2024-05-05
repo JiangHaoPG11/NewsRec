@@ -1,6 +1,6 @@
-debug_flag=true
-model_name=MCCM
-epoch=10
+debug_flag=false
+model_name=RCENR
+epoch=60
 data_scale=2wU
 
 if [ "$debug_flag" == true ]; then
@@ -16,5 +16,5 @@ else
         --mode $model_name \
         --epoch $epoch \
         --train_flag true \
-        --test_flag true   > ${model_name}_${data_scale}_epoch_${epoch}_result_v1.log &
+        --test_flag true   > log/${model_name}_${data_scale}_epoch_${epoch}_result_v1.log &
 fi

@@ -308,10 +308,10 @@ class Reasoner(torch.nn.Module):
         reason_qua = torch.div(path_input_total, (torch.log((np.e + news_graph_num + user_graph_graph_num).float())))
         reason_num = torch.div(overlap_entity_num, (torch.log((np.e + news_graph_num + user_graph_graph_num).float())))
         predicts = 0.5 * reason_qua + 0.5 * reason_num
-        predicts = predicts.reshape(self.args.batch_size, self.args.sample_size)
+        predicts = predicts.reshape(self.args.batch_size, self.args.sample_num)
         # print('学习到的推理路径数：{}'.format(path_num))
         # print('学习到的重叠点数：{}'.format(total_overlap_num))
-        return predicts, reason_num.reshape(self.args.batch_size, self.args.sample_size), \
+        return predicts, reason_num.reshape(self.args.batch_size, self.args.sample_num), \
                path_num, path_num_list, total_overlap_num, overlap_entity_num_list, \
                reasoning_paths, reasoning_edges, \
                news_graph_list, user_graph_list, \

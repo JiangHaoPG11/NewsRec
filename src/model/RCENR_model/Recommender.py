@@ -13,11 +13,11 @@ class news_encoder(torch.nn.Module):
         self.dropout_prob = 0.2
         self.multiheadatt = MultiHeadSelfAttention(word_dim, self.multi_dim, attention_heads)
         self.word_attention = Additive_Attention(query_vector_dim, self.multi_dim)
-        self.layernorm1 = nn.LayerNorm(self.multi_dim)
+        self.norm1 = nn.LayerNorm(self.multi_dim)
 
     def forward(self, word_embedding, entity_embedding, category_index, subcategory_index):
         word_embedding = self.multiheadatt(word_embedding)
-        word_embedding = self.layernorm1(word_embedding)
+        word_embedding = self.norm1(word_embedding)
         word_embedding = F.dropout(word_embedding, p=self.dropout_prob, training=self.training)
         word_rep = self.word_attention(word_embedding)
         news_rep = F.dropout(word_rep, p=self.dropout_prob, training=self.training)
@@ -41,20 +41,17 @@ class user_encoder(torch.nn.Module):
             attention_heads
         )
         self.user_attention = Additive_Attention(query_vector_dim, self.multi_dim)
-        self.layernorm1 = nn.LayerNorm(self.multi_dim)
-        self.layernorm2 = nn.LayerNorm(self.multi_dim)
+        self.norm1 = nn.LayerNorm(self.multi_dim)
+        self.norm2 = nn.LayerNorm(self.multi_dim)
         self.dropout_prob = 0.2
 
-    def forward(self, word_embedding, entity_embedding, category_index, subcategory_index):
-        # 点击新闻表征
-        news_rep = self.news_encoder(word_embedding, entity_embedding, category_index, subcategory_index).unsqueeze(0)
+    def forward(self, clicked_news_rep):
+        news_rep = self.multiheadatt(clicked_news_rep)
         news_rep = F.dropout(news_rep, p=self.dropout_prob, training=self.training)
-        news_rep = self.multiheadatt(news_rep)
-        news_rep = F.dropout(news_rep, p=self.dropout_prob, training=self.training)
-        news_rep = self.layernorm1(news_rep)
+        news_rep = self.norm1(news_rep)
         user_rep = self.user_attention(news_rep)
         user_rep = F.dropout(user_rep, p=self.dropout_prob, training=self.training)
-        user_rep = self.layernorm2(user_rep)
+        user_rep = self.norm2(user_rep)
         return user_rep
 
 
@@ -315,7 +312,7 @@ class Recommender(torch.nn.Module):
                 news_entities[-1][-1].append(self.news_entity_dict[int(newsids[i, j])][:])
         return np.array(news_entities)
 
-    def get_user_news_rep(self, candidate_news_index, user_clicked_news_index):
+    def get_user_news_rep(self, candidate_news_index, user_clicked_news_index, test_flag):
 
         # get news words emb
         candidate_news_word_embedding = self.word_embedding(
@@ -346,8 +343,12 @@ class Recommender(torch.nn.Module):
         user_clicked_news_subcategory_index = torch.IntTensor(self.news_subcategory_dict[np.array(user_clicked_news_index.cpu())]).to(self.device)
         
         ## 新闻编码器
+        if test_flag:
+            candidate_news_num = 1
+        else:
+            candidate_news_num = self.args.sample_size
         news_rep = None
-        for i in range(self.args.sample_num):
+        for i in range(candidate_news_num):
             news_word_embedding_one = candidate_news_word_embedding[:, i, :]
             news_entity_embedding_one = candidate_news_entity_embedding[:, i, :]
             news_category_index = candidate_news_category_index[:, i]
@@ -362,6 +363,7 @@ class Recommender(torch.nn.Module):
                 news_rep = news_rep_one
             else:
                 news_rep = torch.cat([news_rep, news_rep_one], dim = 1)
+        
         # 用户编码器
         user_rep = None
         for i in range(self.args.batch_size):
@@ -375,11 +377,19 @@ class Recommender(torch.nn.Module):
             clicked_news_category_index = user_clicked_news_category_index[i, :]
             # 点击新闻副主题index
             clicked_news_subcategory_index = user_clicked_news_subcategory_index[i, :]
+            
+            clicked_news_rep_one = self.news_encoder(
+                clicked_news_word_embedding_one, 
+                clicked_news_entity_embedding_one,                       
+                clicked_news_category_index, 
+                clicked_news_subcategory_index
+            )
+            
             # 用户表征
             user_rep_one = self.user_encoder(
-                clicked_news_word_embedding_one, clicked_news_entity_embedding_one,
-                clicked_news_category_index, clicked_news_subcategory_index
+                clicked_news_rep_one.unsqueeze(0)
             ).unsqueeze(0)
+            
             if i == 0:
                 user_rep = user_rep_one
             else:
@@ -394,7 +404,7 @@ class Recommender(torch.nn.Module):
 
         # user_clicked_news_index = user_clicked_news_index[..., :10]
     
-        user_rep, news_rep = self.get_user_news_rep(candidate_news, user_clicked_news_index)
+        user_rep, news_rep = self.get_user_news_rep(candidate_news, user_clicked_news_index, True)
         score = torch.sum(news_rep * user_rep, dim = -1)
 
         news_graph_embedding = self.get_graph_embedding(news_graph, mode="news") # bz, news_dim
